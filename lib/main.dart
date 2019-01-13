@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 import './product_manager.dart';
 
-//renders, mounts widgets
-// we need to attach widgets (building blocks, UI components)
+//renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() => runApp(MyApp());
 
 // root widget, extends widget features
 class MyApp extends StatelessWidget {
-  // @override
-  // // state object belongs to statefulwidget
-  // State<StatefulWidget> createState() {
-  //   return _MyAppState();
-  // }
-
-
-// underscored classes are private
-//class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +16,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('A List'),
         ),
-        body: ProductManager()
+        body: ProductManager('food tester')
       ),
     );
   }
@@ -39,3 +29,23 @@ class MyApp extends StatelessWidget {
 // shift alt f for format
 
 // stateless widget: can't work, change or recall internal data, recalls build function
+
+// main.dart. class MyApp is stateless. inserts a title and calls on ProductManager object. 
+  // passes 'food tester' to ProductManager (see  "_products.add(widget.startingProduct);") 
+// class Products: stateless. Returns image-text components by mapping the products array. 
+// class Product_Manager: stateful. includes functional button, pass _products to class Products to change UI. 
+
+// Lifecycle hooks . Stateless Ws are used to create a widget that render things to the UI. You can pass data into them. Eg: Proudcts W 
+// input External data from ProductManager -> Widget Proudcts -> Renders UI  
+// Stateful: External data as input -> Widget with Internal State -> Renders UI
+
+/* Stateless: constructor method leads to build
+Stateful: Constructor, initState(), build(), setState();
+*/
+
+/*
+main calls ProductManager, which usesproducts.
+ProductManager setState() causes another build 
+Rebuilding is efficient, checking what has changed
+ */
+
