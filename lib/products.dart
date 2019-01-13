@@ -12,15 +12,15 @@ class Products extends StatelessWidget {
     print('[Products Widget] build()');
     return Column(
       children: products
-          .map((element) => Card(
-                child: Column(
-                  children: <Widget>[
-                    Image.asset("assets/food.jpg"),
-                    Text(element)
-                  ],
-                ),
-              ))
-          .toList(),
+        .map((element) => Card(
+              child: Column(
+                children: <Widget>[
+                  // Image.asset("assets/food.jpg"),
+                  Text(element)
+                ],
+              ), 
+            ))
+        .toList(),
     );
   }
 }

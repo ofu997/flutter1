@@ -26,20 +26,21 @@ class _ProductManagerState extends State<ProductManager> {
     super.initState();
     _products.add(widget.startingProduct);
   }
-// this works when it receives outside data
-@override 
+  // this works when it receives outside data
+  @override 
   void didUpdateWidget(ProductManager oldWidget) {
     print('[ProductManager state] didUpdateWidget()');
     super.didUpdateWidget(oldWidget);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // context stores metadata like Themes
     print('[ProductManager state] build()');
     return Column(children: [
       Container(
         margin: EdgeInsets.all(10.0),
         child: RaisedButton(
+          color: Theme.of(context).primaryColor,
           onPressed: () {
             setState(() {
               _products.add('advanced food tester!');
@@ -55,3 +56,8 @@ class _ProductManagerState extends State<ProductManager> {
 
 // setState() causes another build
 
+// here build includes a button that adds 'advanced food tester' 
+// to _products, then calls Products(_products)
+
+  
+}

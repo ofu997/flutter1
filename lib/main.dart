@@ -11,6 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // return a shippable widget
     return MaterialApp(
+      theme: ThemeData( // swatch is auto-color-schemes. Colors is package, followed by static types
+        brightness: Brightness.light,
+        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.deepPurple
+      ),
       home: Scaffold(
         // we can put UI elements here
         appBar: AppBar(
@@ -49,3 +54,4 @@ ProductManager setState() causes another build
 Rebuilding is efficient, checking what has changed
  */
 
+/* MATERIAL: a design system with guides, best practices, color pairings, Customizable*/
