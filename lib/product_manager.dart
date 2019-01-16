@@ -20,6 +20,7 @@ class ProductManager extends StatefulWidget {
 
 class _ProductManagerState extends State<ProductManager> {
   List<String> _products = [];
+  int count = 0;
   // this runs before BuildContext
   @override
   void initState(){
@@ -37,6 +38,7 @@ class _ProductManagerState extends State<ProductManager> {
   void _addsProducts(String product){
     setState(
       () {
+        count++;
       _products.add(product);
       }
     );
@@ -44,7 +46,7 @@ class _ProductManagerState extends State<ProductManager> {
 
   @override
   Widget build(BuildContext context) { // context stores metadata like Themes
-    print('[ProductManager state] build()');
+    print('[ProductManager state] build()'+' addProduct() text count: ' + count.toString() + ' ' + DateTime.now().toIso8601String());
     return Column(children: [
       Container(
         margin: EdgeInsets.all(10.0),

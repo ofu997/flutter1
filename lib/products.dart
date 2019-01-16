@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
   final List<String> products;
-  Products([this.products = const []]){
+  Products([this.products = const ['first']]){
     print('[Products Widget] Constructor');
   }
 
