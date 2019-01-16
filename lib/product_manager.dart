@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import './products.dart';
+import './ProductControl.dart';
 
 class ProductManager extends StatefulWidget {
   final String startingProduct;
-
-  ProductManager(this.startingProduct){
+  // when argument is in curly brackets we can define it more clearly
+  ProductManager({this.startingProduct = 'sweets tester'}){
     print('[ProductsManager state] Constructor');
   }
 
@@ -33,21 +34,21 @@ class _ProductManagerState extends State<ProductManager> {
     super.didUpdateWidget(oldWidget);
   }
 
+  void _addsProducts(String product){
+    setState(
+      () {
+      _products.add(product);
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) { // context stores metadata like Themes
     print('[ProductManager state] build()');
     return Column(children: [
       Container(
         margin: EdgeInsets.all(10.0),
-        child: RaisedButton(
-          color: Theme.of(context).primaryColor,
-          onPressed: () {
-            setState(() {
-              _products.add('advanced food tester!');
-            });
-          },
-          child: Text("Add product"),
-        ),
+        child: ProductControl(_addsProducts) // Refs function without executing
       ),
       Products(_products)
     ]);
@@ -58,6 +59,3 @@ class _ProductManagerState extends State<ProductManager> {
 
 // here build includes a button that adds 'advanced food tester' 
 // to _products, then calls Products(_products)
-
-  
-}

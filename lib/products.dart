@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
   final List<String> products;
-  Products(this.products){
-    print('[Products Widget]Constructor');
+  Products([this.products = const []]){
+    print('[Products Widget] Constructor');
   }
 
   @override

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('A List'),
         ),
-        body: ProductManager('food tester')
+        body: ProductManager() // an argument here would override the one in Constructor
       ),
     );
   }
@@ -40,7 +40,8 @@ class MyApp extends StatelessWidget {
 // class Products: stateless. Returns image-text components by mapping the products array. 
 // class Product_Manager: stateful. includes functional button, pass _products to class Products to change UI. 
 
-// Lifecycle hooks . Stateless Ws are used to create a widget that render things to the UI. You can pass data into them. Eg: Proudcts W 
+// Lifecycle hooks . 
+// Stateless Ws are used to create a widget that render things to the UI. You can pass data into them. Eg: Proudcts W 
 // input External data from ProductManager -> Widget Proudcts -> Renders UI  
 // Stateful: External data as input -> Widget with Internal State -> Renders UI
 
