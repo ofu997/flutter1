@@ -58,8 +58,9 @@ Rebuilding is efficient, checking what has changed
 /* MATERIAL: a design system with guides, best practices, color pairings, Customizable*/
 
 /* to debug, import 'package:flutter/rendering.dart'; and add 
-debugPaintSizeenabled = true to main.
-debugPaintBaseLinesEnabled = true; underlines where leements start and end 
-debug paintPointersenabled = true; shows tap listeners
+debugPaintSizeEnabled = true to main.
+debugPaintBaselinesEnabled = true; underlines where leements start and end 
+debugPaintPointersEnabled = true; shows tap listeners
+print() variables to see what they are
 in MaterialApp, add debugShowMaterialGrid: true, to show positioning/centering and distances
 */

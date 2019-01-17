@@ -39,21 +39,25 @@ class _ProductManagerState extends State<ProductManager> {
     setState(
       () {
         count++;
-      _products.add(product);
+        _products.add(product);
+        print(' addProduct() text count: ' + count.toString() + ' ' + DateTime.now().toIso8601String());
       }
     );
   }
 
   @override
   Widget build(BuildContext context) { // context stores metadata like Themes
-    print('[ProductManager state] build()'+' addProduct() text count: ' + count.toString() + ' ' + DateTime.now().toIso8601String());
-    return Column(children: [
-      Container(
-        margin: EdgeInsets.all(10.0),
-        child: ProductControl(_addsProducts) // Refs function without executing
-      ),
-      Products(_products)
-    ]);
+    print('[ProductManager state] build()');
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.all(10.0),
+          child: ProductControl(_addsProducts, count) // Refs function without executing
+        ),
+        Expanded(child: Products(_products)),     
+        // Container(height: 300.0, child: Products(_products)) // scrollable but within a container      
+      ]
+    );
   }
 }
 
