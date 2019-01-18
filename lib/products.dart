@@ -18,23 +18,23 @@ class Products extends StatelessWidget {
                 );
   }
 
+  Widget _buildProductList(){// exports widget
+    Widget productCard = Center(
+    child: Text('No product found, please add one'),
+    );
+    if(products.length >0){
+      productCard =  ListView.builder(// conditional rendering
+      itemBuilder: _buildProductItem,
+      itemCount: products.length,// how many items will be built/displayed
+      );
+    }
+    return productCard;
+  }
+
   @override
   Widget build(BuildContext context) {
     print('[Products Widget] build()');
-    return ListView.builder(
-      itemBuilder: _buildProductItem,
-      itemCount: products.length,// how many items will be built/displayed
-      // children: products
-      //   .map((element) => Card(
-      //         child: Column(
-      //           children: <Widget>[
-      //             Image.asset("assets/food.jpg"),
-      //             Text(element)
-      //           ],
-      //         ), 
-      //       ))
-      //   .toList(),
-    );
+    return _buildProductList();
   }
 }
 
