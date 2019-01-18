@@ -6,7 +6,7 @@ import './ProductControl.dart';
 class ProductManager extends StatefulWidget {
   final String startingProduct;
   // when argument is in curly brackets we can define it more clearly
-  ProductManager({this.startingProduct = 'sweets tester'}){
+  ProductManager({this.startingProduct}){//putting a {} makes it a named argument
     print('[ProductsManager state] Constructor');
   }
 
@@ -25,8 +25,10 @@ class _ProductManagerState extends State<ProductManager> {
   @override
   void initState(){
     print('[ProductManager state] initState()');
+    if(widget.startingProduct!=null){
+      _products.add(widget.startingProduct);
+    }
     super.initState();
-    _products.add(widget.startingProduct);
   }
   // this works when it receives outside data
   @override 
