@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './product_manager.dart';
+// import './product_manager.dart';
+import './pages/home.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() => runApp(MyApp());
@@ -16,13 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.deepPurple
       ),
-      home: Scaffold(
-        // we can put UI elements here
-        appBar: AppBar(
-          title: Text('A List'),
-        ),
-        body: ProductManager() // an argument here would override the one in Constructor
-      ),
+      home: HomePage()
     );
   }
   // functions here are methods, of course

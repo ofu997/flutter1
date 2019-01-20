@@ -28,7 +28,7 @@ class Products extends StatelessWidget {
       itemCount: products.length,// how many items will be built/displayed
       );
     }
-    return productCard;
+    return productCard;// we must return something, such as Container(), because Widget build() requires it.
   }
 
   @override
@@ -38,5 +38,5 @@ class Products extends StatelessWidget {
   }
 }
 
-/* listViews are good for limited number of elements  
-Using builder, it can also destroy items out of view*/
+/* listView(children: ) is good for static number of items
+Using builder.(...) allows dynamic and longer lists. it can also destroy items out of view*/
