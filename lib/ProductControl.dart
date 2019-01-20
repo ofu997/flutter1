@@ -12,7 +12,8 @@ class ProductControl extends StatelessWidget{
       return RaisedButton(
         color: Theme.of(context).primaryColor,
         onPressed: () {
-          addProduct(pcCount.toString() + ') ' + 'timestamp: ' + DateTime.now().toIso8601String() + '. Here is a picture of sweets');
+          //addProduct(pcCount.toString() + ') ' + 'timestamp: ' + DateTime.now().toIso8601String() + '. Here is a picture of sweets');
+          addProduct({'one':"val one", 'image':'assets/food.jpg', 'title':'the title'});
         },
         child: Text("Add product"),
       );

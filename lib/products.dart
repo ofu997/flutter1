@@ -3,8 +3,8 @@ import './pages/product.dart';
 
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
-  final List<String> products;
-  Products([this.products = const ['first']]){
+  final List<Map<String,String>> products;
+  Products([this.products]){
     print('[Products Widget] Constructor');
   }
 
@@ -12,8 +12,8 @@ class Products extends StatelessWidget {
     return Card(
                   child: Column(
                     children: <Widget>[
-                      Image.asset("assets/food.jpg"),
-                      Text(products[index]),
+                      Image.asset(products[index]['image']),
+                      Text(products[index]['title']),
                       ButtonBar(
                         alignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -22,7 +22,9 @@ class Products extends StatelessWidget {
                             onPressed: () => Navigator.push(
                               context, 
                               MaterialPageRoute(
-                                builder: (BuildContext context) => ProductPage(),
+                                builder: (BuildContext context) => ProductPage(
+                                  products[index]['title'],products[index]['image']
+                                ),
                               ),
                             ),
                           ),
@@ -48,7 +50,7 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('[Products Widget] build()');
+    print('[Products Widget] build() ' + DateTime.now().toIso8601String());
     return _buildProductList();
   }
 }

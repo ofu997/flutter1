@@ -4,14 +4,12 @@ import './products.dart';
 import './ProductControl.dart';
 
 class ProductManager extends StatefulWidget {
-  final String startingProduct;
-  // when argument is in curly brackets we can define it more clearly
-  ProductManager({this.startingProduct}){//putting a {} makes it a named argument
+  final Map<String,String> startingProduct;
+  ProductManager({this.startingProduct}){//putting a {} makes it a named argument // when argument is in curly brackets we can define it more clearly
     print('[ProductsManager state] Constructor');
   }
 
-  @override
-  // state object belongs to statefulwidget
+  @override // state object belongs to statefulwidget
   State<StatefulWidget> createState() {
     print('[ProductManager state] createState()');
     return _ProductManagerState();
@@ -19,7 +17,7 @@ class ProductManager extends StatefulWidget {
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  List<Map<String, String>> _products = [];
   int count = 0;
   // this runs before BuildContext
   @override
@@ -37,7 +35,7 @@ class _ProductManagerState extends State<ProductManager> {
     super.didUpdateWidget(oldWidget);
   }
 
-  void _addsProducts(String product){
+  void _addsProducts(Map<String, String> product){
     setState(
       () {
         count++;
