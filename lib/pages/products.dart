@@ -6,7 +6,10 @@ class ProductsPage extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      // we can put UI elements here
+      drawer: Drawer(child: Column(children: <Widget>[
+        AppBar(automaticallyImplyLeading: false, title: Text('Choose'),), //automaticallyImplyLeading: whether to assume AppBar actions
+        ListTile(title: Text('Manage Products'), onTap: (){},)
+      ],),),
       appBar: AppBar(
         title: Text('Food List'),
       ),
