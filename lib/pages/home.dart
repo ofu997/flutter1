@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget{
     return Scaffold(
       // we can put UI elements here
       appBar: AppBar(
-        title: Text('A List'),
+        title: Text('Food List'),
       ),
       body: ProductManager() // an argument here would override the one in Constructor
     );

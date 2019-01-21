@@ -4,7 +4,9 @@ import './pages/product.dart';
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
   final List<Map<String,String>> products;
-  Products([this.products]){
+  final Function deleteProduct;
+
+  Products(this.products, {this.deleteProduct}){
     print('[Products Widget] Constructor');
   }
 
@@ -18,15 +20,20 @@ class Products extends StatelessWidget {
                         alignment: MainAxisAlignment.center,
                         children: <Widget>[
                           FlatButton(
+                            color: Theme.of(context).primaryColor,
                             child: Text('Details'),
-                            onPressed: () => Navigator.push(
+                            onPressed: () => Navigator.push<bool>(
                               context, 
                               MaterialPageRoute(
                                 builder: (BuildContext context) => ProductPage(
                                   products[index]['title'],products[index]['image']
                                 ),
                               ),
-                            ),
+                            ).then((bool value){
+                              if (value){
+                                deleteProduct(index);
+                              }//print(value);
+                            }),
                           ),
                         ]
                       )

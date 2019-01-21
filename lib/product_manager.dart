@@ -45,6 +45,12 @@ class _ProductManagerState extends State<ProductManager> {
     );
   }
 
+  void _deleteProduct(int index){
+    setState((){
+      _products.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) { // context stores metadata like Themes
     print('[ProductManager state] build()');
@@ -54,7 +60,7 @@ class _ProductManagerState extends State<ProductManager> {
           margin: EdgeInsets.all(10.0),
           child: ProductControl(_addsProducts, count) // Refs function without executing
         ),
-        Expanded(child: Products(_products)),     
+        Expanded(child: Products(_products, deleteProduct: _deleteProduct )),// _deleteProduct as a named argument     
         // Container(height: 300.0, child: Products(_products)) // scrollable but within a container      
       ]
     );
