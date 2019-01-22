@@ -16,7 +16,7 @@ class ProductsPage extends StatelessWidget{
           children: <Widget>[
             AppBar(
               automaticallyImplyLeading: false, 
-              title: Text('Choose'),
+              title: Text('Choose below'),
               ), //automaticallyImplyLeading: whether to assume AppBar actions
               ListTile(
                   title: Text('Manage Products'),

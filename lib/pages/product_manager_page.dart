@@ -25,7 +25,7 @@ class _ProductManagerPageState extends State<ProductManagerPage> {
               title: Text(''),
             ), //automaticallyImplyLeading: whether to assume AppBar actions
             ListTile(
-              title: Text('all Products'),
+              title: Text('All products'),
               onTap: () {// change parameters to key since it requires the page
                 Navigator.pushReplacementNamed(context,'/');
               },
