@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './products.dart';
-
+import './product_create.dart';
+import './product_list.dart';
 class ProductManagerPage extends StatefulWidget {
   ProductManagerPage();
 
@@ -15,7 +16,7 @@ class _ProductManagerPageState extends State<ProductManagerPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return DefaultTabController(length: 2, child: Scaffold(
       drawer: Drawer(
         child: Column(
           children: <Widget>[
@@ -36,11 +37,18 @@ class _ProductManagerPageState extends State<ProductManagerPage> {
         ),
       ),
       appBar: AppBar(
-        title: Text('The product manager'),
+        title: Text('Manage products'),
+        bottom: TabBar(tabs: <Widget>[
+          Tab(icon: Icon(Icons.create),text: 'create product',),
+          Tab(icon: Icon(Icons.list), text: 'my products',),
+        ],),
       ),
-      body: Center(
-        child: Text('Here goes all product'),
+      body: TabBarView(// reads TabBar events and displays content
+        children: <Widget>[
+          ProductCreatePage(),
+          ProductListPage()
+        ],
       ),
-    );
+    ));
   }
 }
