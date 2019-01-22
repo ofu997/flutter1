@@ -17,20 +17,17 @@ class _ProductManagerPageState extends State<ProductManagerPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return DefaultTabController(length: 2, child: Scaffold(
-      drawer: Drawer(
+      drawer: Drawer(// menu square UI
         child: Column(
           children: <Widget>[
             AppBar(// what shows up when hamburger menu is clicked
               automaticallyImplyLeading: false,
-              title: Text('What is this?'),
+              title: Text(''),
             ), //automaticallyImplyLeading: whether to assume AppBar actions
             ListTile(
               title: Text('all Products'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => ProductsPage()));
+              onTap: () {// change parameters to key since it requires the page
+                Navigator.pushReplacementNamed(context,'/');
               },
             )
           ],

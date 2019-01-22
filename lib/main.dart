@@ -2,12 +2,41 @@ import 'package:flutter/material.dart';
 // import './product_manager.dart';
 // import './pages/home.dart';
 import './pages/auth.dart';
+import './pages/product_manager_page.dart';
+import './pages/products.dart';
+import './pages/product.dart';
+
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() => runApp(MyApp());
 
 // root widget, extends widget features
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+    State<StatefulWidget> createState() {
+      // TODO: implement createState
+      return _MyAppState();
+    }
+}
 
+class _MyAppState extends State<MyApp>{
+  int count = 0;
+  List<Map<String,String>> _products=[];
+  
+  void _addsProducts(Map<String, String> product){
+    setState(
+      () {
+        count++;
+        _products.add(product);
+        print(' addProduct() text count: ' + count.toString() + ' ' + DateTime.now().toIso8601String());
+      }
+    );
+  }
+
+  void _deleteProduct(int index){
+    setState((){
+      _products.removeAt(index);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // return a shippable widget
@@ -15,12 +44,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData( // swatch is auto-color-schemes. Colors is package, followed by static types
         brightness: Brightness.light,
         primarySwatch: Colors.deepOrange,
-        accentColor: Colors.deepPurple
+        accentColor: Colors.lightBlue
       ),
-      home: AuthPage()
+      //home: AuthPage(),
+      routes: {
+      '/':(BuildContext context) => ProductsPage(_products, _addsProducts, _deleteProduct),
+      '/admin':(BuildContext context) => ProductManagerPage(),
+      },
+      onGenerateRoute: (RouteSettings settings){
+        final List<String> pathElements = settings.name.split('/');
+        if (pathElements[0] != ''){
+          return null;
+        }
+        if (pathElements[1]=='product'){
+          final int index = int.parse(pathElements[2]);
+          return MaterialPageRoute<bool>(
+            builder: (BuildContext context) => ProductPage(
+           _products[index]['title'], _products[index]['image']), 
+          );
+        }
+        return null; 
+      },
     );
   }
-  // functions here are methods, of course
 }
 
 // dart is a modular object-oriented language, importing from packages

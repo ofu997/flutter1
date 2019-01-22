@@ -3,52 +3,13 @@ import 'package:flutter/material.dart';
 import './products.dart';
 import './ProductControl.dart';
 
-class ProductManager extends StatefulWidget {
-  final Map<String,String> startingProduct;
-  ProductManager({this.startingProduct}){//putting a {} makes it a named argument // when argument is in curly brackets we can define it more clearly
+class ProductManager extends StatelessWidget {
+  final List <Map<String,String>> products;
+  final Function addProduct;
+  final Function deleteProduct;
+  final int count=1;
+  ProductManager(this.products, this.addProduct, this.deleteProduct){//putting a {} makes it a named argument // when argument is in curly brackets we can define it more clearly
     print('[ProductsManager state] Constructor');
-  }
-
-  @override // state object belongs to statefulwidget
-  State<StatefulWidget> createState() {
-    print('[ProductManager state] createState()');
-    return _ProductManagerState();
-  }
-}
-
-class _ProductManagerState extends State<ProductManager> {
-  List<Map<String, String>> _products = [];
-  int count = 0;
-  // this runs before BuildContext
-  @override
-  void initState(){
-    print('[ProductManager state] initState()');
-    if(widget.startingProduct!=null){
-      _products.add(widget.startingProduct);
-    }
-    super.initState();
-  }
-  // this works when it receives outside data
-  @override 
-  void didUpdateWidget(ProductManager oldWidget) {
-    print('[ProductManager state] didUpdateWidget()');
-    super.didUpdateWidget(oldWidget);
-  }
-
-  void _addsProducts(Map<String, String> product){
-    setState(
-      () {
-        count++;
-        _products.add(product);
-        print(' addProduct() text count: ' + count.toString() + ' ' + DateTime.now().toIso8601String());
-      }
-    );
-  }
-
-  void _deleteProduct(int index){
-    setState((){
-      _products.removeAt(index);
-    });
   }
 
   @override
@@ -58,14 +19,16 @@ class _ProductManagerState extends State<ProductManager> {
       children: [
         Container(
           margin: EdgeInsets.all(10.0),
-          child: ProductControl(_addsProducts, count) // Refs function without executing
+          child: ProductControl(addProduct, count) // Refs function without executing
         ),
-        Expanded(child: Products(_products, deleteProduct: _deleteProduct )),// _deleteProduct as a named argument     
+        Expanded(child: Products(products, deleteProduct: deleteProduct )),// _deleteProduct as a named argument     
         // Container(height: 300.0, child: Products(_products)) // scrollable but within a container      
       ]
     );
   }
 }
+
+// Stateful, includes operations on products
 
 // setState() causes another build
 
