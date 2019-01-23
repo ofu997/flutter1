@@ -15,48 +15,38 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextField(
-          onChanged: (String value) {
-            setState(
-              () {
-              titleValue = value;
-              }
-            );
-          },
-        ),
-        TextField(
-          maxLines: 4,
-          onChanged: (String value) {
-            setState( () {
+    return Container(
+      margin: EdgeInsets.all(10.0),
+      child: Column(
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(labelText: 'Product Title'),
+            onChanged: (String value) {
+              setState(() {
+                titleValue = value;
+              });
+            },
+          ),
+          TextField(
+            decoration: InputDecoration(labelText: 'Product Description'),
+            maxLines: 4,
+            onChanged: (String value) {
+              setState(() {
                 description = value;
               });
-          },
-        ),
-        TextField(
-          keyboardType: TextInputType.number,
-          onChanged: (String value) {
-            setState( () {
-              price = double.parse(value);
-            });
-          },
-        ),
-      ],
+            },
+          ),
+          TextField(              
+            decoration: InputDecoration(labelText: 'Product Price'),          
+            keyboardType: TextInputType.number,
+            onChanged: (String value) {
+              setState(() {
+                price = double.parse(value);
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }
-
-// Bye immutable non-interactive content
-// Center(
-//       child: RaisedButton(
-//         child: Text('Save'),
-//         onPressed: (){
-//           showModalBottomSheet(
-//             context: context, builder: (BuildContext context){
-//               return Center(child: Text('This is our modal'),);
-//             }
-//           );
-//         },
-//       ),
-//     );
