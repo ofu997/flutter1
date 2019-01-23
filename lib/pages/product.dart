@@ -40,10 +40,8 @@ class ProductPage extends StatelessWidget {
         // determines if user can leave the page and with what value
         onWillPop: () {
           print('back button pressed');
-          Navigator.pop(context,
-              false); // (context, false): user can leave without deleting. (context): will delete.
-          return Future.value(
-              false); // (false) because we don't want to start another pop event
+          Navigator.pop(context, false); // (context, false): user can leave without deleting. (context): will delete.
+          return Future.value(false); // (false) because we don't want to start another pop event
         },
         child: Scaffold(
           // we can put UI elements here
