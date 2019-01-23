@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../product_manager.dart';
-import './product_manager_page.dart';
+// import './product_manager_page.dart';
+
 class ProductsPage extends StatelessWidget{
-  final List<Map<String,String>> products;
-  final Function addProduct;
-  final Function deleteProduct;
-  ProductsPage(this.products, this.addProduct, this.deleteProduct);
+  final List<Map<String, dynamic>> products;
+  // final Function addProduct;
+  // final Function deleteProduct;
+
+  ProductsPage(this.products);
   
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ProductsPage extends StatelessWidget{
       appBar: AppBar(
         title: Text('Food List'),
       ),
-      body: ProductManager(products, addProduct, deleteProduct), // an argument here would override the one in Constructor
+      body: ProductManager(products), // an argument here would override the one in Constructor
     );
   }
 }

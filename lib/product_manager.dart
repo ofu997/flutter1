@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import './products.dart';
-import './ProductControl.dart';
+// import './product_control.dart';
 
 class ProductManager extends StatelessWidget {
-  final List <Map<String,String>> products;
-  final Function addProduct;
-  final Function deleteProduct;
+  final List <Map<String, dynamic>> products;
+  // final Function addProduct;
+  // final Function deleteProduct;
   final int count=1;
-  ProductManager(this.products, this.addProduct, this.deleteProduct){//putting a {} makes it a named argument // when argument is in curly brackets we can define it more clearly
+  ProductManager(this.products){//putting a {} makes it a named argument // when argument is in curly brackets we can define it more clearly
     print('[ProductsManager state] Constructor');
   }
 
@@ -17,11 +17,7 @@ class ProductManager extends StatelessWidget {
     print('[ProductManager state] build()');
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.all(10.0),
-          child: ProductControl(addProduct, count) // Refs function without executing
-        ),
-        Expanded(child: Products(products, deleteProduct: deleteProduct )),// _deleteProduct as a named argument     
+        Expanded(child: Products(products)),// _deleteProduct as a named argument     
         // Container(height: 300.0, child: Products(_products)) // scrollable but within a container      
       ]
     );

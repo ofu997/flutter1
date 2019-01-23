@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import './pages/product.dart';
+// import './pages/product.dart';
 
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
-  final List<Map<String,String>> products;
-  final Function deleteProduct;
+  final List<Map<String, dynamic>> products;
+  // final Function deleteProduct;
 
-  Products(this.products, {this.deleteProduct}){
+  Products(this.products){
     print('[Products Widget] Constructor');
   }
 
@@ -23,12 +23,12 @@ class Products extends StatelessWidget {
                             color: Theme.of(context).primaryColor,
                             child: Text('Details'),
                             onPressed: () => Navigator.pushNamed<bool>(
-                              context, '/product/' + index.toString(),
-                            ).then((bool value){
-                              if (value){
-                                deleteProduct(index);
-                              }//print(value);
-                            }),
+                              context, '/product/' + index.toString(),)
+                            // .then((bool value){
+                            //   if (value){
+                            //     deleteProduct(index);
+                            //   }//print(value);
+                            // }),
                           ),
                         ]
                       )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './product_manager.dart';
+// import './product_manager.dart';
 
 class ProductControl extends StatelessWidget{
   final Function addProduct;
@@ -23,4 +23,9 @@ class ProductControl extends StatelessWidget{
 /* 
   this passes data up 
   reference to _addsProducts was passed down
+*/
+
+
+/*
+Section 7.92: this gets deleted
 */

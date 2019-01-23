@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import './products.dart';
+// import './products.dart';
 import './product_create.dart';
 import './product_list.dart';
-class ProductManagerPage extends StatefulWidget {
-  ProductManagerPage();
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _ProductManagerPageState();
-  }
-}
+class ProductManagerPage extends StatelessWidget {
 
-class _ProductManagerPageState extends State<ProductManagerPage> {
+  final Function addProduct;
+  final Function deleteProduct;
+
+  ProductManagerPage(this.addProduct, this.deleteProduct);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -42,7 +39,7 @@ class _ProductManagerPageState extends State<ProductManagerPage> {
       ),
       body: TabBarView(// reads TabBar events and displays content
         children: <Widget>[
-          ProductCreatePage(),
+          ProductCreatePage(addProduct),
           ProductListPage()
         ],
       ),

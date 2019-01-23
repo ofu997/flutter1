@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 // import './product_manager.dart';
 // import './pages/home.dart';
-import './pages/auth.dart';
-import './pages/product_manager_page.dart';
-import './pages/products.dart';
-import './pages/product.dart';
+// import './pages/auth.dart';
+import 'package:second_app/pages/product_manager_page.dart';
+//import './pages/product_manager_page.dart';
+import 'package:second_app/pages/products.dart';
+import 'package:second_app/pages/product.dart';
+// import './pages/product.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() => runApp(MyApp());
@@ -20,9 +22,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp>{
   int count = 0;
-  List<Map<String,String>> _products=[];
+  List<Map<String, dynamic>> _products=[];
   
-  void _addsProducts(Map<String, String> product){
+  void _addsProducts(Map<String,dynamic> product){
     setState(
       () {
         count++;
@@ -48,8 +50,8 @@ class _MyAppState extends State<MyApp>{
       ),
       //home: AuthPage(),
       routes: {
-      '/':(BuildContext context) => ProductsPage(_products, _addsProducts, _deleteProduct),
-      '/admin':(BuildContext context) => ProductManagerPage(),
+      '/':(BuildContext context) => ProductsPage(_products),
+      '/admin':(BuildContext context) => ProductManagerPage(_addsProducts, _deleteProduct),
       },
       onGenerateRoute: (RouteSettings settings){
         final List<String> pathElements = settings.name.split('/');
@@ -67,7 +69,7 @@ class _MyAppState extends State<MyApp>{
       },
       onUnknownRoute: (RouteSettings settings){
         return MaterialPageRoute(
-          builder:  (BuildContext context) => ProductsPage(_products, _addsProducts, _deleteProduct)
+          builder:  (BuildContext context) => ProductsPage(_products)
         );
       },
 
