@@ -49,13 +49,19 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
               });
             },
           ),
+          SizedBox(height: 25.0,),
           RaisedButton(
+            color: Theme.of(context).primaryColorLight,
             child: Text('Save'),
             onPressed: (){
-              final Map<String, dynamic> product ={'title': titleValue, 'description': description,
-              'price': price };
-              widget.addProduct(product);
+              final Map<String, dynamic> product = {
+                'title': titleValue, 'description': description,
+              'price': price, 'image': 'assets/food.jpg'
+              };
+            widget.addProduct(product);
+            Navigator.pushReplacementNamed(context,'/');// gives you no option of going back
             },
+
           )
         ],
       ),
