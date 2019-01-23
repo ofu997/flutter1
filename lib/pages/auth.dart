@@ -11,7 +11,7 @@ class AuthPage extends StatelessWidget {
         body: Center(
           child: RaisedButton(
               child: Text('Log In'),
-              onPressed: () {// pushReplacement -> pushReplacementnamed. change parameter to route
+              onPressed: () {// pushReplacement -> pushReplacementNamed. change parameter to route
                 Navigator.pushReplacementNamed(
                   context, '/',
                 );
@@ -21,3 +21,6 @@ class AuthPage extends StatelessWidget {
     );
   }
 }
+
+/* pushReplacementNamed: replace the route by pushing the route named routeName 
+and then disposing the previous route once the new route has finished animating in.*/
