@@ -6,6 +6,7 @@ import 'package:second_app/pages/product_manager_page.dart';
 //import './pages/product_manager_page.dart';
 import 'package:second_app/pages/products.dart';
 import 'package:second_app/pages/product.dart';
+import 'package:second_app/pages/auth.dart';
 // import './pages/product.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
@@ -50,7 +51,9 @@ class _MyAppState extends State<MyApp>{
       ),
       //home: AuthPage(),
       routes: {
-      '/':(BuildContext context) => ProductsPage(_products),
+      '/':(BuildContext context) => AuthPage(),
+      '/products':(BuildContext context) => ProductsPage(_products),
+      /*'/':(BuildContext context) => ProductsPage(_products),*/
       '/admin':(BuildContext context) => ProductManagerPage(_addsProducts, _deleteProduct),
       },
       onGenerateRoute: (RouteSettings settings){

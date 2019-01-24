@@ -14,8 +14,8 @@ class ProductCreatePage extends StatefulWidget {
 
 class _ProductCreatePageState extends State<ProductCreatePage> {
   String titleValue = '';
-  String description = '';
-  double price = 0.00;
+  String descriptionValue = '';
+  double priceValue = 0.00;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             maxLines: 4,
             onChanged: (String value) {
               setState(() {
-                description = value;
+                descriptionValue = value;
               });
             },
           ),
@@ -45,7 +45,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             keyboardType: TextInputType.number,
             onChanged: (String value) {
               setState(() {
-                price = double.parse(value);
+                priceValue = double.parse(value);
               });
             },
           ),
@@ -55,8 +55,8 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             child: Text('Save'),
             onPressed: (){
               final Map<String, dynamic> product = {
-                'title': titleValue, 'description': description,
-              'price': price, 'image': 'assets/food.jpg'
+                'title': titleValue, 'description': descriptionValue,
+              'price': priceValue, 'image': 'assets/food.jpg'
               };
             widget.addProduct(product);
             Navigator.pushReplacementNamed(context,'/');// gives you no option of going back
