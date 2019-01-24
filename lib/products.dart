@@ -15,7 +15,20 @@ class Products extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Image.asset(products[index]['image']),
-                      Text(products[index]['title']),
+                      Container(
+                          padding: EdgeInsets.only(top:10.0), 
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                            Text(
+                            products[index]['title'],
+                            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),//fontFamily: 'Oswald'
+                            ),
+                          SizedBox(width: 33.0,),
+                          Text(products[index]['price'].toString())
+                          ],
+                        )
+                      ),
                       ButtonBar(
                         alignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -24,11 +37,6 @@ class Products extends StatelessWidget {
                             child: Text('Details'),
                             onPressed: () => Navigator.pushNamed<bool>(
                               context, '/product/' + index.toString(),)
-                            // .then((bool value){
-                            //   if (value){
-                            //     deleteProduct(index);
-                            //   }//print(value);
-                            // }),
                           ),
                         ]
                       )

@@ -47,7 +47,8 @@ class _MyAppState extends State<MyApp>{
       theme: ThemeData( // swatch is auto-color-schemes. Colors is package, followed by static types
         brightness: Brightness.light,
         primarySwatch: Colors.deepOrange,
-        accentColor: Colors.lightBlue
+        accentColor: Colors.lightBlue,
+        // fontFamily: 'Oswald',
       ),
       //home: AuthPage(),
       routes: {

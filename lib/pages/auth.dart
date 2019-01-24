@@ -12,7 +12,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPage extends State<AuthPage> {
   String userName;
   String password;
-
+  bool _acceptTerms=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +25,7 @@ class _AuthPage extends State<AuthPage> {
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(labelText: 'User Name'),
+                keyboardType:TextInputType.emailAddress,
                 onChanged: (String value) {
                   setState(() {
                     userName = value;
@@ -34,6 +35,7 @@ class _AuthPage extends State<AuthPage> {
               TextField(
                 decoration: InputDecoration(labelText: 'Password'),
                 maxLines: 4,
+                obscureText: true,
                 keyboardType:TextInputType.text,
                 onChanged: (String value) {
                   setState(() {
@@ -41,10 +43,17 @@ class _AuthPage extends State<AuthPage> {
                   });
                 },
               ),
+              SwitchListTile(
+                value: _acceptTerms, onChanged:(bool value){
+                  setState(() {
+                    _acceptTerms = value;
+                  });
+                },title:Text('accept terms'),),
               SizedBox(
                 height: 25.0,
               ),
               RaisedButton(
+                textColor: Colors.brown,
                 color: Theme.of(context).primaryColorLight,
                 child: Text('Save'),
                 onPressed: () {
@@ -52,6 +61,7 @@ class _AuthPage extends State<AuthPage> {
                     'name': userName,
                     'description': password,
                   };
+                  print(userName+password);
                   print(userInfo.toString());
                   //widget.addProduct(product);
                   Navigator.pushReplacementNamed(context,
@@ -61,16 +71,7 @@ class _AuthPage extends State<AuthPage> {
             ],
           ),
         )
-        //  Center(
-        //   child: RaisedButton(
-        //       child: Text('Log In'),
-        //       onPressed: () {// pushReplacement -> pushReplacementNamed. change parameter to route
-        //         Navigator.pushReplacementNamed(
-        //           context, '/',
-        //         );
-        //       }
-        //   ),
-        // ),
+
 
         );
   }
@@ -78,3 +79,23 @@ class _AuthPage extends State<AuthPage> {
 
 /* pushReplacementNamed: replace the route by pushing the route named routeName 
 and then disposing the previous route once the new route has finished animating in.*/
+
+
+//  Center(
+//   child: RaisedButton(
+//       child: Text('Log In'),
+//       onPressed: () {// pushReplacement -> pushReplacementNamed. change parameter to route
+//         Navigator.pushReplacementNamed(
+//           context, '/',
+//         );
+//       }
+//   ),
+// ),
+
+// solution after AppBar
+// ListView(
+//   children: <Widget>[
+//     TextField(),
+//     RaisedButton(onPressed: ,)
+//   ]
+// )
