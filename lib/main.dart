@@ -8,9 +8,13 @@ import 'package:second_app/pages/products.dart';
 import 'package:second_app/pages/product.dart';
 import 'package:second_app/pages/auth.dart';
 // import './pages/product.dart';
+import 'package:flutter/rendering.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
-void main() => runApp(MyApp());
+void main() { 
+  //debugPaintSizeEnabled=true;
+  runApp(MyApp());
+}
 
 // root widget, extends widget features
 class MyApp extends StatefulWidget {

@@ -12,7 +12,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPage extends State<AuthPage> {
   String userName;
   String password;
-  bool _acceptTerms=false;
+  bool _acceptTerms = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +20,19 @@ class _AuthPage extends State<AuthPage> {
           title: Text('Log In'),
         ),
         body: Container(
-          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.09), BlendMode.dstATop),
+              fit: BoxFit.cover,
+              image: AssetImage('assets/background.jpg'),
+            )
+          ),
+          padding: EdgeInsets.all(10.0),
           child: ListView(
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(labelText: 'User Name'),
-                keyboardType:TextInputType.emailAddress,
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (String value) {
                   setState(() {
                     userName = value;
@@ -36,7 +43,7 @@ class _AuthPage extends State<AuthPage> {
                 decoration: InputDecoration(labelText: 'Password'),
                 maxLines: 4,
                 obscureText: true,
-                keyboardType:TextInputType.text,
+                keyboardType: TextInputType.text,
                 onChanged: (String value) {
                   setState(() {
                     password = value;
@@ -44,11 +51,14 @@ class _AuthPage extends State<AuthPage> {
                 },
               ),
               SwitchListTile(
-                value: _acceptTerms, onChanged:(bool value){
+                value: _acceptTerms,
+                onChanged: (bool value) {
                   setState(() {
                     _acceptTerms = value;
                   });
-                },title:Text('accept terms'),),
+                },
+                title: Text('accept terms'),
+              ),
               SizedBox(
                 height: 25.0,
               ),
@@ -61,7 +71,7 @@ class _AuthPage extends State<AuthPage> {
                     'name': userName,
                     'description': password,
                   };
-                  print(userName+password);
+                  print(userName + password);
                   print(userInfo.toString());
                   //widget.addProduct(product);
                   Navigator.pushReplacementNamed(context,
@@ -70,16 +80,12 @@ class _AuthPage extends State<AuthPage> {
               )
             ],
           ),
-        )
-
-
-        );
+        ));
   }
 }
 
 /* pushReplacementNamed: replace the route by pushing the route named routeName 
 and then disposing the previous route once the new route has finished animating in.*/
-
 
 //  Center(
 //   child: RaisedButton(

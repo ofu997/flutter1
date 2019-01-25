@@ -6,78 +6,76 @@ class Products extends StatelessWidget {
   final List<Map<String, dynamic>> products;
   // final Function deleteProduct;
 
-  Products(this.products){
+  Products(this.products) {
     print('[Products Widget] Constructor');
   }
 
-  Widget _buildProductItem(BuildContext context, int index){
+  Widget _buildProductItem(BuildContext context, int index) {
     return Card(
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(products[index]['image']),
-                      Container(
-                            padding: EdgeInsets.only(top:10.0), 
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,// For a row, centers it horizontally
-                              children: <Widget>[
-                              Text(
-                              products[index]['title'],
-                              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, fontFamily: 'Oswald'),//
-                              ),
-                            SizedBox(
-                              width: 33.0,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColorLight, 
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Text(
-                                '\$${products[index]['price'].toString()}',
-                                style: TextStyle(color: Colors.white),
-                              )
-                            )
-                          ],
-                        )
-                      ),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 1.0),
-                          borderRadius: BorderRadius.circular(8.0)
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-                          child: Text('Union Square, New York'),
-                          ),
-                      ),
-                      ButtonBar(
-                        alignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          FlatButton(
-                            color: Theme.of(context).primaryColor,
-                            child: Text('Details'),
-                            onPressed: () => Navigator.pushNamed<bool>(
-                              context, '/product/' + index.toString(),)
-                          ),
-                        ]
-                      )
-                    ]
-                  )
-                );
+        child: Column(children: <Widget>[
+      Image.asset(products[index]['image']),
+      Container(
+          padding: EdgeInsets.only(top: 10.0),
+          child: Row(
+            mainAxisAlignment:
+                MainAxisAlignment.center, // For a row, centers it horizontally
+            children: <Widget>[
+              Text(
+                products[index]['title'],
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Oswald'), //
+              ),
+              SizedBox(
+                width: 33.0,
+              ),
+              Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColorLight,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: Text(
+                    '\$${products[index]['price'].toString()}',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ],
+          )),
+      DecoratedBox(
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 1.0),
+            borderRadius: BorderRadius.circular(8.0)),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+          child: Text('Union Square, New York'),
+        ),
+      ),
+      ButtonBar(alignment: MainAxisAlignment.center, children: <Widget>[
+        FlatButton(
+            color: Theme.of(context).primaryColor,
+            child: Text('Details'),
+            onPressed: () => Navigator.pushNamed<bool>(
+                  context,
+                  '/product/' + index.toString(),
+                )),
+      ])
+    ]));
   }
 
-  Widget _buildProductList(){// exports widget
+  Widget _buildProductList() {
+    // exports widget
     Widget productCard = Center(
-    child: Text('No product found, please add one'),
+      child: Text('No product found, please add one'),
     );
-    if(products.length >0){
-      productCard =  ListView.builder(// conditional rendering
-      itemBuilder: _buildProductItem,
-      itemCount: products.length,// how many items will be built/displayed
+    if (products.length > 0) {
+      productCard = ListView.builder(
+        // conditional rendering
+        itemBuilder: _buildProductItem,
+        itemCount: products.length, // how many items will be built/displayed
       );
     }
-    return productCard;// we must return something, such as Container(), because Widget build() requires it.
+    return productCard; // we must return something, such as Container(), because Widget build() requires it.
   }
 
   @override
