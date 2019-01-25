@@ -21,6 +21,7 @@ class ProductsPage extends StatelessWidget{
               title: Text('Choose below'),
               ), //automaticallyImplyLeading: whether to assume AppBar actions
               ListTile(
+                  leading: Icon(Icons.shop),
                   title: Text('Manage Products'),
                   onTap: (){
                     Navigator.pushReplacementNamed(context, '/admin');

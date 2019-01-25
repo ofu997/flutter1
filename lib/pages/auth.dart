@@ -28,10 +28,11 @@ class _AuthPage extends State<AuthPage> {
             )
           ),
           padding: EdgeInsets.all(10.0),
-          child: ListView(
+          child: SingleChildScrollView(
+            child: Column(
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: 'User Name'),
+                decoration: InputDecoration(labelText: 'User Name', filled: true, fillColor: Colors.white),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (String value) {
                   setState(() {
@@ -39,8 +40,11 @@ class _AuthPage extends State<AuthPage> {
                   });
                 },
               ),
+              SizedBox(
+                height: 11.0
+              ),
               TextField(
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white),
                 maxLines: 4,
                 obscureText: true,
                 keyboardType: TextInputType.text,
@@ -50,7 +54,7 @@ class _AuthPage extends State<AuthPage> {
                   });
                 },
               ),
-              SwitchListTile(
+            SwitchListTile(
                 value: _acceptTerms,
                 onChanged: (bool value) {
                   setState(() {
@@ -79,6 +83,7 @@ class _AuthPage extends State<AuthPage> {
                 },
               )
             ],
+            )
           ),
         ));
   }
