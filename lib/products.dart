@@ -16,18 +16,40 @@ class Products extends StatelessWidget {
                     children: <Widget>[
                       Image.asset(products[index]['image']),
                       Container(
-                          padding: EdgeInsets.only(top:10.0), 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                            Text(
-                            products[index]['title'],
-                            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),//fontFamily: 'Oswald'
+                            padding: EdgeInsets.only(top:10.0), 
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,// For a row, centers it horizontally
+                              children: <Widget>[
+                              Text(
+                              products[index]['title'],
+                              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, fontFamily: 'Oswald'),//
+                              ),
+                            SizedBox(
+                              width: 33.0,
                             ),
-                          SizedBox(width: 33.0,),
-                          Text(products[index]['price'].toString())
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColorLight, 
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Text(
+                                '\$${products[index]['price'].toString()}',
+                                style: TextStyle(color: Colors.white),
+                              )
+                            )
                           ],
                         )
+                      ),
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 1.0),
+                          borderRadius: BorderRadius.circular(8.0)
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                          child: Text('Union Square, New York'),
+                          ),
                       ),
                       ButtonBar(
                         alignment: MainAxisAlignment.center,
