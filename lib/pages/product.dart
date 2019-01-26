@@ -4,8 +4,11 @@ import 'dart:async';
 class ProductPage extends StatelessWidget {
   final String title;
   final String imageUrl;
+  final String description;
+  final double price;
+  final String address='union square';
 
-  ProductPage(this.title, this.imageUrl);
+  ProductPage(this.title, this.imageUrl, this.description, this.price);
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -55,16 +58,25 @@ class ProductPage extends StatelessWidget {
                 Image.asset(imageUrl),
                 Container(
                   padding: EdgeInsets.all(10.0),
-                  child: Text(title),
+                  child: Text(title, style: TextStyle(fontSize: 33.0,fontFamily: 'Courier')),
                 ),
                 Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: RaisedButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text('Delete'),
-                      onPressed: () => _showWarningDialog(context),
-                    ) //Navigator.pop(context, true);
-                    ),
+                  child: Text(description)
+                ),
+                Container(
+                  child: Text(price.toString())
+                ),
+                Container(
+                  child: Text(address)
+                )
+                // Container(
+                //     padding: EdgeInsets.all(10.0),
+                //     child: RaisedButton(
+                //       color: Theme.of(context).accentColor,
+                //       child: Text('Delete'),
+                //       onPressed: () => _showWarningDialog(context),
+                //     ) //Navigator.pop(context, true);
+                //     ),
               ]),
           // makes a Back button like the automated one seen in AppBar
         )

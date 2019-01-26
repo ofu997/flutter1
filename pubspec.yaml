@@ -41,6 +41,7 @@ flutter:
     - assets/food.jpg
     - assets/background.jpg
     - assets/Oswald-Bold.ttf
+    - assets/CottageSans.ttf
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -58,6 +59,10 @@ flutter:
     - family: Oswald
       fonts:
         - asset: assets/Oswald-Bold.ttf
+          weight: 700
+    - family: Cottage
+      fonts:
+        - asset: assets/CottageSans.ttf
           weight: 700
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

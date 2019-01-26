@@ -23,7 +23,7 @@ class _AuthPage extends State<AuthPage> {
           decoration: BoxDecoration(
             image: DecorationImage(
               colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.09), BlendMode.dstATop),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               image: AssetImage('assets/background.jpg'),
             )
           ),
@@ -85,7 +85,8 @@ class _AuthPage extends State<AuthPage> {
             ],
             )
           ),
-        ));
+        )
+      );
   }
 }
 

@@ -24,8 +24,8 @@ class Products extends StatelessWidget {
                 products[index]['title'],
                 style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Oswald'), //
+                    fontWeight: FontWeight.w100,
+                    fontFamily: 'Cottage'), //
               ),
               SizedBox(
                 width: 33.0,
@@ -38,8 +38,9 @@ class Products extends StatelessWidget {
                   ),
                   child: Text(
                     '\$${products[index]['price'].toString()}',
-                    style: TextStyle(color: Colors.white),
-                  )),
+                    style: TextStyle(color: Colors.black),
+                  )
+                ),
             ],
           )),
       DecoratedBox(
@@ -54,15 +55,15 @@ class Products extends StatelessWidget {
       ButtonBar(alignment: MainAxisAlignment.center, children: <Widget>[
         IconButton(
             icon: Icon(Icons.info),
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColorLight,
             //child: Text('Details'),
             onPressed: () => Navigator.pushNamed<bool>(
                   context,
                   '/product/' + index.toString(),
                 )),
         IconButton(
-            icon: Icon(Icons.info),
-            color: Theme.of(context).primaryColor,
+            icon: Icon(Icons.favorite_border),
+            color: Colors.red,
             //child: Text('Details'),
             onPressed: () => Navigator.pushNamed<bool>(
                   context,

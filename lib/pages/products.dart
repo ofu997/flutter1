@@ -32,6 +32,9 @@ class ProductsPage extends StatelessWidget{
       ),
       appBar: AppBar(
         title: Text('Food List'),
+        actions: <Widget>[
+
+        ],
       ),
       body: ProductManager(products), // an argument here would override the one in Constructor
     );
