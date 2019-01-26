@@ -58,16 +58,28 @@ class ProductPage extends StatelessWidget {
                 Image.asset(imageUrl),
                 Container(
                   padding: EdgeInsets.all(10.0),
-                  child: Text(title, style: TextStyle(fontSize: 33.0,fontFamily: 'Courier')),
+                  child: Text(title, style: TextStyle(color: Colors.teal[900], fontSize: 22.0, fontFamily: 'Cottage', fontWeight: FontWeight.bold)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center, 
+                  children: <Widget>[
+                  Text(
+                    description, 
+                    style: TextStyle(fontSize: 16.0)),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10.0), 
+                    child: Text('|', style: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  Text(
+                    '\$' + price.toString(), 
+                    style: TextStyle(fontSize: 16.0)
+                    ),
+                  ],
                 ),
                 Container(
-                  child: Text(description)
-                ),
-                Container(
-                  child: Text(price.toString())
-                ),
-                Container(
-                  child: Text(address)
+                  padding: EdgeInsets.all(10.0),
+                  alignment: Alignment.center,
+                  child: Text(address, style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center),
                 )
                 // Container(
                 //     padding: EdgeInsets.all(10.0),

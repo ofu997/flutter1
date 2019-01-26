@@ -12,7 +12,7 @@ import 'package:flutter/rendering.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() { 
-  //debugPaintSizeEnabled=true;
+  debugPaintSizeEnabled=true;
   runApp(MyApp());
 }
 
