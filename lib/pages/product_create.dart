@@ -59,7 +59,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
               'price': _priceValue, 'image': 'assets/food.jpg'
               };
             widget.addProduct(product);
-            Navigator.pushReplacementNamed(context,'/products');// gives you no option of going back
+            Navigator.pushReplacementNamed(context,'/products');// this method gives you no option of going back
             },
 
           )
