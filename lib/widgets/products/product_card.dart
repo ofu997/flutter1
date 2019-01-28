@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget{
               SizedBox(
                 width: 33.0,
               ),
-              PriceTag(product['price'])
+              PriceTag(product['price'].toString())
             ],
           )),
       AddressTag('Union Square, NYC'),
