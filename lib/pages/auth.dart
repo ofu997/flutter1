@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-// import './products.dart';
 
 class AuthPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _AuthPage();
   }
 }
@@ -93,21 +91,3 @@ class _AuthPage extends State<AuthPage> {
 /* pushReplacementNamed: replace the route by pushing the route named routeName 
 and then disposing the previous route once the new route has finished animating in.*/
 
-//  Center(
-//   child: RaisedButton(
-//       child: Text('Log In'),
-//       onPressed: () {// pushReplacement -> pushReplacementNamed. change parameter to route
-//         Navigator.pushReplacementNamed(
-//           context, '/',
-//         );
-//       }
-//   ),
-// ),
-
-// solution after AppBar
-// ListView(
-//   children: <Widget>[
-//     TextField(),
-//     RaisedButton(onPressed: ,)
-//   ]
-// )

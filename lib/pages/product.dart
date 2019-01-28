@@ -11,43 +11,15 @@ class ProductPage extends StatelessWidget {
 
   ProductPage(this.title, this.imageUrl, this.description, this.price);
 
-  _showWarningDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Are you sure?'),
-            content: Text('This action cannot be undone'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Discard'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text('Continue'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context, true);
-                },
-              ),
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+     
     return WillPopScope(
         // determines if user can leave the page and with what value
         onWillPop: () {
           print('back button pressed');
-          Navigator.pop(context,
-              false); // (context, false): user can leave without deleting. (context): will delete.
-          return Future.value(
-              false); // (false) because we don't want to start another pop event
+          Navigator.pop(context,false); // (context, false): user can leave without deleting. (context): will delete.
+          return Future.value(false); // (false) because we don't want to start another pop event
         },
         child: Scaffold(
           // we can put UI elements here
@@ -69,7 +41,6 @@ class ProductPage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(top: 20.0), 
-            
                         child: Text(
                         description,
                         style: TextStyle(fontSize: 16.0),
@@ -93,18 +64,6 @@ class ProductPage extends StatelessWidget {
                 ),
               ]),
         )
-        // Container(
-        //     padding: EdgeInsets.all(10.0),
-        //     child: RaisedButton(
-        //       color: Theme.of(context).accentColor,
-        //       child: Text('Delete'),
-        //       onPressed: () => _showWarningDialog(context),
-        //     ) //Navigator.pop(context, true);
-        //     ),
-
-        // makes a Back button like the automated one seen in AppBar
-        
-    // Center(child: Text('You are on ProductPage'),) // an argument here would override the one in Construct
     );
   }
 }

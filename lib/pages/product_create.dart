@@ -7,7 +7,6 @@ class ProductCreatePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _ProductCreatePageState();
   }
 }
@@ -59,10 +58,9 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
                 'title': _titleValue, 'description': _descriptionValue,
               'price': _priceValue, 'image': 'assets/food.jpg'
               };
-            widget.addProduct(product);
+            widget.addProduct(product);//widget calls parent class ProductCreatePage
             Navigator.pushReplacementNamed(context,'/products');// this method gives you no option of going back
             },
-
           )
         ],
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import './products.dart';
 import './product_create.dart';
 import './product_list.dart';
 
@@ -12,7 +11,7 @@ class ProductManagerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+     
     return DefaultTabController(length: 2, child: Scaffold(
       drawer: Drawer(// menu square UI
         child: Column(
