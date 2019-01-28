@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
+import '../widgets/ui_elements/title_default.dart';
 class ProductPage extends StatelessWidget {
   final String title;
   final String imageUrl;
   final String description;
   final double price;
-  final String address='union square';
+  final String address='union square, San Francisco';
 
   ProductPage(this.title, this.imageUrl, this.description, this.price);
 
@@ -58,7 +58,7 @@ class ProductPage extends StatelessWidget {
                 Image.asset(imageUrl),
                 Container(
                   padding: EdgeInsets.all(10.0),
-                  child: Text(title, style: TextStyle(color: Colors.teal[900], fontSize: 22.0, fontFamily: 'Cottage', fontWeight: FontWeight.bold)),
+                  child: TitleDefault(title),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center, 
@@ -71,7 +71,7 @@ class ProductPage extends StatelessWidget {
                     child: Text('|', style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                   Text(
-                    '\$' + price.toString(), 
+                    price.toString(), 
                     style: TextStyle(fontSize: 16.0)
                     ),
                   ],

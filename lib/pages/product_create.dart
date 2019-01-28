@@ -46,6 +46,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
             onChanged: (String value) {
               setState(() {
                 _priceValue = double.parse(value);
+                print(_priceValue.toString());
               });
             },
           ),
