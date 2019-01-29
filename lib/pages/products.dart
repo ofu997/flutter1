@@ -5,12 +5,9 @@ class ProductsPage extends StatelessWidget{
   final List<Map<String, dynamic>> products;
 
   ProductsPage(this.products);
-  
-  @override
-  Widget build(BuildContext context) {
-     
-    return Scaffold(
-      drawer: Drawer(
+
+  Widget _buildDrawer(BuildContext context){//we pass context in callback and construct it with (BuildContext context) 
+    return Drawer(
         child: Column(
           children: <Widget>[
             AppBar(
@@ -26,7 +23,14 @@ class ProductsPage extends StatelessWidget{
                 )
               ],
             ),
-      ),
+      );
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+     
+    return Scaffold(
+      drawer: _buildDrawer(context),
       appBar: AppBar(
         title: Text('Food List'),
         actions: <Widget>[

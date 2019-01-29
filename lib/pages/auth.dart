@@ -7,29 +7,23 @@ class AuthPage extends StatefulWidget {
   }
 }
 
+
+
 class _AuthPage extends State<AuthPage> {
   String userName;
   String password;
   bool _acceptTerms = false;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Log In'),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
+
+  DecorationImage _buildBackgroundImage(){
+  return DecorationImage(
               colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.09), BlendMode.dstATop),
               fit: BoxFit.fill,
               image: AssetImage('assets/background.jpg'),
-            )
-          ),
-          padding: EdgeInsets.all(10.0),
-          child: SingleChildScrollView(
-            child: Column(
-            children: <Widget>[
-              TextField(
+            );
+  }
+
+Widget _buildEmailTextfield(){
+  return  TextField(
                 decoration: InputDecoration(labelText: 'User Name', filled: true, fillColor: Colors.white),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (String value) {
@@ -37,11 +31,11 @@ class _AuthPage extends State<AuthPage> {
                     userName = value;
                   });
                 },
-              ),
-              SizedBox(
-                height: 11.0
-              ),
-              TextField(
+              );
+  }
+
+  Widget _buildPassword(){
+  return  TextField(
                 decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white),
                 maxLines: 4,
                 obscureText: true,
@@ -51,8 +45,11 @@ class _AuthPage extends State<AuthPage> {
                     password = value;
                   });
                 },
-              ),
-            SwitchListTile(
+              );
+}
+
+Widget _buildSwitch(){
+  return  SwitchListTile(
                 value: _acceptTerms,
                 onChanged: (bool value) {
                   setState(() {
@@ -60,15 +57,11 @@ class _AuthPage extends State<AuthPage> {
                   });
                 },
                 title: Text('accept terms'),
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
-              RaisedButton(
-                textColor: Colors.brown,
-                color: Theme.of(context).primaryColorLight,
-                child: Text('Save'),
-                onPressed: () {
+              );
+}
+
+void _submitForm(){
+
                   final Map<String, dynamic> userInfo = {
                     'name': userName,
                     'description': password,
@@ -78,7 +71,37 @@ class _AuthPage extends State<AuthPage> {
                   //widget.addProduct(product);
                   Navigator.pushReplacementNamed(context,
                       '/products'); // gives you no option of going back
-                },
+}
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Log In'),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: _buildBackgroundImage(),
+          ),
+          padding: EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: Column(
+            children: <Widget>[
+              _buildEmailTextfield(),
+              SizedBox(
+                height: 11.0
+              ),
+              _buildPassword(),
+              _buildSwitch(),
+
+              SizedBox(
+                height: 25.0,
+              ),
+              RaisedButton (
+                textColor: Colors.brown,
+                color: Theme.of(context).primaryColorLight,
+                child: Text('submit'),
+                onPressed: _submitForm,
               )
             ],
             )

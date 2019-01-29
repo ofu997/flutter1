@@ -11,6 +11,29 @@ class ProductPage extends StatelessWidget {
 
   ProductPage(this.title, this.imageUrl, this.description, this.price);
 
+  Widget _buildDescriptionPriceRow(){
+    return      Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(top: 20.0), 
+                        child: Text(
+                        description,
+                        style: TextStyle(fontSize: 16.0),
+                      //textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Text('|',
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 8.0)),
+                    ),
+                    Text(price.toString(), style: TextStyle(fontSize: 16.0)),
+                  ],
+                );
+  }
+
   @override
   Widget build(BuildContext context) {
      
@@ -35,26 +58,7 @@ class ProductPage extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   child: TitleDefault(title),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(top: 20.0), 
-                        child: Text(
-                        description,
-                        style: TextStyle(fontSize: 16.0),
-                      //textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text('|',
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 8.0)),
-                    ),
-                    Text(price.toString(), style: TextStyle(fontSize: 16.0)),
-                  ],
-                ),
+                _buildDescriptionPriceRow(),
                 Container(
                   padding: EdgeInsets.all(10.0),
                   alignment: Alignment.center,
