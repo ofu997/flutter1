@@ -75,6 +75,8 @@ void _submitForm(){
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth *0.95;
     return Scaffold(
         appBar: AppBar(
           title: Text('Log In'),
@@ -84,26 +86,30 @@ void _submitForm(){
             image: _buildBackgroundImage(),
           ),
           padding: EdgeInsets.all(10.0),
-          child: SingleChildScrollView(
-            child: Column(
-            children: <Widget>[
-              _buildEmailTextfield(),
-              SizedBox(
-                height: 11.0
-              ),
-              _buildPassword(),
-              _buildSwitch(),
-
-              SizedBox(
-                height: 25.0,
-              ),
-              RaisedButton (
-                textColor: Colors.brown,
-                color: Theme.of(context).primaryColorLight,
-                child: Text('submit'),
-                onPressed: _submitForm,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: targetWidth,
+                child: Column( 
+                  children: <Widget>[
+                    _buildEmailTextfield(),
+                    SizedBox(
+                      height: 11.0
+                    ),
+                    _buildPassword(),
+                    _buildSwitch(),
+                    SizedBox(
+                      height: 25.0,
+                    ),
+                    RaisedButton (
+                      textColor: Colors.brown,
+                      color: Theme.of(context).primaryColorLight,
+                      child: Text('submit'),
+                      onPressed: _submitForm,
+                    )
+                  ],
+                ),
               )
-            ],
             )
           ),
         )

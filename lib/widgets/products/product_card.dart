@@ -43,7 +43,7 @@ class ProductCard extends StatelessWidget{
                   '/product/' + productIndex.toString(),
                 )),
       ]
-    )
+    );
   }
 
   @override
@@ -57,6 +57,6 @@ class ProductCard extends StatelessWidget{
       _buildIcons(context)
     ]
   )
-);;
+);
     }
 } 
