@@ -10,40 +10,56 @@ class AuthPage extends StatefulWidget {
 
 
 class _AuthPage extends State<AuthPage> {
-  String userName;
-  String password;
+  final Map<String,dynamic> _authData = {
+    'email': null,
+    'passWord': null,
+    'acceptTerms': null
+  };
+  final GlobalKey<FormState> _authFormKey = GlobalKey<FormState>();
+  // String userName;
+  // String password;
   bool _acceptTerms = false;
 
   DecorationImage _buildBackgroundImage(){
-  return DecorationImage(
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.09), BlendMode.dstATop),
-              fit: BoxFit.fill,
-              image: AssetImage('assets/background.jpg'),
-            );
+  return 
+    DecorationImage(
+      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.09), BlendMode.dstATop),
+      fit: BoxFit.fill,
+      image: AssetImage('assets/background.jpg'),
+    );
   }
 
 Widget _buildEmailTextfield(){
-  return  TextField(
-                decoration: InputDecoration(labelText: 'User Name', filled: true, fillColor: Colors.white),
+  return  TextFormField(
+                decoration: InputDecoration(labelText: 'Email', filled: true, fillColor: Colors.white),
                 keyboardType: TextInputType.emailAddress,
-                onChanged: (String value) {
-                  setState(() {
-                    userName = value;
-                  });
+                onSaved: (String value) {
+                  _authData['email'] = value;
                 },
+                validator: (String value) {
+                  if (value.isEmpty ||
+                      !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").hasMatch(value)) {
+                    return ('needs to be a valid email address.');
+                  }
+                }
               );
   }
 
   Widget _buildPassword(){
-  return  TextField(
+  return  TextFormField(
                 decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white),
                 maxLines: 4,
                 obscureText: true,
                 keyboardType: TextInputType.text,
-                onChanged: (String value) {
-                  setState(() {
-                    password = value;
-                  });
+                onSaved: (String value) {
+                
+                 _authData['passWord'] = value;
+                  
+                },
+                validator: (String value){
+                  if (value.isEmpty){
+                    return 'Needs to be filled out';
+                  }
                 },
               );
 }
@@ -52,9 +68,9 @@ Widget _buildSwitch(){
   return  SwitchListTile(
                 value: _acceptTerms,
                 onChanged: (bool value) {
-                  setState(() {
-                    _acceptTerms = value;
-                  });
+                
+                    _authData['acceptTerms'] = value;
+                  
                 },
                 title: Text('accept terms'),
               );
@@ -62,13 +78,21 @@ Widget _buildSwitch(){
 
 void _submitForm(){
 
-                  final Map<String, dynamic> userInfo = {
-                    'name': userName,
-                    'description': password,
-                  };
-                  print(userName + password);
-                  print(userInfo.toString());
+                  // final Map<String, dynamic> userInfo = {
+                  //   'name': userName,
+                  //   'description': password,
+                  // };
+                  if (!_authFormKey.currentState.validate()) {
+                    return;
+                  }
+                  if (_authData['acceptTerms']==false){
+                    return;
+                  }
+                  _authFormKey.currentState.save();
+                  print(_authData['email'] + _authData['passWord']);
+                  //print(userInfo.toString());
                   //widget.addProduct(product);
+                  
                   Navigator.pushReplacementNamed(context,
                       '/products'); // gives you no option of going back
 }
@@ -86,7 +110,9 @@ void _submitForm(){
             image: _buildBackgroundImage(),
           ),
           padding: EdgeInsets.all(10.0),
-          child: Center(
+          child: Form(
+            key: _authFormKey,
+            child: Center(
             child: SingleChildScrollView(
               child: Container(
                 width: targetWidth,
@@ -112,6 +138,7 @@ void _submitForm(){
               )
             )
           ),
+          )
         )
       );
   }
