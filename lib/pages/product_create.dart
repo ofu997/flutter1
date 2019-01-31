@@ -63,21 +63,35 @@ void _submitForm(){
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
+    final double targetPadding = deviceWidth - targetWidth;
     return Container(
+      width: targetWidth,
       margin: EdgeInsets.all(10.0),
       child: ListView(
-        children: <Widget>[
+        padding: EdgeInsets.symmetric(horizontal: targetPadding /2),
+        children: <Widget>[//ListView children always take full available width
           _buildTitleTextField(),
           _buildDescriptionTextField(),
           _buildPriceTextField(),
           SizedBox(height: 25.0,),
-          RaisedButton(
-            color: Theme.of(context).primaryColorLight,
-            child: Text('Save'),
-            onPressed: _submitForm,
-          )
+          // RaisedButton(
+          //   color: Theme.of(context).primaryColorLight,
+          //   child: Text('Save'),
+          //   onPressed: _submitForm,
+          // ),
+          GestureDetector(//offers other types of listener events
+            onTap: _submitForm,
+            child: Container(
+              color: Colors.green,
+              padding: EdgeInsets.all(5.0),
+              child: Text('My Button'),
+            ),
+          ),
         ],
       ),
     );
   }
 }
+
