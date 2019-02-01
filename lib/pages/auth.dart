@@ -7,18 +7,16 @@ class AuthPage extends StatefulWidget {
   }
 }
 
-
-
 class _AuthPage extends State<AuthPage> {
   final Map<String,dynamic> _authData = {
     'email': null,
     'passWord': null,
-    'acceptTerms': null
+    'acceptTerms': false
   };
   final GlobalKey<FormState> _authFormKey = GlobalKey<FormState>();
   // String userName;
   // String password;
-  bool _acceptTerms = false;
+  // bool _acceptTerms = false;
 
   DecorationImage _buildBackgroundImage(){
   return 
@@ -66,11 +64,11 @@ Widget _buildEmailTextfield(){
 
 Widget _buildSwitch(){
   return  SwitchListTile(
-                value: _acceptTerms,
+                value: _authData['acceptTerms'],
                 onChanged: (bool value) {
                 
                     _authData['acceptTerms'] = value;
-                  
+                    print('switch button changed');
                 },
                 title: Text('accept terms'),
               );
@@ -82,12 +80,13 @@ void _submitForm(){
                   //   'name': userName,
                   //   'description': password,
                   // };
-                  if (!_authFormKey.currentState.validate()) {
+                  print('submit button pushed');
+                  if (!_authFormKey.currentState.validate() || !_authData['acceptTerms']) {
                     return;
                   }
-                  if (_authData['acceptTerms']==false){
-                    return;
-                  }
+                  // if (_authData['acceptTerms']==false){
+                  //   return;
+                  // }
                   _authFormKey.currentState.save();
                   print(_authData['email'] + _authData['passWord']);
                   //print(userInfo.toString());
@@ -131,8 +130,8 @@ void _submitForm(){
                       textColor: Colors.brown,
                       color: Theme.of(context).primaryColorLight,
                       child: Text('submit'),
-                      onPressed: _submitForm,
-                    )
+                      onPressed: _submitForm
+                    ),
                   ],
                 ),
               )
