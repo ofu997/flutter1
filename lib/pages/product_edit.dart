@@ -20,9 +20,6 @@ class _ProductEditPageState extends State<ProductEditPage> {
     'price':null,
     'image':'assets/food.jpg'
   };
-  // String _titleValue = '';
-  // String _descriptionValue = '';
-  // double _priceValue = 0.00;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget _buildTitleTextField() {
@@ -50,12 +47,14 @@ class _ProductEditPageState extends State<ProductEditPage> {
         },
         onSaved: (String value) {
             _formData['description'] = value;
-        });
+        }
+      );
   }
 
   Widget _buildPriceTextField() {
     return TextFormField(
         decoration: InputDecoration(labelText: 'Product Price'),
+        initialValue: widget.product == null? '' : widget.product['price'].toString(),
         keyboardType: TextInputType.number,
         validator: (String value) {
           if (value.isEmpty ||
@@ -65,7 +64,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
         },
         onSaved: (String value) {
             _formData['price'] = double.parse(value);
-        });
+        }
+      );
   }
 
   void _submitForm() {
@@ -73,12 +73,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
       return;
     }
     _formKey.currentState.save();
-    // final Map<String, dynamic> product = {
-    //   'title': _titleValue,
-    //   'description': _descriptionValue,
-    //   'price': _priceValue,
-    //   'image': 'assets/food.jpg'
-    // };
+
     widget.addProduct(_formData); //widget calls parent class ProductCreatePage
     Navigator.pushReplacementNamed(
         context, '/products'); // this method gives you no option of going back
@@ -89,7 +84,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
-    return GestureDetector(
+    final Widget pageContent = GestureDetector(
       onTap:(){
         FocusScope.of(context).requestFocus(FocusNode());//instantiates an empty focus node, looks at form elements 
       },
@@ -108,7 +103,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
                 height: 25.0,
               ),
               GestureDetector(
-                //offers other types of listener events
+                //offers more types of listener events than RaisedButton
                 onTap: _submitForm,
                 child: Container(
                   color: Theme.of(context)
@@ -122,11 +117,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
         )
       )
     );
+
+    return widget.product == null ? pageContent : Scaffold(appBar: AppBar(title: Text('Edit Products'),),body: pageContent,);
   }
 }
-
-// RaisedButton(
-//   color: Theme.of(context).primaryColorLight,
-//   child: Text('Save'),
-//   onPressed: _submitForm,
-// ),
