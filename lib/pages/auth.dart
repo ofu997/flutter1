@@ -88,7 +88,7 @@ void _submitForm(){
                   //   return;
                   // }
                   _authFormKey.currentState.save();
-                  print(_authData['email'] + _authData['passWord']);
+                  print(_authData['email'] + ' ' + _authData['passWord']);
                   //print(userInfo.toString());
                   //widget.addProduct(product);
                   

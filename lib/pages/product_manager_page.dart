@@ -6,9 +6,10 @@ class ProductManagerPage extends StatelessWidget {
 
   final Function addProduct;
   final Function deleteProduct;
+  final Function updateProduct;
   final List<Map<String,dynamic>> products;
 
-  ProductManagerPage(this.addProduct, this.deleteProduct, this.products);
+  ProductManagerPage(this.addProduct, this.deleteProduct, this.updateProduct, this.products);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class ProductManagerPage extends StatelessWidget {
       body: TabBarView(// reads TabBar events and displays content
         children: <Widget>[
           ProductEditPage(addProduct: addProduct),
-          ProductListPage(products)
+          ProductListPage(products, updateProduct)
         ],
       ),
     ));
