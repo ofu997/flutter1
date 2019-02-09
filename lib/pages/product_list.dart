@@ -10,21 +10,19 @@ class ProductListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //return Center(child: Text('All products'),);;
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         return Dismissible(
           background: Container(color: Colors.pink),
-          key: Key(products[index]['title']), //this needs to become 'id' later to fully delete data
-          onDismissed: (DismissDirection direction){
-            if (direction == DismissDirection.endToStart){
+          key: Key(products[index]
+              ['title']), //this needs to become 'id' later to fully delete data
+          onDismissed: (DismissDirection direction) {
+            if (direction == DismissDirection.endToStart) {
               print('end to start');
               deleteProduct(index);
-            }
-            else if (direction == DismissDirection.startToEnd){
+            } else if (direction == DismissDirection.startToEnd) {
               print('start to end');
-            }
-            else{
+            } else {
               print('other swipe');
             }
           },
@@ -37,22 +35,7 @@ class ProductListPage extends StatelessWidget {
                 ),
                 title: Text(products[index]['title']),
                 subtitle: Text('\$${products[index]['price'].toString()}'),
-                trailing: IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return ProductEditPage(
-                              product: products[index],
-                              updateProduct: updateProduct,
-                              productIndex:
-                                  index); //we don't pass addProduct here
-                        },
-                      ),
-                    );
-                  },
-                ),
+                trailing: _buildEditButton(context, index),
               ),
               Divider(),
             ],
@@ -60,6 +43,24 @@ class ProductListPage extends StatelessWidget {
         );
       },
       itemCount: products.length,
+    );
+  }
+
+  Widget _buildEditButton(BuildContext context, index) {
+    return IconButton(
+      icon: Icon(Icons.edit),
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return ProductEditPage(
+                  product: products[index],
+                  updateProduct: updateProduct,
+                  productIndex: index); //we don't pass addProduct here
+            },
+          ),
+        );
+      },
     );
   }
 }

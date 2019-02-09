@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-// import './product_manager.dart';
-// import './pages/home.dart';
-// import './pages/auth.dart';
 import 'package:second_app/pages/product_manager_page.dart';
-//import './pages/product_manager_page.dart';
 import 'package:second_app/pages/products.dart';
 import 'package:second_app/pages/product.dart';
 import 'package:second_app/pages/auth.dart';
-// import './pages/product.dart';
+import 'package:second_app/models/product.dart';
 // import 'package:flutter/rendering.dart';//to show layout lines for paintSizeEnabled
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
