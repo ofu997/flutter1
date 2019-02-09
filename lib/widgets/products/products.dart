@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-// import './pages/product.dart';
-import './price_tag.dart';
 import './product_card.dart';
+import '../../models/product.dart';
 
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
   // final Function deleteProduct;
 
   Products(this.products) {

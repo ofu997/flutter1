@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../widgets/helpers/ensure-visible.dart';
+import '../models/product.dart';
 
 class ProductEditPage extends StatefulWidget {
   final Function addProduct;
   final Function updateProduct;
-  final Map<String, dynamic> product;
+  final Product product;
   final int productIndex;
 
   ProductEditPage(
@@ -35,7 +36,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
         focusNode: _titleFocusNode,
         decoration: InputDecoration(labelText: 'Product Title'),
         //if not a complete create, the widget would be null and not constructed, causing a render error when fetching 'title'
-        initialValue: widget.product == null ? '' : widget.product['title'],
+        initialValue: widget.product == null ? '' : widget.product.title,
         validator: (String value) {
           if (value.isEmpty || value.length < 5) {
             return ('Title is required and should be 5+ characters long.');
@@ -53,20 +54,19 @@ class _ProductEditPageState extends State<ProductEditPage> {
     return EnsureVisibleWhenFocused(
       focusNode: _descriptionFocusNode,
       child: TextFormField(
-        focusNode: _descriptionFocusNode,
-        decoration: InputDecoration(labelText: 'Product Description'),
-        initialValue:
-            widget.product == null ? '' : widget.product['description'],
-        maxLines: 4,
-        validator: (String value) {
-          if (value.isEmpty || value.length < 10) {
-            return ('Description is required and should be 10+ characters long.');
-          }
-        },
-        onSaved: (String value) {
-          _formData['description'] = value;
-        }
-      ),
+          focusNode: _descriptionFocusNode,
+          decoration: InputDecoration(labelText: 'Product Description'),
+          initialValue:
+              widget.product == null ? '' : widget.product.description,
+          maxLines: 4,
+          validator: (String value) {
+            if (value.isEmpty || value.length < 10) {
+              return ('Description is required and should be 10+ characters long.');
+            }
+          },
+          onSaved: (String value) {
+            _formData['description'] = value;
+          }),
     );
   }
 
@@ -74,21 +74,20 @@ class _ProductEditPageState extends State<ProductEditPage> {
     return EnsureVisibleWhenFocused(
       focusNode: _priceFocusNode,
       child: TextFormField(
-        focusNode: _priceFocusNode,
-        decoration: InputDecoration(labelText: 'Product Price'),
-        initialValue:
-            widget.product == null ? '' : widget.product['price'].toString(),
-        keyboardType: TextInputType.number,
-        validator: (String value) {
-          if (value.isEmpty ||
-              !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
-            return ('Price is required and should be a number.');
-          }
-        },
-        onSaved: (String value) {
-          _formData['price'] = double.parse(value);
-        }
-      ),
+          focusNode: _priceFocusNode,
+          decoration: InputDecoration(labelText: 'Product Price'),
+          initialValue:
+              widget.product == null ? '' : widget.product.price.toString(),
+          keyboardType: TextInputType.number,
+          validator: (String value) {
+            if (value.isEmpty ||
+                !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
+              return ('Price is required and should be a number.');
+            }
+          },
+          onSaved: (String value) {
+            _formData['price'] = double.parse(value);
+          }),
     );
   }
 
@@ -98,8 +97,11 @@ class _ProductEditPageState extends State<ProductEditPage> {
     }
     _formKey.currentState.save();
     if (widget.product == null) {
-      widget
-          .addProduct(_formData); //widget calls parent class ProductCreatePage
+      widget.addProduct(Product(
+          title: _formData['title'],
+          description: _formData['description'],
+          price: _formData['price'],
+          image: _formData['image'])); //widget calls parent class ProductCreatePage
     } else {
       widget.updateProduct(widget.productIndex, _formData);
       print('reached updater function');
@@ -121,12 +123,11 @@ class _ProductEditPageState extends State<ProductEditPage> {
           );
   }
 
-  Widget _buildPageContent(BuildContext context){
+  Widget _buildPageContent(BuildContext context) {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
-    return
-  GestureDetector(
+    return GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(
               FocusNode()); //instantiates an empty focus node, looks at form elements
@@ -160,5 +161,4 @@ class _ProductEditPageState extends State<ProductEditPage> {
               ),
             )));
   }
-
 }
