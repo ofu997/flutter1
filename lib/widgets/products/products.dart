@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import './product_card.dart';
 import '../../models/product.dart';
+import 'package:scoped_model/scoped_model.dart';
+import '../../scoped-models/main.dart';
+
+
 
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
@@ -11,7 +15,7 @@ class Products extends StatelessWidget {
     print('[Products Widget] Constructor');
   }
 
-  Widget _buildProductList() {
+  Widget _buildProductList(List<Product> products) {
     // exports widget
     Widget productCard = Center(
       child: Text('No product found, please add one'),
@@ -29,7 +33,9 @@ class Products extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('[Products Widget] build() ' + DateTime.now().toIso8601String());
-    return _buildProductList();
+    return ScopedModelDescendant<MainModel>(builder: (BuildContext context, Widget child, MainModel model) {
+      return _buildProductList(model.displayedProducts);
+    });
   }
 }
 

@@ -3,14 +3,17 @@ import 'package:second_app/pages/product_manager_page.dart';
 import 'package:second_app/pages/products.dart';
 import 'package:second_app/pages/product.dart';
 import 'package:second_app/pages/auth.dart';
-import 'package:second_app/models/product.dart';
+//import 'package:second_app/models/product.dart';
+import 'package:scoped_model/scoped_model.dart';
+import './scoped-models/main.dart';
 // import 'package:flutter/rendering.dart';//to show layout lines for paintSizeEnabled
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
-  //debugPaintSizeEnabled=true;
+  //debugPaintSizeEnabled=true;debugBaselinesEnabled=true;debugPaintPointersEnabled=true;
   runApp(MyApp());
 }
+
 
 // root widget, extends widget features
 class MyApp extends StatefulWidget {
@@ -21,73 +24,42 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int count = 0;
-  List<Product> _products = [];
-
-  void _addsProducts(Product product) {
-    setState(() {
-      count++;
-      _products.add(product);
-      print(' addProduct() text count: ' +
-          count.toString() +
-          ' ' +
-          DateTime.now().toIso8601String());
-    });
-  }
-
-  void _deleteProduct(int index) {
-    setState(() {
-      _products.removeAt(index);
-    });
-  }
-
-  void _updateProduct(int index, Product product) {
-    setState(() {
-      _products[index] = product;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // return a shippable widget
-    return MaterialApp(
-      theme: ThemeData(
-        // swatch is auto-color-schemes. Colors is package, followed by static types
-        brightness: Brightness.light,
-        primarySwatch: Colors.deepOrange,
-        accentColor: Colors.lightBlue,
-        // fontFamily: 'Oswald',
-      ),
-      //home: AuthPage(),
-      routes: {
-        '/': (BuildContext context) => AuthPage(),
-        '/products': (BuildContext context) => ProductsPage(_products),
-        /*'/':(BuildContext context) => ProductsPage(_products),*/
-        '/admin': (BuildContext context) => ProductManagerPage(
-            _addsProducts, _deleteProduct, _updateProduct, _products),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        final List<String> pathElements = settings.name.split('/');
-        if (pathElements[0] != '') {
+    return ScopedModel<MainModel>(
+      model: MainModel(),
+      child: MaterialApp(
+        theme: ThemeData(
+          // swatch is auto-color-schemes. Colors is package, followed by static types
+          brightness: Brightness.light,
+          primarySwatch: Colors.deepOrange,
+          accentColor: Colors.lightBlue,
+        ),
+        //home: AuthPage(),
+        routes: {
+          '/': (BuildContext context) => AuthPage(),
+          '/products': (BuildContext context) => ProductsPage(),
+          '/admin': (BuildContext context) => ProductManagerPage(),
+        },
+        onGenerateRoute: (RouteSettings settings) {
+          final List<String> pathElements = settings.name.split('/');
+          if (pathElements[0] != '') {
+            return null;
+          }
+          if (pathElements[1] == 'product') {
+            final int index = int.parse(pathElements[2]);
+            return MaterialPageRoute<bool>(
+              builder: (BuildContext context) => ProductPage(index),
+            );
+          }
           return null;
-        }
-        if (pathElements[1] == 'product') {
-          final int index = int.parse(pathElements[2]);
-          return MaterialPageRoute<bool>(
-            builder: (BuildContext context) => ProductPage(
-                  _products[index].title,
-                  _products[index].image,
-                  _products[index].description,
-                  _products[index].price,
-                ),
+        },
+        onUnknownRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+              builder: (BuildContext context) => ProductsPage()
           );
-        }
-        return null;
-      },
-      onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(
-            builder: (BuildContext context) => ProductsPage(_products));
-      },
+        },
+      ), 
     );
   }
 }

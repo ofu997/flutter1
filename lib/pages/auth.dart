@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:scoped_model/scoped_model.dart';
+
+import '../scoped-models/main.dart';
+
 class AuthPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -14,9 +18,6 @@ class _AuthPage extends State<AuthPage> {
     'acceptTerms': false
   };
   final GlobalKey<FormState> _authFormKey = GlobalKey<FormState>();
-  // String userName;
-  // String password;
-  // bool _acceptTerms = false;
 
   DecorationImage _buildBackgroundImage(){
   return 
@@ -50,9 +51,7 @@ Widget _buildEmailTextfield(){
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 onSaved: (String value) {
-                
                  _authData['passWord'] = value;
-                  
                 },
                 validator: (String value){
                   if (value.isEmpty){
@@ -65,35 +64,23 @@ Widget _buildEmailTextfield(){
 Widget _buildSwitch(){
   return  SwitchListTile(
                 value: _authData['acceptTerms'],
-                onChanged: (bool value) {
-                
+                onChanged: (bool value) {           
+                  setState((){
                     _authData['acceptTerms'] = value;
-                    print('switch button changed');
+                  });    
                 },
                 title: Text('accept terms'),
               );
 }
 
-void _submitForm(){
-
-                  // final Map<String, dynamic> userInfo = {
-                  //   'name': userName,
-                  //   'description': password,
-                  // };
-                  print('submit button pushed');
-                  if (!_authFormKey.currentState.validate() || !_authData['acceptTerms']) {
-                    return;
-                  }
-                  // if (_authData['acceptTerms']==false){
-                  //   return;
-                  // }
-                  _authFormKey.currentState.save();
-                  print(_authData['email'] + ' ' + _authData['passWord']);
-                  //print(userInfo.toString());
-                  //widget.addProduct(product);
-                  
-                  Navigator.pushReplacementNamed(context,
-                      '/products'); // gives you no option of going back
+void _submitForm(Function login){ 
+  if (!_authFormKey.currentState.validate() || !_authData['acceptTerms']) {
+    return;
+  }
+  _authFormKey.currentState.save();
+  print(_authData['email'] + ' ' + _authData['passWord']);
+  login(_authData['email'], _authData['password']);
+  Navigator.pushReplacementNamed(context,'/products'); // gives you no option of going back
 }
 
   @override
@@ -112,31 +99,35 @@ void _submitForm(){
           child: Form(
             key: _authFormKey,
             child: Center(
-            child: SingleChildScrollView(
-              child: Container(
-                width: targetWidth,
-                child: Column( 
-                  children: <Widget>[
-                    _buildEmailTextfield(),
-                    SizedBox(
-                      height: 11.0
-                    ),
-                    _buildPassword(),
-                    _buildSwitch(),
-                    SizedBox(
-                      height: 25.0,
-                    ),
-                    RaisedButton (
-                      textColor: Colors.brown,
-                      color: Theme.of(context).primaryColorLight,
-                      child: Text('submit'),
-                      onPressed: _submitForm
-                    ),
-                  ],
-                ),
+              child: SingleChildScrollView(
+                child: Container(
+                  width: targetWidth,
+                  child: Column( 
+                    children: <Widget>[
+                      _buildEmailTextfield(),
+                      SizedBox(
+                        height: 11.0
+                      ),
+                      _buildPassword(),
+                      _buildSwitch(),
+                      SizedBox(
+                        height: 25.0,
+                      ),
+                      ScopedModelDescendant<MainModel> (
+                        builder: (BuildContext context, Widget child, MainModel model){
+                          return RaisedButton(
+                            textColor: Colors.brown,
+                            color: Theme.of(context).primaryColorLight,
+                            child: Text('submit'),                          
+                            onPressed: () => _submitForm(model.login),
+                          );
+                        }
+                      ),
+                    ],
+                  ),
+                )
               )
-            )
-          ),
+            ),
           )
         )
       );
