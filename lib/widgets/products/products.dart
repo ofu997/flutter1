@@ -8,15 +8,14 @@ import '../../scoped-models/main.dart';
 
 class Products extends StatelessWidget {
   // final: the data is set from outside, triggers a build and replace
-  final List<Product> products;
+  // final List<Product> products;
   // final Function deleteProduct;
 
-  Products(this.products) {
-    print('[Products Widget] Constructor');
-  }
+  // Products(this.products) {
+  //   print('[Products Widget] Constructor');
+  // }
 
   Widget _buildProductList(List<Product> products) {
-    // exports widget
     Widget productCard = Center(
       child: Text('No product found, please add one'),
     );

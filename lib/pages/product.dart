@@ -20,7 +20,7 @@ class ProductPage extends StatelessWidget {
           child: Text(
             'union square, san francisco',
             style: TextStyle(
-                fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
+                fontSize: 16.0, fontFamily: '', color: Colors.blueGrey),
             //textAlign: TextAlign.center,
           ),
         ),
@@ -46,7 +46,7 @@ class ProductPage extends StatelessWidget {
         }, 
         child: ScopedModelDescendant<MainModel>(
           builder: (BuildContext context, Widget child, MainModel model) {
-          final Product product = model.allProduct[productIndex];
+          final Product product = model.allProducts[productIndex];
           return Scaffold(
             appBar: AppBar(
               title: Text(product.title + ' details page'),

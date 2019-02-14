@@ -3,11 +3,14 @@ import '../models/product.dart';
 import '../models/user.dart';
 
 
-class ConnectedProductsModel extends Model{
+mixin ConnectedProductsModel on Model{
   int count = 0;
   List<Product> _products = [];
   int _selProductIndex;
+
   User _authenticatedUser;
+  // I added _selProductId;
+  String _selProductId;
 
   void addsProducts(String title, String description, String image, double price) {
       count++;
@@ -89,8 +92,18 @@ mixin ProductsModel on ConnectedProductsModel {
 
   void selectProduct(int index) {
     _selProductIndex = index;
+    if (index != null){
     notifyListeners();
+    }
   }
+
+  // What lesson proposes
+  //  void selectProduct(String productId) {
+  //   _selProductId = productId;
+  //   if (productId != null) {
+  //     notifyListeners();
+  //   }
+  // }
 
   void toggleDisplayMode() {
     _showFavorites = !_showFavorites;

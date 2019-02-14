@@ -92,8 +92,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
       builder: (BuildContext context, Widget child, MainModel model){
         return RaisedButton(
           child: Text('Save'),
-          textColor: Colors.white,,
-          onPressed: () => _submitForm(model.addProduct, model.updateProduct,
+          textColor: Colors.white,
+          onPressed: () => _submitForm(model.addsProducts, model.updateProduct,
             model.selectProduct, model.selectedProductIndex),
         );
       },
@@ -151,8 +151,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
       addProduct(
         _formData['title'],
         _formData['description'],
-        _formData['price'],
-        _formData['image']
+        _formData['image'],
+        _formData['price']
         ); //widget calls parent class ProductCreatePage
     } else {
       updateProduct(
@@ -169,8 +169,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainModel>(
-      builder: (Buildcontext context, Widget child, MainModel model) {
-        final Widget pagecontent =
+      builder: (BuildContext context, Widget child, MainModel model) {
+        final Widget pageContent =
           _buildPageContent(context, model.selectedProduct);
         return model.selectedProductIndex == null
           ? pageContent

@@ -16,7 +16,7 @@ class ProductManagerPage extends StatelessWidget {
           ListTile(
             title: Text('All products'),
             onTap: () {// change parameters to key since it requires the page
-              Navigator.pushReplacementNamed(context,'/');
+              Navigator.pushReplacementNamed(context,'/products');
             },
           )
         ],
