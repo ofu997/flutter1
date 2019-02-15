@@ -47,10 +47,11 @@ mixin ProductsModel on ConnectedProductsModel {
   }
 
   Product get selectedProduct {
-    if (selectedProductIndex == null) {
+    if (selectedProductIndex == null || _products.isEmpty) {
       return null;
     }
     return _products[selectedProductIndex];
+    
   }
 
   bool get displayFavoritesOnly {
@@ -70,8 +71,10 @@ mixin ProductsModel on ConnectedProductsModel {
     notifyListeners();
   }
 
-  void deleteProduct() {
-    _products.removeAt(selectedProductIndex);
+  void deleteProduct(int index) {
+    _products.removeAt(index);
+    print(index);
+    _selProductIndex = null;
     notifyListeners();
   }
 
@@ -92,9 +95,9 @@ mixin ProductsModel on ConnectedProductsModel {
 
   void selectProduct(int index) {
     _selProductIndex = index;
-    if (index != null){
+    
     notifyListeners();
-    }
+    
   }
 
   // What lesson proposes

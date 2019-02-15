@@ -146,6 +146,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
     if (!_formKey.currentState.validate()) {
       return;
     }
+
     _formKey.currentState.save();
     if (selectedProductIndex == null) {
       addProduct(
@@ -172,7 +173,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
       builder: (BuildContext context, Widget child, MainModel model) {
         final Widget pageContent =
           _buildPageContent(context, model.selectedProduct);
-        return model.selectedProductIndex == null
+        return model.selectedProductIndex == null 
           ? pageContent
           : Scaffold(
               appBar: AppBar(

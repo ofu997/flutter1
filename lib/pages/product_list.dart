@@ -33,10 +33,11 @@ class ProductListPage extends StatelessWidget {
             key: Key(model.allProducts[index].title),
             onDismissed: (DismissDirection direction) {
               if (direction == DismissDirection.endToStart) {
-                model.selectProduct(index);
-                model.deleteProduct();
+
               } else if (direction == DismissDirection.startToEnd) {
                 print('start to end');
+                model.selectProduct(index);
+                model.deleteProduct(index);
               } else {
                 print('other swipe');
               }
