@@ -1,7 +1,8 @@
 import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
 import '../models/user.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 mixin ConnectedProductsModel on Model{
   int count = 0;
@@ -13,6 +14,15 @@ mixin ConnectedProductsModel on Model{
   String _selProductId;
 
   void addsProducts(String title, String description, String image, double price) {
+        final Map<String,dynamic> productData = {
+          'title': title,
+          'description': description,
+          'image': 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiWquab48PgAhWSHDQIHXUVD58QjRx6BAgBEAU&url=https%3A%2F%2Fbarefeetinthekitchen.com%2Fhow-to-make-a-cheese-board%2F&psig=AOvVaw1ig44_mDut58gEs7RKuZ12&ust=1550527502726219',
+          'price': price,
+        };
+      http.post('https://flutterbyof.firebaseio.com/products.json', 
+      body: json.encode(productData));
+
       count++;
       final Product newProduct = Product(
         title: title,
