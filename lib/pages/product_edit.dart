@@ -148,23 +148,47 @@ class _ProductEditPageState extends State<ProductEditPage> {
     }
 
     _formKey.currentState.save();
-    if (selectedProductIndex == null) {
+    if (selectedProductIndex == -1) {
       addProduct(
         _formData['title'],
         _formData['description'],
         _formData['image'],
         _formData['price']
-        ); //widget calls parent class ProductCreatePage
+        ).then((bool success){
+          if (success){
+            Navigator
+              .pushReplacementNamed(context, '/products')
+              .then((_) => setSelectedProduct(null));
+          }else{
+            showDialog(
+              context: context,
+              builder: (BuildContext context){
+                return AlertDialog(
+                  title: Text('something went wrong'),
+                  content: Text('please try again'),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('okay'),
+                    )
+                  ],
+                );
+              }
+            );
+          }
+        }); 
     } else {
       updateProduct(
         _formData['title'],
         _formData['description'],
         _formData['image'],
         _formData['price'],
-      );  
+      ).then(
+        (_) => Navigator
+          .pushReplacementNamed(context, '/products')
+          .then((_) => setSelectedProduct(null))
+        );  
     }
-    Navigator.pushReplacementNamed(
-        context, '/products').then((_) => setSelectedProduct(null)); 
   }
 
   @override

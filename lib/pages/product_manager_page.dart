@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import './product_edit.dart';
 import './product_list.dart';
-
+import '../scoped-models/main.dart';
 
 class ProductManagerPage extends StatelessWidget {
+  final MainModel model;
+
+  ProductManagerPage(this.model);
+
   Widget _buildSideDrawer(BuildContext context) {
     return 
     Drawer(// menu square UI
@@ -33,14 +37,14 @@ class ProductManagerPage extends StatelessWidget {
         appBar:  AppBar(
           title: Text('Manage products'),
           bottom: TabBar(tabs: <Widget>[
-            Tab(icon: Icon(Icons.create),text: 'create product',),
-            Tab(icon: Icon(Icons.list), text: 'my products',),
+            Tab(icon: Icon(Icons.create),text: 'Create product',),
+            Tab(icon: Icon(Icons.list), text: 'My products',),
           ],),
         ),
         body: TabBarView(// reads TabBar events and displays content
           children: <Widget>[
           ProductEditPage(),
-          ProductListPage()
+          ProductListPage(model)
           ],
         ),
       )

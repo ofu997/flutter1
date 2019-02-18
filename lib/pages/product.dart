@@ -6,9 +6,9 @@ import '../models/product.dart';
 import '../scoped-models/main.dart';
 
 class ProductPage extends StatelessWidget {
-  final int productIndex;
+  final Product product;
 
-  ProductPage(this.productIndex);
+  ProductPage(this.product);
 
   Widget _buildAddressPriceRow(double price) {
     return Row(
@@ -28,7 +28,8 @@ class ProductPage extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 5.0),
           child: Text('|', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
         ),
-        Text('\$' + price.toString(),
+        Text(
+          '\$' + price.toString(),
           style: TextStyle(fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
         )
       ],
@@ -44,10 +45,7 @@ class ProductPage extends StatelessWidget {
           Navigator.pop(context, false); // (context, false): user can leave without deleting. (context): will delete.
           return Future.value(false); // (false) because we don't want to start another pop event
         }, 
-        child: ScopedModelDescendant<MainModel>(
-          builder: (BuildContext context, Widget child, MainModel model) {
-          final Product product = model.allProducts[productIndex];
-          return Scaffold(
+        child: Scaffold(
             appBar: AppBar(
               title: Text(product.title + ' details page'),
             ),
@@ -55,7 +53,12 @@ class ProductPage extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,// vertical centering
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Image.asset(product.image),
+                FadeInImage(
+                  image: NetworkImage(product.image),
+                  height: 300.0,
+                  fit: BoxFit.cover,
+                  placeholder: AssetImage('assets/food.jpg'),
+                ),
                 Container(
                   padding: EdgeInsets.all(10.0),
                   child: TitleDefault(product.title),
@@ -64,15 +67,21 @@ class ProductPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10.0),
                   alignment: Alignment.center,
-                  child: Text(product.description,
+                  child: Text(
+                      product.description,
                       style: TextStyle(fontSize: 16.0),
                       textAlign: TextAlign.center),
                 ),
               ]
             ),
-          );
-        }
-      )
+          ),
     );
   }
 }
+
+//     ScopedModelDescendant<MainModel>(
+//     builder: (BuildContext context, Widget child, MainModel model) {
+//     //final Product product = model.allProducts;
+//     return 
+//   }
+// )
