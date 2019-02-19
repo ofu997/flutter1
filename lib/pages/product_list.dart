@@ -42,8 +42,8 @@ class _ProductListPageState extends State<ProductListPage>{
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MainModel>(
-        builder: (BuildContext context, Widget child, MainModel model) {
-      return ListView.builder(
+      builder: (BuildContext context, Widget child, MainModel model) {
+        Widget content = ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Dismissible(
             background: Container(color: Colors.pink),
@@ -63,7 +63,8 @@ class _ProductListPageState extends State<ProductListPage>{
                 ListTile(
                   //leading: Container(child: Image.asset(products[index]['image']),width: 75.0),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(model.allProducts[index].image),
+                    backgroundImage: 
+                      NetworkImage(model.allProducts[index].image),
                   ),
                   title: Text(model.allProducts[index].title),
                   subtitle:
@@ -77,6 +78,8 @@ class _ProductListPageState extends State<ProductListPage>{
         },
         itemCount: model.allProducts.length,
       );
+      if (model.allProducts.isEmpty){content = Center(child:Text('is empty'));}
+      return content;
     });
   }
 }

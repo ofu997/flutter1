@@ -40,11 +40,12 @@ mixin ProductsModel on ConnectedProductsModel {
   }
 
   Product get selectedProduct {
-    if (selectedProductIndex == null || _products.isEmpty) {
+    if (selectedProductId == null ) {//|| _products.isEmpty
       return null;
     }
     return _products.firstWhere((Product product) {
       return product.id == _selProductId;
+      //orElse: () => print('No matching element.')
     });    
   }
 
@@ -55,17 +56,18 @@ mixin ProductsModel on ConnectedProductsModel {
   Future<bool> addsProducts(String title, String description, String image, double price) async {
       _isLoading = true;
       notifyListeners();  
-      final Map<String,dynamic> productData = {
+      final Map<String,dynamic> productData = {//we send this object to Firebase
         'title': title,
         'description': description,
-        'image': 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiWquab48PgAhWSHDQIHXUVD58QjRx6BAgBEAU&url=https%3A%2F%2Fbarefeetinthekitchen.com%2Fhow-to-make-a-cheese-board%2F&psig=AOvVaw1ig44_mDut58gEs7RKuZ12&ust=1550527502726219',
+        'image': 'https://www.imagesource.com/stock-image/Rigatoni-with-tomato-sauce-and-Parmigiano-IDI2P3F.html',
         'price': price,
         'userEmail': _authenticatedUser.email,
         'userId': _authenticatedUser.id
       };
       try{
         final http.Response response = await 
-          http.post(
+          http
+            .post(
             'https://flutterbyof.firebaseio.com/products.json', 
             body: json.encode(productData)
           );
@@ -104,7 +106,7 @@ mixin ProductsModel on ConnectedProductsModel {
     final Map<String,dynamic> updateData = {
         'title': title,
         'description': description,
-        'image': 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiWquab48PgAhWSHDQIHXUVD58QjRx6BAgBEAU&url=https%3A%2F%2Fbarefeetinthekitchen.com%2Fhow-to-make-a-cheese-board%2F&psig=AOvVaw1ig44_mDut58gEs7RKuZ12&ust=1550527502726219',
+        'image': 'https://www.imagesource.com/stock-image/Rigatoni-with-tomato-sauce-and-Parmigiano-IDI2P3F.html',
         'price': price,
         'userEmail': _authenticatedUser.email,
         'userId': _authenticatedUser.id

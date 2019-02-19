@@ -44,12 +44,10 @@ class ProductCard extends StatelessWidget{
                 //child: Text('Details'),
                 onPressed: () => Navigator.pushNamed<bool>(
                       context,
-                      '/product/' + productIndex.toString(),
-                    )
+                      '/product/' + model.allProducts[productIndex].id
+                    ),
             ),
-            ScopedModelDescendant<MainModel>(
-              builder: (BuildContext context, Widget child, MainModel model) {
-                return IconButton(
+            IconButton(
                   icon: Icon(model.allProducts[productIndex].isFavorite
                       ? Icons.favorite
                       : Icons.favorite_border),
@@ -58,9 +56,7 @@ class ProductCard extends StatelessWidget{
                     model.selectProduct(model.allProducts[productIndex].id);
                     model.toggleProductFavoriteStatus();
                   },
-                );
-              },
-            ),
+                ),
           ]
         );   
       }
