@@ -92,7 +92,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
       builder: (BuildContext context, Widget child, MainModel model){
         return RaisedButton(
           child: Text('Save'),
-          textColor: Colors.white,
+          textColor: Colors.black,
           onPressed: () => _submitForm(model.addsProducts, model.updateProduct,
             model.selectProduct, model.selectedProductIndex),
         );
@@ -148,7 +148,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
     }
 
     _formKey.currentState.save();
-    if (selectedProductIndex == -1) {
+    if (selectedProductIndex == -1) {// || selectedProductIndex != null
       addProduct(
         _formData['title'],
         _formData['description'],
@@ -178,6 +178,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           }
         }); 
     } else {
+      print(selectedProductIndex);
       updateProduct(
         _formData['title'],
         _formData['description'],
@@ -197,13 +198,15 @@ class _ProductEditPageState extends State<ProductEditPage> {
       builder: (BuildContext context, Widget child, MainModel model) {
         final Widget pageContent =
           _buildPageContent(context, model.selectedProduct);
-        return (model.selectedProductIndex == -1 ||  model.selectedProductIndex != null)
+        return (model.selectedProductIndex == -1)// ||  model.selectedProductIndex != null
           ? pageContent
           : 
           Scaffold(
               appBar: AppBar(
-                title: Text('Edit Product'),              ),
-              body: pageContent,            );
+                title: Text('E'+model.selectedProduct.title+' '+model.selectedProductIndex.toString()),              
+                ),
+              body: pageContent,            
+              );
       },
     );
   }

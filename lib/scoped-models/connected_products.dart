@@ -59,7 +59,7 @@ mixin ProductsModel on ConnectedProductsModel {
       final Map<String,dynamic> productData = {//we send this object to Firebase
         'title': title,
         'description': description,
-        'image': 'https://www.imagesource.com/stock-image/Rigatoni-with-tomato-sauce-and-Parmigiano-IDI2P3F.html',
+        'image': 'https://upload.wikimedia.org/wikipedia/commons/6/68/Chocolatebrownie.JPG',
         'price': price,
         'userEmail': _authenticatedUser.email,
         'userId': _authenticatedUser.id
@@ -78,6 +78,7 @@ mixin ProductsModel on ConnectedProductsModel {
           return false;
         }
         final Map<String, dynamic> responseData = json.decode(response.body);
+        print(responseData);
         final Product newProduct = Product(
             id: responseData['name'],
             title: title,
@@ -106,11 +107,12 @@ mixin ProductsModel on ConnectedProductsModel {
     final Map<String,dynamic> updateData = {
         'title': title,
         'description': description,
-        'image': 'https://www.imagesource.com/stock-image/Rigatoni-with-tomato-sauce-and-Parmigiano-IDI2P3F.html',
+        'image':  'https://upload.wikimedia.org/wikipedia/commons/6/68/Chocolatebrownie.JPG',
         'price': price,
         'userEmail': _authenticatedUser.email,
         'userId': _authenticatedUser.id
     };
+    print(title+" is updated");
     return http
       .put(
             'https://flutterbyof.firebaseio.com/products.json', 
@@ -130,6 +132,7 @@ mixin ProductsModel on ConnectedProductsModel {
 
             _products[selectedProductIndex] = updatedProduct;
             notifyListeners();
+            print(updatedProduct.id);
             return true;
           }).catchError((error) {
             _isLoading = false;
@@ -184,7 +187,7 @@ mixin ProductsModel on ConnectedProductsModel {
         fetchedProductList.add(product);
       });
       _products = fetchedProductList;
-      _isLoading = false;
+      //_isLoading = false;
       notifyListeners();
       _selProductId = null;
     }).catchError((error) {
