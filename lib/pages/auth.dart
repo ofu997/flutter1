@@ -4,12 +4,16 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../scoped-models/main.dart';
 
+enum AuthMode {Signup, Login}
+
 class AuthPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _AuthPage();
   }
 }
+
+
 
 class _AuthPage extends State<AuthPage> {
   final Map<String,dynamic> _authData = {
@@ -18,6 +22,9 @@ class _AuthPage extends State<AuthPage> {
     'acceptTerms': false
   };
   final GlobalKey<FormState> _authFormKey = GlobalKey<FormState>();
+
+  final TextEditingController _passwordTextController = TextEditingController();
+  AuthMode _authMode = AuthMode.Login;
 
   DecorationImage _buildBackgroundImage(){
   return 
@@ -47,7 +54,7 @@ Widget _buildEmailTextfield(){
   Widget _buildPassword(){
   return  TextFormField(
                 decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white),
-                maxLines: 4,
+                controller: _passwordTextController,
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 onSaved: (String value) {
@@ -61,27 +68,65 @@ Widget _buildEmailTextfield(){
               );
 }
 
-Widget _buildSwitch(){
-  return  SwitchListTile(
-                value: _authData['acceptTerms'],
-                onChanged: (bool value) {           
-                  setState((){
-                    _authData['acceptTerms'] = value;
-                  });    
-                },
-                title: Text('accept terms'),
-              );
-}
-
-void _submitForm(Function login){ 
-  if (!_authFormKey.currentState.validate() || !_authData['acceptTerms']) {
-    return;
+  Widget _buildPasswordConfirmTextField() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Confirm Password', filled: true, fillColor: Colors.white),
+      obscureText: true,
+      validator: (String value) {
+        if (_passwordTextController.text != value) {
+          return 'Passwords do not match.';
+        }
+      },
+    );
   }
-  _authFormKey.currentState.save();
-  print(_authData['email'] + ' ' + _authData['passWord']);
-  login(_authData['email'], _authData['password']);
-  Navigator.pushReplacementNamed(context,'/products'); // gives you no option of going back
-}
+
+  Widget _buildSwitch(){
+    return  SwitchListTile(
+                  value: _authData['acceptTerms'],
+                  onChanged: (bool value) {           
+                    setState((){
+                      _authData['acceptTerms'] = value;
+                    });    
+                  },
+                  title: Text('accept terms'),
+                );
+  }
+
+  void _submitForm(Function login, Function signup) async
+  { 
+    if (!_authFormKey.currentState.validate() || !_authData['acceptTerms']) {
+      return;
+    }
+    _authFormKey.currentState.save();
+    if (_authMode == AuthMode.Login){
+      login(_authData['email'], _authData['password']);
+      } else {
+        final Map<String, dynamic> successInformation =
+            await signup(_authData['email'], _authData['password']);
+        if (successInformation['success']) {
+          Navigator.pushReplacementNamed(context, '/products');
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('An Error Occurred!'),
+                  content: Text(successInformation['message']),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              });
+        }
+      }
+    }
+
 
   @override
   Widget build(BuildContext context) {
@@ -109,17 +154,41 @@ void _submitForm(Function login){
                         height: 11.0
                       ),
                       _buildPassword(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                    _authMode == AuthMode.Signup
+                        ? _buildPasswordConfirmTextField()
+                        : Container(),                      
                       _buildSwitch(),
                       SizedBox(
                         height: 25.0,
                       ),
+                      FlatButton(
+                        child: Text(
+                            'Switch to ${_authMode == AuthMode.Login ? 'Signup' : 'Login'}'),
+                        onPressed: () {
+                          setState(() {
+                            _authMode = _authMode == AuthMode.Login
+                                ? AuthMode.Signup
+                                : AuthMode.Login;
+                            });
+                        },
+                      ),
+                    SizedBox(
+                      height: 10.0,
+                    ),                      
                       ScopedModelDescendant<MainModel> (
                         builder: (BuildContext context, Widget child, MainModel model){
-                          return RaisedButton(
-                            textColor: Colors.brown,
-                            color: Theme.of(context).primaryColorLight,
-                            child: Text('submit'),                          
-                            onPressed: () => _submitForm(model.login),
+                          return model.isLoading?
+                          CircularProgressIndicator():
+                          RaisedButton(
+                            child: Text(_authMode ==AuthMode.Login?
+                              'LOGIN':
+                              'SIGNUP'
+                            ),
+                            textColor: Colors.white,
+                            onPressed: ( ) => _submitForm(model.login, model.signup),
                           );
                         }
                       ),
