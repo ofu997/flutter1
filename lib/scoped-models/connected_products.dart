@@ -15,7 +15,7 @@ class ConnectedProductsModel extends Model{
   bool _isLoading = false;
 }
 
-mixin ProductsModel on ConnectedProductsModel {
+class ProductsModel extends ConnectedProductsModel {
   bool _showFavorites = false;
 
   List<Product> get allProducts {
@@ -234,13 +234,40 @@ mixin ProductsModel on ConnectedProductsModel {
 }
 
 
-mixin UserModel on ConnectedProductsModel {
-    void login(String email, String password) {
+class UserModel extends ConnectedProductsModel {
+  void login(String email, String password) {
     _authenticatedUser = User(id: 'fdalsdfasf', email: email, password: password);
+  }
+
+  Future<Map<String, dynamic>> signup(String email, String password) async {
+    _isLoading = true;
+    notifyListeners();
+    final Map<String, dynamic> authData = {
+      'email': email,
+      'password': password,
+      'returnSecureToken': true
+    };
+    final http.Response response = await http.post(
+      'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDRNWISSlMAV8cduZYT9sEVKhRx6qdwJcc',
+      body: json.encode(authData),
+      headers: {'Content-Type': 'application/json'},
+    );
+    final Map<String, dynamic> responseData = json.decode(response.body);
+    bool hasError = true;
+    String message = 'Something went wrong.';
+    if (responseData.containsKey('idToken')) {
+      hasError = false;
+      message = 'Authentication succeeded!';
+    } else if (responseData['error']['message'] == 'EMAIL_EXISTS') {
+      message = 'This email already exists.';
+    }
+    _isLoading = false;
+    notifyListeners();
+    return {'success': !hasError, 'message': message};
   }
 }
 
-mixin UtilityModel on ConnectedProductsModel {
+class UtilityModel extends ConnectedProductsModel {
   bool get isLoading {
     return _isLoading;
   }
