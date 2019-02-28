@@ -108,6 +108,7 @@ in MaterialApp, add debugShowMaterialGrid: true, to show positioning/centering a
 /*Tips:
 -If emulator won't start, go to AVD Manager, select Show On Disk, and delete cached images
 Source: https://stackoverflow.com/questions/15565028/android-emulator-wont-boot-up
+Or wipe data.
 -Faster emulator: flutter clean, or connect to physical device. Try to keep main stateless.
 */
-/*$flutter doctor --android-licenses */
+//$flutter doctor --android-licenses */

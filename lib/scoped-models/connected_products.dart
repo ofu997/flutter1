@@ -248,7 +248,7 @@ class UserModel extends ConnectedProductsModel {
       'returnSecureToken': true
     };
     final http.Response response = await http.post(
-      'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDRNWISSlMAV8cduZYT9sEVKhRx6qdwJcc',
+      'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyC6uawrA3OJMCH7lyFbzpkyg7k5OS1mWqQ',
       body: json.encode(authData),
       headers: {'Content-Type': 'application/json'},
     );
