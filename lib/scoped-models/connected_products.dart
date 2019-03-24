@@ -55,6 +55,9 @@ class ProductsModel extends ConnectedProductsModel {
 
   Future<bool> addsProducts(String title, String description, String image, double price) async {
       _isLoading = true;
+      DateTime timeStamp = new DateTime.now();
+      String dateSlug = "${timeStamp.month.toString()}-${timeStamp.day.toString()}-${timeStamp.year.toString}+" " + ${timeStamp.hour.toString()}+ ${timeStamp.minute.toString()}";
+      print(dateSlug);
       notifyListeners();  
       final Map<String,dynamic> productData = {//we send this object to Firebase
         'title': title,
@@ -62,7 +65,8 @@ class ProductsModel extends ConnectedProductsModel {
         'image': 'https://upload.wikimedia.org/wikipedia/commons/6/68/Chocolatebrownie.JPG',
         'price': price,
         'userEmail': _authenticatedUser.email,
-        'userId': _authenticatedUser.id
+        'userId': _authenticatedUser.id,
+        //'dateTime': dateSlug
       };
       try{
         final http.Response response = await 
@@ -86,7 +90,10 @@ class ProductsModel extends ConnectedProductsModel {
             image: image,
             price: price,
             userEmail: _authenticatedUser.email,
-            userId: _authenticatedUser.id);
+            userId: _authenticatedUser.id,
+            //dateTime: dateSlug,
+            );
+
         _products.add(newProduct);
         _count++;
         print(' addProduct() text count: ' + _count.toString() + ' ' + DateTime.now().toIso8601String());
@@ -185,9 +192,10 @@ class ProductsModel extends ConnectedProductsModel {
             userEmail: productData['userEmail'],
             userId: productData['userId']);
         fetchedProductList.add(product);
+        print(fetchedProductList.length.toString());
       });
       _products = fetchedProductList;
-      //_isLoading = false;
+      _isLoading = false;
       notifyListeners();
       _selProductId = null;
     }).catchError((error) {
@@ -252,6 +260,7 @@ class UserModel extends ConnectedProductsModel {
       body: json.encode(authData),
       headers: {'Content-Type': 'application/json'},
     );
+    print(response.body);
     final Map<String, dynamic> responseData = json.decode(response.body);
     bool hasError = true;
     String message = 'Something went wrong.';

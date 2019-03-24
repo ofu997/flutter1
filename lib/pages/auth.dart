@@ -18,7 +18,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPage extends State<AuthPage> {
   final Map<String,dynamic> _authData = {
     'email': null,
-    'passWord': null,
+    'password': null,
     'acceptTerms': false
   };
   final GlobalKey<FormState> _authFormKey = GlobalKey<FormState>();
@@ -58,7 +58,7 @@ Widget _buildEmailTextfield(){
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 onSaved: (String value) {
-                 _authData['passWord'] = value;
+                 _authData['password'] = value;
                 },
                 validator: (String value){
                   if (value.isEmpty){
@@ -172,6 +172,7 @@ Widget _buildEmailTextfield(){
                             _authMode = _authMode == AuthMode.Login
                                 ? AuthMode.Signup
                                 : AuthMode.Login;
+                                print("switch pressed");
                             });
                         },
                       ),

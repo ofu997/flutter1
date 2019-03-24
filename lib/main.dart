@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_app/pages/product_manager_page.dart';
+import 'package:second_app/pages/products_admin.dart';
 import 'package:second_app/pages/products.dart';
 import 'package:second_app/pages/product.dart';
 import 'package:second_app/pages/auth.dart';
@@ -24,11 +24,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final MainModel _model = MainModel();
+  bool _isAuthenticated = false;
+
+  @override
+  void initState() {
+    _model.autoAuthenticate();
+    _model.userSubject.listen((bool isAuthenticated) {
+      setState(() {
+        _isAuthenticated = isAuthenticated;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('building main page');
     final MainModel model = MainModel();
     return ScopedModel<MainModel>(
-      model: model,
+      model: _model,
       child: MaterialApp(
         theme: ThemeData(
           // swatch is auto-color-schemes. Colors is package, followed by static types
@@ -38,29 +53,39 @@ class _MyAppState extends State<MyApp> {
         ),
         //home: AuthPage(),
         routes: {
-          '/': (BuildContext context) => AuthPage(),
-          '/products': (BuildContext context) => ProductsPage(model),
-          '/admin': (BuildContext context) => ProductManagerPage(model),
+          '/': (BuildContext context) => 
+            !_isAuthenticated ? AuthPage() :
+            ProductsPage(_model),
+          '/admin': (BuildContext context) =>
+            !_isAuthenticated ? AuthPage() :
+          ProductsAdminPage(_model),
         },
         onGenerateRoute: (RouteSettings settings) {
+          if (!_isAuthenticated) {
+            return MaterialPageRoute<bool>(
+              builder: (BuildContext context) => AuthPage(),
+            );
+          }
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
             return null;
           }
           if (pathElements[1] == 'product') {
             final String productId = pathElements[2];
-            final Product product = model.allProducts.firstWhere((Product product){
+            final Product product =_model.allProducts.firstWhere((Product product) {
               return product.id == productId;
             });
             return MaterialPageRoute<bool>(
-              builder: (BuildContext context) => ProductPage(product),
+              builder: (BuildContext context) =>
+                  !_isAuthenticated ? AuthPage() : ProductPage(product),
             );
           }
           return null;
         },
         onUnknownRoute: (RouteSettings settings) {
           return MaterialPageRoute(
-              builder: (BuildContext context) => ProductsPage(model)
+            builder: (BuildContext context) =>
+                  !_isAuthenticated ? AuthPage() : ProductsPage(_model)
           );
         },
       ), 
@@ -112,3 +137,5 @@ Or wipe data.
 -Faster emulator: flutter clean, or connect to physical device. Try to keep main stateless.
 */
 //$flutter doctor --android-licenses */
+
+// grass73@gmail.com, qwer12!@

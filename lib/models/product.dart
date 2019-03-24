@@ -9,6 +9,7 @@ class Product{
   final bool isFavorite;
   final String userEmail;
   final String userId;
+  //final String dateTime;
 
   Product(
     {@required this.id,
@@ -18,6 +19,7 @@ class Product{
     @required this.image,
     @required this.userEmail,
     @required this.userId,
+    //@required this.dateTime,
     this.isFavorite = false}
   );
 }

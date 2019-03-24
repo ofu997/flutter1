@@ -3,10 +3,10 @@ import './product_edit.dart';
 import './product_list.dart';
 import '../scoped-models/main.dart';
 
-class ProductManagerPage extends StatelessWidget {
+class ProductsAdminPage extends StatelessWidget {
   final MainModel model;
 
-  ProductManagerPage(this.model);
+  ProductsAdminPage(this.model);
 
   Widget _buildSideDrawer(BuildContext context) {
     return 
