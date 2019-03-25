@@ -1,9 +1,14 @@
 import 'package:scoped_model/scoped_model.dart';
-// import '../models/product.dart';
-// import '../models/user.dart';
 import 'package:second_app/models/product.dart';
 import 'package:second_app/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rxdart/subjects.dart';
+
+import '../models/product.dart';
+import '../models/user.dart';
+import '../models/auth.dart';
+
 import 'dart:convert';
 import 'dart:async';
 

@@ -4,7 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../scoped-models/main.dart';
 
-enum AuthMode {Signup, Login}
+import '../models/auth.dart';
 
 class AuthPage extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class AuthPage extends StatefulWidget {
 
 
 class _AuthPage extends State<AuthPage> {
-  final Map<String,dynamic> _authData = {
+  final Map<String,dynamic> _formData = {
     'email': null,
     'password': null,
     'acceptTerms': false
@@ -40,7 +40,7 @@ Widget _buildEmailTextfield(){
                 decoration: InputDecoration(labelText: 'Email', filled: true, fillColor: Colors.white),
                 keyboardType: TextInputType.emailAddress,
                 onSaved: (String value) {
-                  _authData['email'] = value;
+                  _formData['email'] = value;
                 },
                 validator: (String value) {
                   if (value.isEmpty ||
@@ -58,7 +58,7 @@ Widget _buildEmailTextfield(){
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 onSaved: (String value) {
-                 _authData['password'] = value;
+                 _formData['password'] = value;
                 },
                 validator: (String value){
                   if (value.isEmpty){
@@ -83,47 +83,68 @@ Widget _buildEmailTextfield(){
 
   Widget _buildSwitch(){
     return  SwitchListTile(
-                  value: _authData['acceptTerms'],
+                  value: _formData['acceptTerms'],
                   onChanged: (bool value) {           
                     setState((){
-                      _authData['acceptTerms'] = value;
+                      _formData['acceptTerms'] = value;
                     });    
                   },
                   title: Text('accept terms'),
                 );
   }
 
-  void _submitForm(Function login, Function signup) async
+  void _submitForm(Function authenticate) async
   { 
-    if (!_authFormKey.currentState.validate() || !_authData['acceptTerms']) {
+    if (!_authFormKey.currentState.validate() || !_formData['acceptTerms']) {
       return;
     }
     _authFormKey.currentState.save();
-    if (_authMode == AuthMode.Login){
-      login(_authData['email'], _authData['password']);
+    Map<String, dynamic> successInformation;
+    successInformation = await authenticate(
+        _formData['email'], _formData['password'], _authMode);
+    if (successInformation['success']) {
+      // Navigator.pushReplacementNamed(context, '/');
       } else {
-        final Map<String, dynamic> successInformation =
-            await signup(_authData['email'], _authData['password']);
-        if (successInformation['success']) {
-          Navigator.pushReplacementNamed(context, '/products');
-        } else {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('An Error Occurred!'),
-                  content: Text(successInformation['message']),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text('Okay'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                );
-              });
-        }
+        showDialog(
+          context: context,
+
+          builder: (BuildContext context){
+            return AlertDialog(
+              title: Text('An Error Occurred!'),
+              content: Text(successInformation['message']),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          },
+        );
+        // final Map<String, dynamic> successInformation =
+        //     await signup(_formData['email'], _formData['password']);
+        // if (successInformation['success']) {
+        //   Navigator.pushReplacementNamed(context, '/products');
+        // } else {
+        //   showDialog(
+        //       context: context,
+        //       builder: (BuildContext context) {
+        //         return AlertDialog(
+        //           title: Text('An Error Occurred!'),
+        //           content: Text(successInformation['message']),
+        //           actions: <Widget>[
+        //             FlatButton(
+        //               child: Text('Okay'),
+        //               onPressed: () {
+        //                 Navigator.of(context).pop();
+        //               },
+        //             )
+        //           ],
+        //         );
+        //       });
+        // }
       }
     }
 
@@ -189,7 +210,7 @@ Widget _buildEmailTextfield(){
                               'SIGNUP'
                             ),
                             textColor: Colors.white,
-                            onPressed: ( ) => _submitForm(model.login, model.signup),
+                            onPressed: () => _submitForm(model.authenticate),
                           );
                         }
                       ),
