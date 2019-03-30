@@ -284,7 +284,7 @@ class UserModel extends ConnectedProductsModel {
     http.Response response;
     if (mode == AuthMode.Login){
       response = await http.post(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyC6uawrA3OJMCH7lyFbzpkyg7k5OS1mWqQ',
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyC6uawrA3OJMCH7lyFbzpkyg7k5OS1mWqQ',
         body: json.encode(authData),
         headers: {'Content-Type': 'application/json'},
       );
@@ -292,10 +292,11 @@ class UserModel extends ConnectedProductsModel {
     else 
     {
       response = await http.post(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyC6uawrA3OJMCH7lyFbzpkyg7k5OS1mWqQ',
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyC6uawrA3OJMCH7lyFbzpkyg7k5OS1mWqQ',
         body: json.encode(authData),
         headers: {'Content-Type': 'application/json'},          
       );
+      print(authData.toString() +' signup worked');
     }
     
       

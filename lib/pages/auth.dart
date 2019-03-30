@@ -184,7 +184,7 @@ Widget _buildEmailTextfield(){
                               'LOGIN':
                               'SIGNUP'
                             ),
-                            textColor: Colors.white,
+                            textColor: Colors.lime[900],
                             onPressed: () => _submitForm(model.authenticate),
                           );
                         }
