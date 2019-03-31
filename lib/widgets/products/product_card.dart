@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget{
               SizedBox(
                 width: 33.0,
               ),
-              PriceTag(product.price.toString())
+              PriceTag(product.price.toStringAsFixed(2))
             ],
           ));
   }
