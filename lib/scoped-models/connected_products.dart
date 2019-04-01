@@ -12,7 +12,7 @@ import '../models/auth.dart';
 import 'dart:convert';
 import 'dart:async';
 
-class ConnectedProductsModel extends Model{
+mixin ConnectedProductsModel on Model{
   int _count = 0;
   List<Product> _products = [];
   String _selProductId;
@@ -20,7 +20,7 @@ class ConnectedProductsModel extends Model{
   bool _isLoading = false;
 }
 
-class ProductsModel extends ConnectedProductsModel {
+mixin ProductsModel on ConnectedProductsModel {
   bool _showFavorites = false;
 
   List<Product> get allProducts {
@@ -261,7 +261,7 @@ class ProductsModel extends ConnectedProductsModel {
   }
 }
 
-class UserModel extends ConnectedProductsModel {
+mixin UserModel on ConnectedProductsModel {
   Timer _authTimer;
   PublishSubject<bool> _userSubject = PublishSubject();
 
@@ -373,7 +373,7 @@ class UserModel extends ConnectedProductsModel {
   }
 }
 
-class UtilityModel extends ConnectedProductsModel {
+mixin UtilityModel on ConnectedProductsModel {
   bool get isLoading {
     return _isLoading;
   }

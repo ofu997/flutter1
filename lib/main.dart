@@ -6,11 +6,13 @@ import 'package:second_app/pages/auth.dart';
 import 'package:second_app/models/product.dart';
 import 'package:scoped_model/scoped_model.dart';
 import './scoped-models/main.dart';
+import 'package:map_view/map_view.dart';
 // import 'package:flutter/rendering.dart';//to show layout lines for paintSizeEnabled
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
   //debugPaintSizeEnabled=true;debugBaselinesEnabled=true;debugPaintPointersEnabled=true;
+  MapView.setApiKey("AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM");
   runApp(MyApp());
 }
 

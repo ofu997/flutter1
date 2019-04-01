@@ -3,7 +3,7 @@ import '../widgets/helpers/ensure-visible.dart';
 import '../models/product.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../scoped-models/main.dart';
-
+import '../widgets/form_inputs/location.dart';
 
 
 class ProductEditPage extends StatefulWidget {
@@ -124,6 +124,10 @@ class _ProductEditPageState extends State<ProductEditPage> {
                   SizedBox(
                     height: 25.0,
                   ),
+              LocationInput(),
+              SizedBox(
+                height: 10.0,
+              ),
                   _buildSubmitButton(),
                   // GestureDetector(
                   //   //offers more types of listener events than RaisedButton
