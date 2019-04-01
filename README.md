@@ -1,4 +1,4 @@
-# second_app
+# Product Lister
 
 A new Flutter project.
 
