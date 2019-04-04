@@ -29,7 +29,7 @@ import '../helpers/ensure-visible.dart';
 
    void getStaticMap() {
     final StaticMapProvider staticMapViewProvider =
-        StaticMapProvider('AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM');
+        StaticMapProvider('AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM');// Maps Static API
     final Uri staticMapUri = staticMapViewProvider.getStaticUriWithMarkers(
         [Marker('position', 'Position', 45.58508, -122.76477)],
         center: Location(45.58508, -122.76477),
