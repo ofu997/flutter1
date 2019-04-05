@@ -34,6 +34,11 @@ class _ProductListPageState extends State<ProductListPage>{
               return ProductEditPage(); //we don't pass addProduct here
             },
           ),
+        )
+        .then(
+          (_){
+          model.selectProduct(null);
+          }
         );
       },
     );
