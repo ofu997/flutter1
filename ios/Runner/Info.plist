@@ -28,6 +28,8 @@
 	<string>Main</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>User's location is required to add a product's location on the map</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Requires live tracking of location</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
