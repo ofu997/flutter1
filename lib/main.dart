@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     print('building main page');
-    final MainModel model = MainModel();
+    final MainModel _model = MainModel();
     return ScopedModel<MainModel>(
       model: _model,
       child: MaterialApp(
@@ -144,3 +144,21 @@ Or wipe data.
 
 // location package in 14.223
 
+/*
+https://github.com/apptreesoftware/flutter_google_map_view/issues/129
+
+This worked for me (VS Code):
+
+Edit \Pub\Cache\hosted\pub.dartlang.org\map_view-0.0.14\android\build.gradle. Change ext.kotlin_version under buildscript to 1.2.51.
+
+Edit \Pub\Cache\hosted\pub.dartlang.org\map_view-0.0.14\android\src\main\kotlin\com\apptreesoftware\mapview\MapViewPlugin.kt:
+
+Line 168: Change to val cameraDict = mapOptions!!["cameraPosition"] as Map<String, Any>
+Line 171: Change to showUserLocation = mapOptions!!["showUserLocation"] as Boolean
+Line 172: Change to showMyLocationButton = mapOptions!!["showMyLocationButton"] as Boolean
+Line 173: Change to showCompassButton = mapOptions!!["showCompassButton"] as Boolean
+Line 174: Change to hideToolbar = mapOptions!!["hideToolbar"] as Boolean
+Line 175: Change to mapTitle = mapOptions!!["title"] as String
+Line 177: Change to if (mapOptions!!["mapViewType"] != null) {
+Line 178: Change to val mappedMapType: Int? = mapTypeMapping.get(mapOptions!!["mapViewType"]);
+*/
