@@ -59,7 +59,7 @@ mixin ProductsModel on ConnectedProductsModel {
     return _showFavorites;
   }
 
-  Future<bool> addsProducts(String title, String description, String image, double price, LocationData locData) async {
+  Future<bool> addProduct(String title, String description, String image, double price, LocationData locData) async {
       _isLoading = true;
       DateTime timeStamp = new DateTime.now();
       String dateSlug = "${timeStamp.month.toString()}-${timeStamp.day.toString()}-${timeStamp.year.toString}+" " + ${timeStamp.hour.toString()}+ ${timeStamp.minute.toString()}";
@@ -183,6 +183,7 @@ mixin ProductsModel on ConnectedProductsModel {
   Future<Null> fetchProducts({onlyForUser = false}) {
     _isLoading = true;
     notifyListeners();
+    print("printing _authenticatedUser.token from connected_products fetchProducts" + _authenticatedUser.token);
     return http
         .get('https://flutterbyof.firebaseio.com/products.json?auth=${_authenticatedUser.token}')
         .then<Null>((http.Response response) {
@@ -214,7 +215,8 @@ mixin ProductsModel on ConnectedProductsModel {
         print(fetchedProductList.length.toString());
       });
       _products = onlyForUser? fetchedProductList.where((Product product) {
-        return product.userId == _authenticatedUser.id;}).toList() : fetchedProductList;
+        return product.userId == _authenticatedUser.id;}).toList() 
+        : fetchedProductList;
       _isLoading = false;
       notifyListeners();
       _selProductId = null;
@@ -305,6 +307,7 @@ mixin UserModel on ConnectedProductsModel {
         body: json.encode(authData),
         headers: {'Content-Type': 'application/json'},
       );
+      print('log in works' + authData.toString());
     } 
     else 
     {
@@ -313,24 +316,28 @@ mixin UserModel on ConnectedProductsModel {
         body: json.encode(authData),
         headers: {'Content-Type': 'application/json'},          
       );
-      print(authData.toString() +' signup worked');
+      print("authData is: "+ authData.toString() +' signup worked');
     }
     
       
       
     
-    print(response.body);
+    print("printing response.body from connected_products" + response.body);
     final Map<String, dynamic> responseData = json.decode(response.body);
     bool hasError = true;
     String message = 'Something went wrong.';
-    print(responseData);
+    print("responseData is " + responseData.toString());
     if (responseData.containsKey('idToken')) {
       hasError = false;
+      print('authentication succeeded');
       message = 'Authentication succeeded!';
      _authenticatedUser = User(
       id: responseData['localId'],
       email: email,
       token: responseData['idToken']);
+
+      print("connected_products.authenticate: " + _authenticatedUser.token);
+
       setAuthTimeout(int.parse(responseData['expiresIn']));
       _userSubject.add(true);
       final DateTime now = DateTime.now();

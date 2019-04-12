@@ -108,7 +108,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
         return RaisedButton(
           child: Text('Save'),
           textColor: Colors.black,
-          onPressed: () => _submitForm(model.addsProducts, model.updateProduct,
+          onPressed: () => _submitForm(model.addProduct, model.updateProduct,
             model.selectProduct, model.selectedProductIndex),
         );
       },
