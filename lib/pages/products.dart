@@ -22,7 +22,7 @@ class _ProductsPageState extends State<ProductsPage>{
     print('in pages/products');
     widget.model.fetchProducts();
     super.initState();
-    print('finished initState');
+    // print('finished initState');
   }
 
   Widget _buildSideDrawer(BuildContext context) {//we pass context in callback and construct it with (BuildContext context) 

@@ -100,7 +100,7 @@ Widget _buildEmailTextfield(){
     successInformation = await authenticate(
         _formData['email'], _formData['password'], _authMode);
     if (successInformation['success']) {
-      //Navigator.pushReplacementNamed(context, '/');
+      Navigator.pushReplacementNamed(context, '/');
       } else {
         print('not a success');
         showDialog(

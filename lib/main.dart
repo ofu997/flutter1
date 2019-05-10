@@ -1,13 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:second_app/pages/products_admin.dart';
-import 'package:second_app/pages/products.dart';
-import 'package:second_app/pages/product.dart';
-import 'package:second_app/pages/auth.dart';
-import 'package:second_app/models/product.dart';
-import 'package:scoped_model/scoped_model.dart';
-import './scoped-models/main.dart';
-import 'package:map_view/map_view.dart';
+// import 'package:flutter/material.dart';
+// import 'package:second_app/pages/products_admin.dart';
+// import 'package:second_app/pages/products.dart';
+// import 'package:second_app/pages/product.dart';
+// import 'package:second_app/pages/auth.dart';
+// import 'package:second_app/models/product.dart';
+// import 'package:scoped_model/scoped_model.dart';
+// import './scoped-models/main.dart';
+// import 'package:map_view/map_view.dart';
 // import 'package:flutter/rendering.dart';//to show layout lines for paintSizeEnabled
+
+import 'package:flutter/material.dart';
+
+import 'package:scoped_model/scoped_model.dart';
+import 'package:map_view/map_view.dart';
+// import 'package:flutter/rendering.dart';
+
+import './pages/auth.dart';
+import './pages/products_admin.dart';
+import './pages/products.dart';
+import './pages/product.dart';
+import './scoped-models/main.dart';
+import './models/product.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
@@ -34,6 +47,7 @@ class _MyAppState extends State<MyApp> {
     _model.autoAuthenticate();
     _model.userSubject.listen((bool isAuthenticated) {
       setState(() {
+        print("setting is authenticated $isAuthenticated");
         _isAuthenticated = isAuthenticated;
       });
     });
@@ -43,7 +57,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     print('building main page');
-    final MainModel _model = MainModel();
+    // final MainModel _model = MainModel();
     return ScopedModel<MainModel>(
       model: _model,
       child: MaterialApp(
@@ -55,9 +69,9 @@ class _MyAppState extends State<MyApp> {
         ),
         //home: AuthPage(),
         routes: {
-          '/': (BuildContext context) => 
-            !_isAuthenticated ? AuthPage()
-            : ProductsPage(_model),
+          '/': (BuildContext context) {
+            return !_isAuthenticated ? AuthPage()
+            : ProductsPage(_model);},
           '/admin': (BuildContext context) =>
             !_isAuthenticated ? AuthPage()
             : ProductsAdminPage(_model),
@@ -70,7 +84,7 @@ class _MyAppState extends State<MyApp> {
           }
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
-            return null;
+            // return a matpage route
           }
           if (pathElements[1] == 'product') {
             final String productId = pathElements[2];
@@ -87,9 +101,10 @@ class _MyAppState extends State<MyApp> {
         },
         onUnknownRoute: (RouteSettings settings) {
           return MaterialPageRoute(
-            builder: (BuildContext context) =>
+            builder: (BuildContext context) {
+              print("on unknown route");
             !_isAuthenticated ? AuthPage() 
-            : ProductsPage(_model)
+            : ProductsPage(_model); }
           );
         },
       ), 
@@ -143,6 +158,7 @@ Or wipe data.
 //$flutter doctor --android-licenses */
 
 // grass73@gmail.com, qwer12!@
+// oliverfu86@gmail.com, Star213@!#
 
 // location package in 14.223
 
@@ -164,3 +180,5 @@ Line 175: Change to mapTitle = mapOptions!!["title"] as String
 Line 177: Change to if (mapOptions!!["mapViewType"] != null) {
 Line 178: Change to val mappedMapType: Int? = mapTypeMapping.get(mapOptions!!["mapViewType"]);
 */
+
+// line 87
