@@ -68,7 +68,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           decoration: InputDecoration(labelText: 'Product Description'),
           initialValue:
               product == null ? '' : product.description,
-          maxLines: 4,
+          maxLines: 2,
           validator: (String value) {
             if (value.isEmpty || value.length < 10) {
               return ('Description is required and should be 10+ characters long.');
@@ -137,7 +137,10 @@ class _ProductEditPageState extends State<ProductEditPage> {
                   _buildDescriptionTextField(product),
                   _buildPriceTextField(product),
                   SizedBox(
-                    height: 25.0,
+                    height: 10.0,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Input for Location'),
                   ),
               LocationInput(_setLocation, product),
               SizedBox(
@@ -232,7 +235,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           : 
           Scaffold(
               appBar: AppBar(
-                title: Text('E'+model.selectedProduct.title+' '+model.selectedProductIndex.toString()),              
+                title: Text(model.selectedProduct.title),              
                 ),
               body: pageContent,            
               );

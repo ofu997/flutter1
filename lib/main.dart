@@ -21,6 +21,7 @@ import './pages/products.dart';
 import './pages/product.dart';
 import './scoped-models/main.dart';
 import './models/product.dart';
+import './pages/pathelementsempty.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
@@ -84,7 +85,9 @@ class _MyAppState extends State<MyApp> {
           }
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
-            // return a matpage route
+            return MaterialPageRoute<bool>(
+              builder: (BuildContext context) => PathElementsEmpty(),
+            );
           }
           if (pathElements[1] == 'product') {
             final String productId = pathElements[2];
@@ -97,7 +100,7 @@ class _MyAppState extends State<MyApp> {
                   : ProductPage(product),
             );
           }
-          return null;
+          //return null;
         },
         onUnknownRoute: (RouteSettings settings) {
           return MaterialPageRoute(
@@ -157,9 +160,6 @@ Or wipe data.
 */
 //$flutter doctor --android-licenses */
 
-// grass73@gmail.com, qwer12!@
-// oliverfu86@gmail.com, Star213@!#
-
 // location package in 14.223
 
 /*
@@ -182,3 +182,5 @@ Line 178: Change to val mappedMapType: Int? = mapTypeMapping.get(mapOptions!!["m
 */
 
 // line 87
+
+// ofu997@gmail.com, qwer4321
