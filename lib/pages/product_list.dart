@@ -57,6 +57,18 @@ class _ProductListPageState extends State<ProductListPage>{
               if (direction == DismissDirection.endToStart) {
               } else if (direction == DismissDirection.startToEnd) {
                 print('start to end');
+                // return AlertDialog(
+                //   title: Text('Delete item?'),
+                //   content: Text('this will permanently delete the item'),
+                //   actions: <Widget>[
+                //     FlatButton(
+                //       child: Text('cancel'), onPressed: (){Navigator.of(context).pop();}
+                //     ),
+                //     FlatButton(
+                //       child: Text('delete'), onPressed: (){model.selectProduct(model.allProducts[index].id); model.deleteProduct();}
+                //     )
+                //   ],
+                // );
                 model.selectProduct(model.allProducts[index].id);
                 model.deleteProduct();
               } else {

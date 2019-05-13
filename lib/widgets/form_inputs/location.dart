@@ -123,6 +123,7 @@ class _LocationInputState extends State<LocationInput> {
 
   void _updateLocation() {
     if (!_addressInputFocusNode.hasFocus) {
+      print('addressinputfocusnode has focus');
       _getStaticMap(_addressInputController.text);
     }    
   }
@@ -134,10 +135,12 @@ class _LocationInputState extends State<LocationInput> {
         EnsureVisibleWhenFocused(
           focusNode: _addressInputFocusNode,
           child: TextFormField(
+            decoration: InputDecoration(labelText: 'Input Location'),
             focusNode: _addressInputFocusNode,
             controller: _addressInputController,
             validator: (String value){
               if (_locationData == null || value.isEmpty){
+                print('value from location.dart is $value');
                 return 'No valid location found.';
               }
             },

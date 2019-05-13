@@ -139,12 +139,12 @@ class _ProductEditPageState extends State<ProductEditPage> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Input for Location'),
-                  ),
+                  // TextFormField(
+                  //   decoration: InputDecoration(labelText: 'Input for Location'),
+                  // ),
               LocationInput(_setLocation, product),
               SizedBox(
-                height: 10.0,
+                height: 35.0,
               ),
                   _buildSubmitButton(),
                   // GestureDetector(
@@ -171,7 +171,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
   void _submitForm(
     Function addProduct, Function updateProduct, Function setSelectedProduct,
     [int selectedProductIndex]) {
-      print(selectedProductIndex);
+      print('product edit _submitForm $selectedProductIndex');
     if (!_formKey.currentState.validate()) {
     return;
   }
