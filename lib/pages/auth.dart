@@ -32,38 +32,38 @@ class _AuthPage extends State<AuthPage> {
     );
   }
 
-Widget _buildEmailTextfield(){
-  return  TextFormField(
-                decoration: InputDecoration(labelText: 'Email', filled: true, fillColor: Colors.white),
-                keyboardType: TextInputType.emailAddress,
-                onSaved: (String value) {
-                  _formData['email'] = value;
-                },
-                validator: (String value) {
-                  if (value.isEmpty ||
-                      !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").hasMatch(value)) {
-                    return ('needs to be a valid email address.');
+  Widget _buildEmailTextfield(){
+    return  TextFormField(
+                  decoration: InputDecoration(labelText: 'Email', filled: true, fillColor: Colors.white),
+                  keyboardType: TextInputType.emailAddress,
+                  onSaved: (String value) {
+                    _formData['email'] = value;
+                  },
+                  validator: (String value) {
+                    if (value.isEmpty ||
+                        !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").hasMatch(value)) {
+                      return ('needs to be a valid email address.');
+                    }
                   }
-                }
-              );
-  }
+                );
+    }
 
-  Widget _buildPassword(){
-  return  TextFormField(
-                decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white),
-                controller: _passwordTextController,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                onSaved: (String value) {
-                 _formData['password'] = value;
-                },
-                validator: (String value){
-                  if (value.isEmpty){
-                    return 'Needs to be filled out';
-                  }
-                },
-              );
-}
+    Widget _buildPassword(){
+    return  TextFormField(
+                  decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white),
+                  controller: _passwordTextController,
+                  obscureText: true,
+                  keyboardType: TextInputType.text,
+                  onSaved: (String value) {
+                  _formData['password'] = value;
+                  },
+                  validator: (String value){
+                    if (value.isEmpty){
+                      return 'Needs to be filled out';
+                    }
+                  },
+                );
+  }
 
   Widget _buildPasswordConfirmTextField() {
     return TextFormField(

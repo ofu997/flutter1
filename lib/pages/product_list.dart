@@ -55,7 +55,40 @@ class _ProductListPageState extends State<ProductListPage>{
             key: Key(model.allProducts[index].title),
             onDismissed: (DismissDirection direction) {
               if (direction == DismissDirection.endToStart) {
-              } else if (direction == DismissDirection.startToEnd) {
+                print('end to start...');
+                model.selectProduct(model.allProducts[index].id);
+                print('before deleting, number of products is $model.allProducts.length.toString()');
+                model.deleteProduct();
+                print('after deleting, number of products is $model.allProducts.length.toString()');
+                return showDialog<Null>(
+                  context: context,
+                  builder: (BuildContext context){
+                    return AlertDialog(
+                      title: Text('Deleting'),
+                      content: Text('This will delete the item permnaently'),
+                      actions: <Widget>[
+                        FlatButton(child: Text('OK'), onPressed: (){
+                          Navigator.of(context).pop();
+                        }),
+                      ],
+                    );
+                  }
+                );
+
+                
+                  // AlertDialog(
+                  //   title: Text('delete item?'),
+                  //   content: Text('this will delete'),
+                  //   actions: <Widget>[
+                  //     FlatButton(child: Text('yes'), onPressed: (){},),
+                  //     FlatButton(child: Text('no'), onPressed: (){},),
+                  //   ],
+                  // );
+                
+                // model.selectProduct(model.allProducts[index].id);
+                // model.deleteProduct();
+              } 
+              else if (direction == DismissDirection.startToEnd) {
                 print('start to end');
                 // return AlertDialog(
                 //   title: Text('Delete item?'),
@@ -69,8 +102,6 @@ class _ProductListPageState extends State<ProductListPage>{
                 //     )
                 //   ],
                 // );
-                model.selectProduct(model.allProducts[index].id);
-                model.deleteProduct();
               } else {
                 print('other swipe');
               }

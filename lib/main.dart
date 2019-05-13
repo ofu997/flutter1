@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
         onUnknownRoute: (RouteSettings settings) {
           return MaterialPageRoute(
             builder: (BuildContext context) =>
-              // print("on unknown route");
+              //print("on unknown route");
             !_isAuthenticated ? AuthPage() 
             : ProductsPage(_model)
           );

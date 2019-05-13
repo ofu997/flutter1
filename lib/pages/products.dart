@@ -86,7 +86,3 @@ class _ProductsPageState extends State<ProductsPage>{
     );
   }
 }
-
-  // final List<Product> products;
-
-  // ProductsPage(this.products);

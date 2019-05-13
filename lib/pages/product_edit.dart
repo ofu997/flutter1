@@ -142,21 +142,11 @@ class _ProductEditPageState extends State<ProductEditPage> {
                   // TextFormField(
                   //   decoration: InputDecoration(labelText: 'Input for Location'),
                   // ),
-              LocationInput(_setLocation, product),
-              SizedBox(
-                height: 35.0,
-              ),
+                  LocationInput(_setLocation, product),
+                  SizedBox(
+                    height: 35.0,
+                  ),
                   _buildSubmitButton(),
-                  // GestureDetector(
-                  //   //offers more types of listener events than RaisedButton
-                  //   onTap: _submitForm,
-                  //   child: Container(
-                  //     color: Theme.of(context)
-                  //         .primaryColorLight, //Colors.orangeAccent,
-                  //     padding: EdgeInsets.all(5.0),
-                  //     child: Center(child: Text('Save')),
-                  //   ),
-                  // ),
                 ],
               ),
             )
