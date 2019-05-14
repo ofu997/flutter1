@@ -56,37 +56,37 @@ class _ProductListPageState extends State<ProductListPage>{
             onDismissed: (DismissDirection direction) {
               if (direction == DismissDirection.endToStart) {
                 print('end to start...');
-                model.selectProduct(model.allProducts[index].id);
-                print('before deleting, number of products is $model.allProducts.length.toString()');
-                model.deleteProduct();
-                print('after deleting, number of products is $model.allProducts.length.toString()');
+
+                void deleteSelected(){
+                  model.selectProduct(model.allProducts[index].id);
+                  print('before deleting, number of products is $model.allProducts.length.toString()');
+                  model.deleteProduct();
+                  print('after deleting, number of products is $model.allProducts.length.toString()');
+                }
+
                 return showDialog<Null>(
                   context: context,
                   builder: (BuildContext context){
                     return AlertDialog(
-                      title: Text('Deleting'),
-                      content: Text('This will delete the item permnaently'),
+                      title: Text('Deleting by swipe'),
+                      content: Text('Do you want to delete this item permanently?'),
                       actions: <Widget>[
-                        FlatButton(child: Text('OK'), onPressed: (){
-                          Navigator.of(context).pop();
-                        }),
+                        FlatButton(color: Colors.greenAccent, textColor: Colors.white, child: Text('No', style: TextStyle(fontWeight: FontWeight.bold)), onPressed: ()
+                          {
+                            Navigator.of(context).pop();
+                          }
+                        ),
+                        FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w400)), onPressed: ()
+                          {
+                            deleteSelected();
+                            Navigator.of(context).pop();
+                          },
+                        ),
                       ],
                     );
                   }
                 );
 
-                
-                  // AlertDialog(
-                  //   title: Text('delete item?'),
-                  //   content: Text('this will delete'),
-                  //   actions: <Widget>[
-                  //     FlatButton(child: Text('yes'), onPressed: (){},),
-                  //     FlatButton(child: Text('no'), onPressed: (){},),
-                  //   ],
-                  // );
-                
-                // model.selectProduct(model.allProducts[index].id);
-                // model.deleteProduct();
               } 
               else if (direction == DismissDirection.startToEnd) {
                 print('start to end');

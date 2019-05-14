@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
     _model.autoAuthenticate();
     _model.userSubject.listen((bool isAuthenticated) {
       setState(() {
-        print("setting is authenticated $isAuthenticated");
+        print("isAuthenticated: $isAuthenticated");
         _isAuthenticated = isAuthenticated;
       });
     });
