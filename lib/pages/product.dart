@@ -38,30 +38,47 @@ class ProductPage extends StatelessWidget {
   }
 
    Widget _buildAddressPriceRow(String address, double price) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 20.0),
-          child: 
-          GestureDetector(
-            onTap: _showMap,
-            child: Text(
-              address, 
-              style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),)
-          ),
+    return Column(children: <Widget>
+      [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 20.0),
+              child: 
+              GestureDetector(
+                onTap: _showMap,
+                child: Text(
+                  address, 
+                  style: TextStyle(fontFamily: 'Oswald',color: Colors.blueGrey, fontSize: 14.0,fontWeight: FontWeight.w100),
+                )
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              child: Text('', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
+            ),
+            // Text(
+            //   '\$' + price.toString(),
+            //   style: TextStyle(fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
+            // )
+          ],
         ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 5.0),
-          child: Text('|', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
-        ),
-        Text(
-          '\$' + price.toString(),
-          style: TextStyle(fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
+        Row(         
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,children: <Widget>[
+            Text(
+              '\$' + price.toString(),
+              style: TextStyle(fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
+            )
+          ],
         )
-      ],
+      ]
+
     );
+    
+
   }
 
   @override

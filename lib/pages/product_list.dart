@@ -59,9 +59,9 @@ class _ProductListPageState extends State<ProductListPage>{
 
                 void deleteSelected(){
                   model.selectProduct(model.allProducts[index].id);
-                  print('before deleting, number of products is $model.allProducts.length.toString()');
+                  print('before deleting, number of products is ${model.allProducts.length.toString()}');
                   model.deleteProduct();
-                  print('after deleting, number of products is $model.allProducts.length.toString()');
+                  print('after deleting, number of products is ${model.allProducts.length.toString()}');
                 }
 
                 return showDialog<Null>(
@@ -69,14 +69,12 @@ class _ProductListPageState extends State<ProductListPage>{
                   builder: (BuildContext context){
                     return AlertDialog(
                       title: Text('Deleting by swipe'),
-                      content: Text('Do you want to delete this item permanently?'),
+                      content: Text('Do you want to delete ${model.allProducts[index].title} permanently?'),
                       actions: <Widget>[
                         FlatButton(color: Colors.greenAccent, textColor: Colors.white, child: Text('No', style: TextStyle(fontWeight: FontWeight.bold)), onPressed: ()
-                          {
-                            Navigator.of(context).pop();
-                          }
+                          { Navigator.of(context).pop();}
                         ),
-                        FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w400)), onPressed: ()
+                        FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w200)), onPressed: ()
                           {
                             deleteSelected();
                             Navigator.of(context).pop();
@@ -90,18 +88,7 @@ class _ProductListPageState extends State<ProductListPage>{
               } 
               else if (direction == DismissDirection.startToEnd) {
                 print('start to end');
-                // return AlertDialog(
-                //   title: Text('Delete item?'),
-                //   content: Text('this will permanently delete the item'),
-                //   actions: <Widget>[
-                //     FlatButton(
-                //       child: Text('cancel'), onPressed: (){Navigator.of(context).pop();}
-                //     ),
-                //     FlatButton(
-                //       child: Text('delete'), onPressed: (){model.selectProduct(model.allProducts[index].id); model.deleteProduct();}
-                //     )
-                //   ],
-                // );
+
               } else {
                 print('other swipe');
               }
