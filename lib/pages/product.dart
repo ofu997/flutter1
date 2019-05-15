@@ -59,10 +59,6 @@ class ProductPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 5.0),
               child: Text('', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
             ),
-            // Text(
-            //   '\$' + price.toString(),
-            //   style: TextStyle(fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
-            // )
           ],
         ),
         Row(         

@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     print('building main page');
-    // final MainModel _model = MainModel();
+    // final MainModel _model = MainModel(); duplicate could cause problems in setting _model
     return ScopedModel<MainModel>(
       model: _model,
       child: MaterialApp(
@@ -183,4 +183,6 @@ Line 178: Change to val mappedMapType: Int? = mapTypeMapping.get(mapOptions!!["m
 
 // line 87
 
-// ofu997@gmail.com, qwer4321
+// ofu997@gmail.com, rewq1234
+
+// last left off: connected products future<bool> updateProduct
