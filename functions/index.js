@@ -19,7 +19,8 @@ const gcconfig = {
   keyFilename: 'flutter-products.json'
 }
 
-const gcs = require('google-cloud/storage')(gcconfig);
+const GCS = require('@google-cloud/storage');
+const gcs = new GCS.Storage(gcconfig);
 
 fbAdmin.initializeApp({
   credential: fbAdmin.credential.cert(require('./flutter-products.json'))
