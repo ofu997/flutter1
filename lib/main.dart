@@ -185,4 +185,4 @@ Line 178: Change to val mappedMapType: Int? = mapTypeMapping.get(mapOptions!!["m
 
 // ofu997@gmail.com, rewq1234
 
-// last left off: connected products future<bool> updateProduct
+// last left off: 

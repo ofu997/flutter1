@@ -62,7 +62,7 @@ mixin ProductsModel on ConnectedProductsModel {
     final imageUploadRequest = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'https://us-central1-flutter-products.cloudfunctions.net/storeImage'));
+            'https://us-central1-flutterbyof.cloudfunctions.net/storeImage'));
     final file = await http.MultipartFile.fromPath(
       'image',
       image.path,
@@ -82,7 +82,7 @@ mixin ProductsModel on ConnectedProductsModel {
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);
       if (response.statusCode != 200 && response.statusCode != 201) {
-        print('Something went wrong');
+        print('Something went wrong (connected products)');
         print(json.decode(response.body));
         return null;
       }
@@ -99,6 +99,7 @@ mixin ProductsModel on ConnectedProductsModel {
     _isLoading = true;
     notifyListeners();	    
     final uploadData = await uploadImage(image);
+    print('uploadData is $uploadData');
     if (uploadData == null) {
       print('Upload failed!');
       return false;
@@ -115,6 +116,7 @@ mixin ProductsModel on ConnectedProductsModel {
       'loc_lng': locData.longitude,
       'loc_address': locData.address
     };
+    print('     price in cp     $price.toString()');
     try {
       final http.Response response = await http.post(
           'https://flutterbyof.firebaseio.com/products.json?auth=${_authenticatedUser.token}',
@@ -137,6 +139,7 @@ mixin ProductsModel on ConnectedProductsModel {
           userEmail: _authenticatedUser.email,
           userId: _authenticatedUser.id);
       _products.add(newProduct);
+      print(newProduct.price);
       _isLoading = false;
       notifyListeners();
       return true;
@@ -368,7 +371,7 @@ mixin UserModel on ConnectedProductsModel {
 
     final Map<String, dynamic> responseData = json.decode(response.body);
     bool hasError = true;
-    String message = 'Something went wrong.';
+    String message = 'Something went wrong (responseData)';
     print('the responsedata');
     print(responseData);
     if (responseData.containsKey('idToken')) {

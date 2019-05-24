@@ -109,9 +109,9 @@ class _LocationInputState extends State<LocationInput> {
   }
 
   void _getUserLocation() async {
-  final location = geoloc.Location();
-  final currentLocation = await location.getLocation();
-  final address = await _getAddress(
+    final location = geoloc.Location();
+    final currentLocation = await location.getLocation();
+    final address = await _getAddress(
       currentLocation.latitude, currentLocation.longitude);
     _getStaticMap(
       address,

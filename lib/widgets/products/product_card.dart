@@ -13,7 +13,7 @@ class ProductCard extends StatelessWidget{
   final int productIndex;
 
   ProductCard(this.product, this.productIndex);
-
+  
   Widget _buildTitlePrice(){
     return  Container(
           padding: EdgeInsets.only(top: 10.0),
@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget{
               SizedBox(
                 width: 33.0,
               ),
-              PriceTag(product.price.toStringAsFixed(2))
+              PriceTag(product.price.toString())
             ],
           ));
   }
@@ -84,3 +84,4 @@ class ProductCard extends StatelessWidget{
     );
   }
 } 
+

@@ -7,6 +7,8 @@ class PriceTag extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+      print('price tag: $price.toString()');
+      print('title: $this.title');
       return Container(
               padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
               decoration: BoxDecoration(

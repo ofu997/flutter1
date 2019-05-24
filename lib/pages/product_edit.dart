@@ -198,7 +198,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
             context: context,
             builder: (BuildContext context){
               return AlertDialog(
-                title: Text('something went wrong'),
+                title: Text('something went wrong (product edit)'),
                 content: Text('please try again'),
                 actions: <Widget>[
                   FlatButton(
