@@ -94,12 +94,12 @@ mixin ProductsModel on ConnectedProductsModel {
     }
   }
 
-  Future<bool> addProduct(String title, String description, File image,
-      double price, LocationData locData) async {
+  Future<bool> addProduct(String title, String description, File image, double _price, LocationData locData) 
+    async {
     _isLoading = true;
     notifyListeners();	    
     final uploadData = await uploadImage(image);
-    print('uploadData is $uploadData');
+    // print('uploadData is $uploadData');
     if (uploadData == null) {
       print('Upload failed!');
       return false;
@@ -107,7 +107,7 @@ mixin ProductsModel on ConnectedProductsModel {
     final Map<String, dynamic> productData = {
       'title': title,
       'description': description,
-      'price': price,
+      'price': _price, // 4.99 (input a double to avoid a null price),
       'userEmail': _authenticatedUser.email,
       'userId': _authenticatedUser.id,      
       'imagePath': uploadData['imagePath'],
@@ -116,7 +116,7 @@ mixin ProductsModel on ConnectedProductsModel {
       'loc_lng': locData.longitude,
       'loc_address': locData.address
     };
-    print('     price in cp     $price.toString()');
+    print('connected products: productData: $productData');
     try {
       final http.Response response = await http.post(
           'https://flutterbyof.firebaseio.com/products.json?auth=${_authenticatedUser.token}',
@@ -134,12 +134,12 @@ mixin ProductsModel on ConnectedProductsModel {
           description: description,
           image: uploadData['imageUrl'],
           imagePath: uploadData['imagePath'],
-          price: price,
+          price: _price,
           location: locData,
           userEmail: _authenticatedUser.email,
           userId: _authenticatedUser.id);
       _products.add(newProduct);
-      print(newProduct.price);
+      //print(newProduct.price);
       _isLoading = false;
       notifyListeners();
       return true;
@@ -230,7 +230,7 @@ mixin ProductsModel on ConnectedProductsModel {
   Future<Null> fetchProducts({onlyForUser = false}) {
     _isLoading = true;
     notifyListeners();
-    print("printing _authenticatedUser.token from connected_products fetchProducts" + _authenticatedUser.token);
+    //print("printing _authenticatedUser.token from connected_products fetchProducts" + _authenticatedUser.token);
     return http
         .get(
             'https://flutterbyof.firebaseio.com/products.json?auth=${_authenticatedUser.token}')
@@ -372,8 +372,8 @@ mixin UserModel on ConnectedProductsModel {
     final Map<String, dynamic> responseData = json.decode(response.body);
     bool hasError = true;
     String message = 'Something went wrong (responseData)';
-    print('the responsedata');
-    print(responseData);
+    // print('the responsedata');
+    // print(responseData);
     if (responseData.containsKey('idToken')) {
       hasError = false;
       message = 'Authentication succeeded!';
@@ -406,7 +406,7 @@ mixin UserModel on ConnectedProductsModel {
   void autoAuthenticate() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token');
-    print(token);
+    // print(token);
     final String expiryTimeString = prefs.getString('expiryTime');
     if (token != null) {
       final DateTime now = DateTime.now();

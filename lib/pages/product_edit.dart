@@ -104,7 +104,12 @@ class _ProductEditPageState extends State<ProductEditPage> {
           }
         },
         onSaved: (String value) {
+          double priceInput = double.parse(value);
+          print('formData[price] is: $priceInput');
           _formData['price'] = double.parse(value);
+          // print('value: $value');
+          // print('formdata price is');
+          // print(_formData['price'].toString());
         },
       ),
     );
@@ -176,51 +181,51 @@ class _ProductEditPageState extends State<ProductEditPage> {
     Function addProduct, Function updateProduct, Function setSelectedProduct,
     [int selectedProductIndex]) {
       print('product edit _submitForm selectedProductIndex: $selectedProductIndex');
-    if (!_formKey.currentState.validate() || (_formData['image'] == null && selectedProductIndex == -1)) {
-      return;
-    }
-
-  _formKey.currentState.save();
-  if (selectedProductIndex == -1) {// || selectedProductIndex != null
-    addProduct(
-      _titleTextController.text,
-      _descriptionTextController.text,
-      _formData['image'],
-      _formData['price'],
-      _formData['location']
-      ).then((bool success){
-        if (success){
-          Navigator
-            .pushReplacementNamed(context, '/products')
-            .then((_) => setSelectedProduct(null));
-        }else{
-          showDialog(
-            context: context,
-            builder: (BuildContext context){
-              return AlertDialog(
-                title: Text('something went wrong (product edit)'),
-                content: Text('please try again'),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text('okay'),
-                  )
-                ],
-              );
-            }
-          );
-        }
+      if (!_formKey.currentState.validate() || (_formData['image'] == null && selectedProductIndex == -1)) {
+        return;
       }
-    ); 
-  } else {
-    print(selectedProductIndex);
-    updateProduct(
-      _titleTextController.text,
-      _descriptionTextController.text,
-      _formData['image'],
-      _formData['price'],
-      _formData['location']
-    ).then(
+
+    _formKey.currentState.save();
+    if (selectedProductIndex == -1) {// || selectedProductIndex != null
+      addProduct(// sends to connected products
+        _titleTextController.text,
+        _descriptionTextController.text,
+        _formData['image'],
+        _formData['price'],
+        _formData['location']
+        ).then((bool success){
+          if (success){
+            Navigator
+              .pushReplacementNamed(context, '/products')
+              .then((_) => setSelectedProduct(null));
+          }else{
+            showDialog(
+              context: context,
+              builder: (BuildContext context){
+                return AlertDialog(
+                  title: Text('something went wrong (product edit)'),
+                  content: Text('please try again'),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('okay'),
+                    )
+                  ],
+                );
+              }
+            );
+          }
+        }
+      ); 
+    } else {
+      print(selectedProductIndex);
+      updateProduct(
+        _titleTextController.text,
+        _descriptionTextController.text,
+        _formData['image'],
+        _formData['price'],
+        _formData['location']
+      ).then(
       (_) => Navigator
         .pushReplacementNamed(context, '/products')
         .then((_) => setSelectedProduct(null))

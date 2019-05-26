@@ -74,7 +74,7 @@ class _ProductListPageState extends State<ProductListPage>{
                         FlatButton(color: Colors.greenAccent, textColor: Colors.white, child: Text('No', style: TextStyle(fontWeight: FontWeight.bold)), onPressed: ()
                           { Navigator.of(context).pop();}
                         ),
-                        FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w200)), onPressed: ()
+                        FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w400)), onPressed: ()
                           {
                             deleteSelected();
                             Navigator.of(context).pop();
