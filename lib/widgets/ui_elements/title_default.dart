@@ -9,7 +9,7 @@ class TitleDefault extends StatelessWidget{
       return Text(
                 title,
                 style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.w100,
                     fontFamily: 'Cottage'), //
               );

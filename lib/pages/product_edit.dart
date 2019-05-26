@@ -24,11 +24,14 @@ class _ProductEditPageState extends State<ProductEditPage> {
     'location': null
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final _titleFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
-  final _priceFocusNode = FocusNode();
+  final _priceFocusNode = FocusNode();//FocusNode();
+
   final _titleTextController = TextEditingController();
   final _descriptionTextController = TextEditingController();
+  final _priceTextController = TextEditingController();
 
   Widget _buildTitleTextField(Product product) {
 	  if (product == null && _titleTextController.text.trim() == '') {
@@ -48,14 +51,19 @@ class _ProductEditPageState extends State<ProductEditPage> {
         focusNode: _titleFocusNode,
         decoration: InputDecoration(labelText: 'Product Title'),
         //if not a complete create, the widget would be null and not constructed, causing a render error when fetching 'title'
-        controller: _titleTextController, 
-        //initialValue: product == null ? '' : product.title,
+        controller: _titleTextController,         
+
+
+        
         validator: (String value) {
           if (value.isEmpty || value.length < 5) {
             return ('Title is required and should be 5+ characters long.');
+
           }
         },
         onSaved: (String value) {
+          print('title: ');
+          print(value);
           _formData['title'] = value;
         },
       ),
@@ -82,20 +90,30 @@ class _ProductEditPageState extends State<ProductEditPage> {
               return ('Description is required and should be 10+ characters long.');
             }
           },
+          onFieldSubmitted: (value){print('description onFieldSubmitted: '+value);},
           onSaved: (String value) {
+            print('description: ');
+            print(value);
             _formData['description'] = value;
           }),
     );
   }
 
   Widget _buildPriceTextField(Product product) {
+    if (product == null && _priceTextController.text.trim() == '') {
+      _priceTextController.text = '';
+    } else if (product != null && _priceTextController.text.trim() == '') {
+      _priceTextController.text = product.price.toString();
+    }
     return EnsureVisibleWhenFocused(
       focusNode: _priceFocusNode,
       child: TextFormField(
+        controller: _priceTextController,
         focusNode: _priceFocusNode,
         decoration: InputDecoration(labelText: 'Product Price'),
-        initialValue:
-          product == null ? '' : product.price.toString(),
+        // initialValue:
+        //   product == null ? '' : 
+        //   product.price.toString(),
         keyboardType: TextInputType.number,
         validator: (String value) {
           if (value.isEmpty ||
@@ -103,10 +121,13 @@ class _ProductEditPageState extends State<ProductEditPage> {
             return ('Price is required and should be a number.');
           }
         },
+        onFieldSubmitted: (value){print('price onFieldSubmitted: '+value);},
         onSaved: (String value) {
-          double priceInput = double.parse(value);
-          print('formData[price] is: $priceInput');
-          _formData['price'] = double.parse(value);
+          //double priceInput = double.tryParse(value);
+          //print('formData[price] is: $priceInput');
+          print('nonparsed price is' + value);
+          _formData['price'] = double.tryParse(value);
+          
           // print('value: $value');
           // print('formdata price is');
           // print(_formData['price'].toString());
@@ -181,17 +202,21 @@ class _ProductEditPageState extends State<ProductEditPage> {
     Function addProduct, Function updateProduct, Function setSelectedProduct,
     [int selectedProductIndex]) {
       print('product edit _submitForm selectedProductIndex: $selectedProductIndex');
-      if (!_formKey.currentState.validate() || (_formData['image'] == null && selectedProductIndex == -1)) {
+      if (!_formKey.currentState.validate() || (_formData['image'] == null && selectedProductIndex == -1) /*|| (_formData['price'] == null && selectedProductIndex == -1)*/) {
         return;
       }
 
     _formKey.currentState.save();
     if (selectedProductIndex == -1) {// || selectedProductIndex != null
+      print('formData[title]: ');
+      print(_formData['title']);
+      print(_formData['price']);
       addProduct(// sends to connected products
         _titleTextController.text,
         _descriptionTextController.text,
         _formData['image'],
-        _formData['price'],
+        double.parse(_priceTextController.text),
+        //_formData['price'],
         _formData['location']
         ).then((bool success){
           if (success){
@@ -218,12 +243,14 @@ class _ProductEditPageState extends State<ProductEditPage> {
         }
       ); 
     } else {
+      print('editing product');
       print(selectedProductIndex);
       updateProduct(
         _titleTextController.text,
         _descriptionTextController.text,
         _formData['image'],
-        _formData['price'],
+        double.parse(_priceTextController.text),
+        //_formData['price'],
         _formData['location']
       ).then(
       (_) => Navigator

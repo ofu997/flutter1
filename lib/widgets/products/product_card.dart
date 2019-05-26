@@ -21,11 +21,13 @@ class ProductCard extends StatelessWidget{
             mainAxisAlignment:
                 MainAxisAlignment.center, // For a row, centers it horizontally
             children: <Widget>[
-              TitleDefault(product.title),
+              Expanded(flex: 2, child: Column()),
+              Expanded(flex: 4,child: TitleDefault(product.title),),              
               SizedBox(
                 width: 33.0,
               ),
-              PriceTag(product.price.toString())
+              PriceTag(product.price.toString()),
+              Expanded(flex: 2, child: Column()),
             ],
           ));
   }

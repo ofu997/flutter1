@@ -71,7 +71,7 @@ class _ProductListPageState extends State<ProductListPage>{
                       title: Text('Deleting by swipe'),
                       content: Text('Do you want to delete ${model.allProducts[index].title} permanently?'),
                       actions: <Widget>[
-                        FlatButton(color: Colors.greenAccent, textColor: Colors.white, child: Text('No', style: TextStyle(fontWeight: FontWeight.bold)), onPressed: ()
+                        FlatButton(color: Colors.greenAccent, textColor: Colors.black, child: Text('No', style: TextStyle(fontWeight: FontWeight.bold)), onPressed: ()
                           { Navigator.of(context).pop();}
                         ),
                         FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w400)), onPressed: ()
