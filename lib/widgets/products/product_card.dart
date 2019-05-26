@@ -41,13 +41,16 @@ class ProductCard extends StatelessWidget{
           alignment: MainAxisAlignment.center, 
           children: <Widget>[
             IconButton(
-                icon: Icon(Icons.info),
-                color: Theme.of(context).primaryColorLight,
-                //child: Text('Details'),
-                onPressed: () => Navigator.pushNamed<bool>(
-                      context,
-                      '/product/' + model.allProducts[productIndex].id
-                    ),
+              icon: Icon(Icons.info),
+              color: Theme.of(context).primaryColorLight,
+              //child: Text('Details'),
+              onPressed: () {
+                model.selectProduct(model.allProducts[productIndex].id);
+                Navigator
+                    .pushNamed<bool>(context,
+                        '/product/' + model.allProducts[productIndex].id)
+                    .then((_) => model.selectProduct(null));                  
+              },                    
             ),
             IconButton(
                   icon: Icon(model.allProducts[productIndex].isFavorite
@@ -70,15 +73,24 @@ class ProductCard extends StatelessWidget{
     return Card(
       child: Column(
         children: <Widget>[
-          FadeInImage(
-            image: NetworkImage(product.image),
-            height: 300.0,
-            fit: BoxFit.cover,
-            placeholder: AssetImage('assets/food.jpg'),
-          ),
+          // FadeInImage(
+          //   image: NetworkImage(product.image),
+          //   height: 300.0,
+          //   fit: BoxFit.cover,
+          //   placeholder: AssetImage('assets/food.jpg'),
+          // ),
+          Hero(
+            tag: product.id,
+            child: FadeInImage(
+              image: NetworkImage(product.image),
+              height: 300.0,
+              fit: BoxFit.cover,
+              placeholder: AssetImage('assets/food.jpg'),
+            ),
+          ),          
           _buildTitlePrice(),
           AddressTag(product.location.address),
-          Text(product.userEmail),
+          //Text(product.userEmail),
           //Text(product.dateTime),
           _buildIcons(context)
         ],

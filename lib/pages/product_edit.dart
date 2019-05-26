@@ -52,13 +52,9 @@ class _ProductEditPageState extends State<ProductEditPage> {
         decoration: InputDecoration(labelText: 'Product Title'),
         //if not a complete create, the widget would be null and not constructed, causing a render error when fetching 'title'
         controller: _titleTextController,         
-
-
-        
         validator: (String value) {
           if (value.isEmpty || value.length < 5) {
             return ('Title is required and should be 5+ characters long.');
-
           }
         },
         onSaved: (String value) {
@@ -81,8 +77,6 @@ class _ProductEditPageState extends State<ProductEditPage> {
       child: TextFormField(
           focusNode: _descriptionFocusNode,
           decoration: InputDecoration(labelText: 'Product Description'),
-          // initialValue:
-          //  // product == null ? '' : product.description,
           controller: _descriptionTextController,
           maxLines: 2,
           validator: (String value) {
@@ -111,9 +105,6 @@ class _ProductEditPageState extends State<ProductEditPage> {
         controller: _priceTextController,
         focusNode: _priceFocusNode,
         decoration: InputDecoration(labelText: 'Product Price'),
-        // initialValue:
-        //   product == null ? '' : 
-        //   product.price.toString(),
         keyboardType: TextInputType.number,
         validator: (String value) {
           if (value.isEmpty ||
@@ -123,14 +114,10 @@ class _ProductEditPageState extends State<ProductEditPage> {
         },
         onFieldSubmitted: (value){print('price onFieldSubmitted: '+value);},
         onSaved: (String value) {
-          //double priceInput = double.tryParse(value);
-          //print('formData[price] is: $priceInput');
-          print('nonparsed price is' + value);
-          _formData['price'] = double.tryParse(value);
-          
-          // print('value: $value');
-          // print('formdata price is');
-          // print(_formData['price'].toString());
+          int tempDouble = int.parse(value);
+          String priceString = tempDouble.toStringAsFixed(2);
+          double priceDouble = double.tryParse(priceString);
+          _formData['price'] = priceDouble;
         },
       ),
     );
@@ -208,9 +195,6 @@ class _ProductEditPageState extends State<ProductEditPage> {
 
     _formKey.currentState.save();
     if (selectedProductIndex == -1) {// || selectedProductIndex != null
-      print('formData[title]: ');
-      print(_formData['title']);
-      print(_formData['price']);
       addProduct(// sends to connected products
         _titleTextController.text,
         _descriptionTextController.text,

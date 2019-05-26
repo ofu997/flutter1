@@ -78,7 +78,7 @@ mixin ProductsModel on ConnectedProductsModel {
     imageUploadRequest.headers['Authorization'] =
         'Bearer ${_authenticatedUser.token}';
 
-     try {
+    try {
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);
       if (response.statusCode != 200 && response.statusCode != 201) {
@@ -151,15 +151,15 @@ mixin ProductsModel on ConnectedProductsModel {
   }
 
   Future<bool> updateProduct(String title, String description, File image,
-      double price, LocationData locData) async{
+  double price, LocationData locData) async{
     _isLoading = true;
     notifyListeners();
- 	  String imageUrl = selectedProduct.image;
+    String imageUrl = selectedProduct.image;
     String imagePath = selectedProduct.imagePath;
     if (image != null) {
       final uploadData = await uploadImage(image);
 
-       if (uploadData == null) {
+      if (uploadData == null) {
         print('Upload failed!');
         return false;
       }

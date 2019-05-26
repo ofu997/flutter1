@@ -5,6 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
 import '../scoped-models/main.dart';
 import 'package:map_view/map_view.dart';
+import '../widgets/products/product_fab.dart';
+
 
 class ProductPage extends StatelessWidget {
   final Product product;
@@ -12,9 +14,9 @@ class ProductPage extends StatelessWidget {
   ProductPage(this.product);
 
   void _showMap() {
-	    final List<Marker> markers = <Marker>[
+	  final List<Marker> markers = <Marker>[
       Marker('position', 'Position', product.location.latitude,
-          product.location.longitude)
+      product.location.longitude)
     ];
     final cameraPosition = CameraPosition(
         Location(product.location.latitude, product.location.longitude), 14.0);
@@ -37,7 +39,7 @@ class ProductPage extends StatelessWidget {
     });
   }
 
-   Widget _buildAddressPriceRow(String address, double price) {
+  Widget _buildAddressPriceRow(String address, double price) {
     return Column(children: <Widget>
       [
         Row(
@@ -87,42 +89,77 @@ class ProductPage extends StatelessWidget {
           return Future.value(false); // (false) because we don't want to start another pop event
         }, 
         child: Scaffold(
-            appBar: AppBar(
-              title: Text(product.title + ' details page'),
+            // appBar: AppBar(
+            //   title: Text(product.title + ' details page'),
+            // ),
+            
+            // body: Column(
+            //   // mainAxisAlignment: MainAxisAlignment.center,// vertical centering
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: <Widget>[
+            //     FadeInImage(
+            //       image: NetworkImage(product.image),
+            //       height: 300.0,
+            //       fit: BoxFit.cover,
+            //       placeholder: AssetImage('assets/food.jpg'),
+            //     ),
+            //     Container(
+            //       padding: EdgeInsets.all(10.0),
+            //       child: TitleDefault(product.title),
+            //     ),
+            //     _buildAddressPriceRow(product.location.address, product.price),
+            //     Container(
+            //       padding: EdgeInsets.all(10.0),
+            //       alignment: Alignment.center,
+            //       child: Text(
+            //           product.description,
+            //           style: TextStyle(fontSize: 16.0),
+            //           textAlign: TextAlign.center),
+            //     ),
+            //   ]
+            // ),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: 256.0,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(product.title),
+                background: Hero(
+                  tag: product.id,
+                  child: FadeInImage(
+                    image: NetworkImage(product.image),
+                    height: 300.0,
+                    fit: BoxFit.cover,
+                    placeholder: AssetImage('assets/food.jpg'),
+                  ),
+                ),
+              ),
             ),
-            body: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,// vertical centering
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                FadeInImage(
-                  image: NetworkImage(product.image),
-                  height: 300.0,
-                  fit: BoxFit.cover,
-                  placeholder: AssetImage('assets/food.jpg'),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: TitleDefault(product.title),
-                ),
-                _buildAddressPriceRow(product.location.address, product.price),
-                Container(
-                  padding: EdgeInsets.all(10.0),
-                  alignment: Alignment.center,
-                  child: Text(
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    alignment: Alignment.center,
+                    child: TitleDefault(product.title),
+                  ),
+                  _buildAddressPriceRow(
+                      product.location.address, product.price),
+                  Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
                       product.description,
-                      style: TextStyle(fontSize: 16.0),
-                      textAlign: TextAlign.center),
-                ),
-              ]
-            ),
-          ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+        floatingActionButton: ProductFAB(product),            
+      ),
     );
   }
 }
-
-//     ScopedModelDescendant<MainModel>(
-//     builder: (BuildContext context, Widget child, MainModel model) {
-//     //final Product product = model.allProducts;
-//     return 
-//   }
-// )

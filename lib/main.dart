@@ -22,6 +22,7 @@ import './pages/product.dart';
 import './scoped-models/main.dart';
 import './models/product.dart';
 import './pages/pathelementsempty.dart';
+import './widgets/helpers/custom_route.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
@@ -94,7 +95,7 @@ class _MyAppState extends State<MyApp> {
             final Product product =_model.allProducts.firstWhere((Product product) {
               return product.id == productId;
             });
-            return MaterialPageRoute<bool>(
+            return CustomRoute<bool>(
               builder: (BuildContext context) =>
                   !_isAuthenticated ? AuthPage()
                   : ProductPage(product),
