@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../widgets/ui_elements/title_default.dart';
@@ -39,36 +40,121 @@ class ProductPage extends StatelessWidget {
     });
   }
 
+  // Widget printAddress(String address){
+  //   List<String> addressArray = address.split(',');
+  //   //List<String> printableArray = List<String>();
+  //   for (int i=0; i<addressArray.length; i++){
+  //     printableArray.add((addressArray[i]));
+  //     Text(
+  //       addressArray[i], 
+  //       style: TextStyle(fontFamily: 'NotoSans',color: Colors.black, fontSize: 16.0,fontWeight: FontWeight.w100),
+  //     );
+  //     return Text(children)
+  //   }
+  // }
+
   Widget _buildAddressPriceRow(String address, double price) {
+    List<String> addressArray = address.split(',');
+
     return Column(children: <Widget>
       [
+        Row(mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+        SizedBox(width: 25.0,),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+          decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
+          child: Text("Address:")
+        ),
+        ],),
+
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 20.0),
-              child: 
+           SizedBox(width: 25.0,),                  
+
+          //   SizedBox(width: 25.0,),
+          //   Container(
+          //     padding: EdgeInsets.only(top: 20.0),
+          //     child: Row(
+          //       mainAxisAlignment:
+          //       MainAxisAlignment.center, // For a row, centers it horizontally
+          //       children: <Widget>[
+          //         Expanded(flex: 2, child: Column()),
+          //         Expanded(
+          //           flex: 4,
+          //           child:
+          //           GestureDetector(
+          //             onTap: _showMap,
+          //             child: 
+          //             Text(
+          //               address, 
+          //               style: TextStyle(fontFamily: 'NotoSans',color: Colors.black, fontSize: 16.0,fontWeight: FontWeight.w100),
+          //             )
+          //           ),
+          //         ),
+          //         Expanded(flex: 2, child: Column()),
+          //       ],
+          //     ),              
+
+
+
+
+
+              
               GestureDetector(
                 onTap: _showMap,
-                child: Text(
-                  address, 
-                  style: TextStyle(fontFamily: 'Oswald',color: Colors.blueGrey, fontSize: 14.0,fontWeight: FontWeight.w100),
-                )
+                child: 
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center, 
+
+                  children: <Widget>[
+
+                    for (var item in addressArray) 
+                    Text(
+                      item,
+                      style: 
+                        TextStyle(
+                          fontFamily: 'NotoSans',
+                          color: Colors.black, 
+                          fontSize: 16.0,
+                        )                      
+                    )
+                  ],
+                ), 
+                //printAddress(address);
+                // Text(
+                //   address, 
+                //   style: TextStyle(fontFamily: 'NotoSans',color: Colors.black, fontSize: 16.0,fontWeight: FontWeight.w100),
+                // )
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Text('', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
-            ),
+            
+            // Container(
+            //   margin: EdgeInsets.symmetric(horizontal: 5.0),
+            //   child: Text('', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8.0)),
+            // ),
           ],
         ),
+        SizedBox(height: 100.0),
+        Row(mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+        SizedBox(width: 25.0,),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+          decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
+          child: Text("Price:")
+        ),
+        ],),
         Row(         
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center, 
+          children: <Widget>[
+            SizedBox(width: 25.0,),
             Text(
               '\$' + price.toString(),
-              style: TextStyle(fontSize: 16.0, fontFamily: 'Cottage', color: Colors.blueGrey),
+              style: TextStyle(fontSize: 16.0, fontFamily: 'NotoSans', color: Colors.black),
             )
           ],
         )
@@ -139,13 +225,30 @@ class ProductPage extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  SizedBox(height: 50.0,),
+                  Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                  SizedBox(width: 25.0,),
                   Container(
-                    padding: EdgeInsets.all(10.0),
-                    alignment: Alignment.center,
-                    child: TitleDefault(product.title),
+                    padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
+                    decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
+                    child: Text("Title:")
                   ),
+                  ],),
+                  Row(
+                    //padding: EdgeInsets.all(10.0),
+                    //alignment: Alignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                    SizedBox(width: 25.0,),                  
+                      TitleDefault(product.title),
+                    ], 
+                  ),
+                  SizedBox(height: 100.0,),
                   _buildAddressPriceRow(
-                      product.location.address, product.price),
+                      product.location.address, product.price
+                  ),
+                  SizedBox(height: 100.0,),
                   Container(
                     padding: EdgeInsets.all(10.0),
                     child: Text(

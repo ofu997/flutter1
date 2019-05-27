@@ -10,7 +10,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=1.1.1 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,7 +27,7 @@ dependencies:
     git:
       url: git://github.com/Eimji/flutter_google_map_view.git
   location: ^2.3.3
-  image_picker: ^0.6.0+3
+  image_picker: ^0.6.0+8
   mime: ^0.9.6+2
   url_launcher: ^5.0.2
 
@@ -53,6 +53,7 @@ flutter:
     - assets/background.jpg
     - assets/Oswald-Bold.ttf
     - assets/CottageSans.ttf
+    - assets/NotoSans-Regular.ttf
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -75,6 +76,9 @@ flutter:
       fonts:
         - asset: assets/CottageSans.ttf
           weight: 700
+    - family: NotoSans
+      fonts:
+        - asset: assets/NotoSans-Regular.ttf
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf

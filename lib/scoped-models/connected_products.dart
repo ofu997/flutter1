@@ -181,7 +181,7 @@ mixin ProductsModel on ConnectedProductsModel {
     };
 
     try {
-      final http.Response response = await http.put(
+      await http.put(
         'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}.json?auth=${_authenticatedUser.token}',
         body: json.encode(updateData)
       );
@@ -215,7 +215,7 @@ mixin ProductsModel on ConnectedProductsModel {
     notifyListeners();
     return http
         .delete(
-            'https://flutterbyof.firebaseio.com/products/${deletedProductId}.json?auth=${_authenticatedUser.token}')
+            'https://flutterbyof.firebaseio.com/products/$deletedProductId.json?auth=${_authenticatedUser.token}')
         .then((http.Response response) {
       _isLoading = false;
       notifyListeners();
@@ -227,8 +227,11 @@ mixin ProductsModel on ConnectedProductsModel {
     });
   }
 
-  Future<Null> fetchProducts({onlyForUser = false}) {
+  Future<Null> fetchProducts({onlyForUser = false, clearExisting = false}) {
     _isLoading = true;
+    if (clearExisting) {
+      _products = [];
+    }
     notifyListeners();
     //print("printing _authenticatedUser.token from connected_products fetchProducts" + _authenticatedUser.token);
     return http
@@ -277,47 +280,97 @@ mixin ProductsModel on ConnectedProductsModel {
     });
   }
 
-  void toggleProductFavoriteStatus() async {
-    final bool isCurrentlyFavorite = selectedProduct.isFavorite;
+  // void toggleProductFavoriteStatus() async {
+  //   final bool isCurrentlyFavorite = selectedProduct.isFavorite;
+  //   final bool newFavoriteStatus = !isCurrentlyFavorite;
+  //   final Product updatedProduct = Product(
+  //       id: selectedProduct.id,
+  //       title: selectedProduct.title,
+  //       description: selectedProduct.description,
+  //       price: selectedProduct.price,
+  //       image: selectedProduct.image,
+  //       imagePath: selectedProduct.imagePath,
+  //       location: selectedProduct.location,
+  //       userEmail: selectedProduct.userEmail,
+  //       userId: selectedProduct.userId,
+  //       isFavorite: newFavoriteStatus);
+  //   _products[selectedProductIndex] = updatedProduct;
+  //   notifyListeners();
+  //   http.Response response;
+  //   if (newFavoriteStatus) {
+  //     response = await http.put(
+  //         'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}',
+  //         body: json.encode(true));
+  //   } else {
+  //     response = await http.delete(
+  //         'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}');
+  //   }
+  //   if (response.statusCode != 200 && response.statusCode != 201) {
+  //     final Product updatedProduct = Product(
+  //         id: selectedProduct.id,
+  //         title: selectedProduct.title,
+  //         description: selectedProduct.description,
+  //         price: selectedProduct.price,
+  //         image: selectedProduct.image,
+  //         imagePath: selectedProduct.imagePath,
+  //         location: selectedProduct.location,
+  //         userEmail: selectedProduct.userEmail,
+  //         userId: selectedProduct.userId,
+  //         isFavorite: !newFavoriteStatus);
+  //     _products[selectedProductIndex] = updatedProduct;
+  //     notifyListeners();
+  //   }
+  //   _selProductId=null;
+  // }
+
+  void toggleProductFavoriteStatus(Product toggledProduct) async {
+    final bool isCurrentlyFavorite = toggledProduct.isFavorite;
     final bool newFavoriteStatus = !isCurrentlyFavorite;
+    // NEWLY ADDED => Get the index of the product passed into the method
+    final int toggledProductIndex = _products.indexWhere((Product product) {
+      return product.id == toggledProduct.id;
+    });
     final Product updatedProduct = Product(
-        id: selectedProduct.id,
-        title: selectedProduct.title,
-        description: selectedProduct.description,
-        price: selectedProduct.price,
-        image: selectedProduct.image,
-        imagePath: selectedProduct.imagePath,
-        location: selectedProduct.location,
-        userEmail: selectedProduct.userEmail,
-        userId: selectedProduct.userId,
+        id: toggledProduct.id,
+        title: toggledProduct.title,
+        description: toggledProduct.description,
+        price: toggledProduct.price,
+        image: toggledProduct.image,
+        imagePath: toggledProduct.imagePath,
+        location: toggledProduct.location,
+        userEmail: toggledProduct.userEmail,
+        userId: toggledProduct.userId,
         isFavorite: newFavoriteStatus);
-    _products[selectedProductIndex] = updatedProduct;
+    _products[toggledProductIndex] = updatedProduct; // Use the "toggledProductIndex" derived earlier in the method
     notifyListeners();
     http.Response response;
     if (newFavoriteStatus) {
       response = await http.put(
-          'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}',
-          body: json.encode(true));
+        'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}',
+        body: json.encode(true)
+      );
     } else {
       response = await http.delete(
-          'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}');
+        'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}'
+      );
     }
     if (response.statusCode != 200 && response.statusCode != 201) {
       final Product updatedProduct = Product(
-          id: selectedProduct.id,
-          title: selectedProduct.title,
-          description: selectedProduct.description,
-          price: selectedProduct.price,
-          image: selectedProduct.image,
-          imagePath: selectedProduct.imagePath,
-          location: selectedProduct.location,
-          userEmail: selectedProduct.userEmail,
-          userId: selectedProduct.userId,
+          id: toggledProduct.id,
+          title: toggledProduct.title,
+          description: toggledProduct.description,
+          price: toggledProduct.price,
+          image: toggledProduct.image,
+          imagePath: toggledProduct.imagePath,
+          location: toggledProduct.location,
+          userEmail: toggledProduct.userEmail,
+          userId: toggledProduct.userId,
           isFavorite: !newFavoriteStatus);
-      _products[selectedProductIndex] = updatedProduct;
+      _products[toggledProductIndex] = updatedProduct;
       notifyListeners();
     }
-  }
+    // _selProductId = null; => This has to be removed/ commented out!
+  }  
 
   void selectProduct(String productId) {
     _selProductId = productId;
@@ -434,6 +487,7 @@ mixin UserModel on ConnectedProductsModel {
     _authenticatedUser = null;
     _authTimer.cancel();
     _userSubject.add(false);
+    _selProductId=null;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
     prefs.remove('userEmail');

@@ -108,17 +108,17 @@ class _ProductEditPageState extends State<ProductEditPage> {
         keyboardType: TextInputType.number,
         validator: (String value) {
           if (value.isEmpty ||
-              !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
+              !RegExp(r'^(?:[1-9]\d*|0)?(?:[.,]\d+)?$').hasMatch(value)) {
             return ('Price is required and should be a number.');
           }
         },
         onFieldSubmitted: (value){print('price onFieldSubmitted: '+value);},
-        onSaved: (String value) {
-          int tempDouble = int.parse(value);
-          String priceString = tempDouble.toStringAsFixed(2);
-          double priceDouble = double.tryParse(priceString);
-          _formData['price'] = priceDouble;
-        },
+        // onSaved: (String value) {
+        //   int tempDouble = int.parse(value);
+        //   String priceString = tempDouble.toStringAsFixed(2);
+        //   double priceDouble = double.tryParse(priceString);
+        //   _formData['price'] = priceDouble;
+        // },
       ),
     );
   }
@@ -199,7 +199,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
         _titleTextController.text,
         _descriptionTextController.text,
         _formData['image'],
-        double.parse(_priceTextController.text),
+        double.parse(_priceTextController.text.replaceFirst(RegExp(r','), '.')),
         //_formData['price'],
         _formData['location']
         ).then((bool success){
@@ -233,7 +233,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
         _titleTextController.text,
         _descriptionTextController.text,
         _formData['image'],
-        double.parse(_priceTextController.text),
+        double.parse(_priceTextController.text.replaceFirst(RegExp(r','), '.')),
         //_formData['price'],
         _formData['location']
       ).then(

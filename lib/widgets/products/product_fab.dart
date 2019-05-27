@@ -79,7 +79,7 @@ class _ProductFABState extends State<ProductFAB> with TickerProviderStateMixin {
                   heroTag: 'favorite',
                   mini: true,
                   onPressed: () {
-                    model.toggleProductFavoriteStatus();
+                    model.toggleProductFavoriteStatus(model.selectedProduct);
                   },
                   child: Icon(
                     model.selectedProduct.isFavorite

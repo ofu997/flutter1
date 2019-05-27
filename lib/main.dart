@@ -23,14 +23,14 @@ import './scoped-models/main.dart';
 import './models/product.dart';
 import './pages/pathelementsempty.dart';
 import './widgets/helpers/custom_route.dart';
+import './shared/global_config.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
   //debugPaintSizeEnabled=true;debugBaselinesEnabled=true;debugPaintPointersEnabled=true;
-  MapView.setApiKey("AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM");
+  MapView.setApiKey(mapAPIKey); //"AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM");
   runApp(MyApp());
 }
-
 
 // root widget, extends widget features
 class MyApp extends StatefulWidget {
