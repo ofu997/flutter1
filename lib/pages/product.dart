@@ -57,67 +57,50 @@ class ProductPage extends StatelessWidget {
 
   Widget _buildAddressPriceRow(String address, double price) {
     List<String> addressArray = address.split(',');
+
     return Column(children: <Widget>
       [
         _buildFieldLabels("Address:"),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: <Widget>[
-        //     SizedBox(width: 25.0,),
-        //     Container(
-        //       padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-        //       decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
-        //       child: Text("Address:")
-        //     ),
-        //   ],
-        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(width: 25.0,),                  
-            GestureDetector(
-              onTap: _showMap,
-              child: 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center, 
-                children: <Widget>[
+            SizedBox(width: 25.0,),     
+            
+              
+                GestureDetector(
+                  onTap: _showMap,
+                  child: 
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start, 
+                    children: <Widget>[
 
-                  for (var item in addressArray) 
-                  Text(
-                    item,
-                    style: 
-                      TextStyle(
-                        fontFamily: 'NotoSans',
-                        color: Colors.black, 
-                        fontSize: 16.0,
-                      )                
+                      for (var item in addressArray) 
+                      Text(
+                        item,
+                        style: 
+                          TextStyle(
+                            fontFamily: 'NotoSans',
+                            color: Colors.black, 
+                            fontSize: 16.0,
+                          )                
 
-                  )
-                ],
-              ), 
-              // for backup, this follows child: 
-              // Text(
-              //   address, 
-              //   style: TextStyle(fontFamily: 'NotoSans',color: Colors.black, fontSize: 16.0,fontWeight: FontWeight.w100),
-              // )
-            ),
+                      )
+                    ],
+                  ), 
+                  // for backup, this follows child: 
+                  // Text(
+                  //   address, 
+                  //   style: TextStyle(fontFamily: 'NotoSans',color: Colors.black, fontSize: 16.0,fontWeight: FontWeight.w100),
+                  // )
+                ),
+              
+                      
           ],
-        ),
+        ),      
         SizedBox(height: 100.0),
         _buildFieldLabels("Price:"),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: <Widget>[
-        //     SizedBox(width: 25.0,),
-        //     Container(
-        //       padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-        //       decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
-        //       child: Text("Price:")
-        //     ),
-        //   ],
-        // ),
         Row(         
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center, 
@@ -166,17 +149,6 @@ class ProductPage extends StatelessWidget {
                   [
                     SizedBox(height: 50.0,),
                     _buildFieldLabels("Title:"),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   children: <Widget>[
-                    //     SizedBox(width: 25.0,),
-                    //     Container(
-                    //       padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-                    //       decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
-                    //       child: Text("Title:")
-                    //     ),
-                    //   ],
-                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -190,24 +162,14 @@ class ProductPage extends StatelessWidget {
                     ),
                     SizedBox(height: 100.0,),
                     _buildFieldLabels("Description:"),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   children: <Widget>[
-                    //     SizedBox(width: 25.0,),
-                    //     Container(
-                    //       padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
-                    //       decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(5.0)),
-                    //       child: Text("Title:")
-                    //     ),
-                    //   ],
-                    // ),
                     Container(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
                         product.description,
                         textAlign: TextAlign.center,
                       ),
-                    )
+                    ),
+                    SizedBox(height: 25.0),
                   ],
                 ),
               )

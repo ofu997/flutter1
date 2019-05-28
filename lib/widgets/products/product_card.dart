@@ -68,35 +68,49 @@ class ProductCard extends StatelessWidget{
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          // FadeInImage(
-          //   image: NetworkImage(product.image),
-          //   height: 300.0,
-          //   fit: BoxFit.cover,
-          //   placeholder: AssetImage('assets/food.jpg'),
-          // ),
-          Hero(
-            tag: product.id,
-            child: FadeInImage(
-              image: NetworkImage(product.image),
-              height: 300.0,
-              fit: BoxFit.cover,
-              placeholder: AssetImage('assets/food.jpg'),
-            ),
-          ),          
-          _buildTitlePrice(),
-          SizedBox(height: 10.0),
-          AddressTag(product.location.address),
-          //Text(product.userEmail),
-          //Text(product.dateTime),
-          _buildIcons(context)
-        ],
-      )
+    return 
+    Container(
+                      decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.orange[900],
+                blurRadius: 10.0,
+                
+              ),
+            ]
+          ),
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            // FadeInImage(
+            //   image: NetworkImage(product.image),
+            //   height: 300.0,
+            //   fit: BoxFit.cover,
+            //   placeholder: AssetImage('assets/food.jpg'),
+            // ),
+            Hero(
+              tag: product.id,
+              child: FadeInImage(
+                image: NetworkImage(product.image),
+                height: 300.0,
+                fit: BoxFit.cover,
+                placeholder: AssetImage('assets/food.jpg'),
+              ),
+            ),          
+            _buildTitlePrice(),
+            SizedBox(height: 10.0),
+            AddressTag(product.location.address),
+            //Text(product.userEmail),
+            //Text(product.dateTime),
+            _buildIcons(context)
+          ],
+        )
+    ),
     );
+
   }
 } 
 

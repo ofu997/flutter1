@@ -24,6 +24,7 @@ import './models/product.dart';
 import './pages/pathelementsempty.dart';
 import './widgets/helpers/custom_route.dart';
 import './shared/global_config.dart';
+import './shared/adaptive_theme.dart';
 
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
@@ -63,13 +64,14 @@ class _MyAppState extends State<MyApp> {
     return ScopedModel<MainModel>(
       model: _model,
       child: MaterialApp(
-        theme: ThemeData(
-          // swatch is auto-color-schemes. Colors is package, followed by static types
-          brightness: Brightness.light,
-          primarySwatch: Colors.deepOrange,
-          accentColor: Colors.lightBlue,
-        ),
+        // theme: ThemeData(
+        //   // swatch is auto-color-schemes. Colors is package, followed by static types
+        //   brightness: Brightness.light,
+        //   primarySwatch: Colors.deepOrange,
+        //   accentColor: Colors.lightBlue,
+        // ),
         //home: AuthPage(),
+        theme: getAdaptiveThemeData(context),
         routes: {
           '/': (BuildContext context) {
             return !_isAuthenticated ? AuthPage()

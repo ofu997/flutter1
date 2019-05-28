@@ -32,6 +32,7 @@ class _ProductsPageState extends State<ProductsPage>{
           AppBar(
             automaticallyImplyLeading: false, 
             title: Text('Choose below'),
+            elevation: Theme.of(context).platform == TargetPlatform.iOS? 0.0 : 4.0
           ), //automaticallyImplyLeading: whether to assume AppBar actions
           ListTile(
             leading: Icon(Icons.shop),
@@ -66,7 +67,8 @@ class _ProductsPageState extends State<ProductsPage>{
     return Scaffold(
       drawer: _buildSideDrawer(context),
       appBar: AppBar(
-        title: Text('Food List'),
+        title: Text('Item list'),
+        elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
         actions: <Widget>[
           ScopedModelDescendant<MainModel>(
             builder: (BuildContext context, Widget child, MainModel model) {

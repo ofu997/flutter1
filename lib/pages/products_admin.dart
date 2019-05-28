@@ -16,6 +16,7 @@ class ProductsAdminPage extends StatelessWidget {
           AppBar(// what shows up when hamburger menu is clicked
             automaticallyImplyLeading: false,
             title: Text(''),
+            elevation: Theme.of(context).platform == TargetPlatform.iOS? 0.0 : 4.0,
           ), //automaticallyImplyLeading: whether to assume AppBar actions
           ListTile(
             title: Text('All products'),
@@ -36,15 +37,16 @@ class ProductsAdminPage extends StatelessWidget {
         drawer: _buildSideDrawer(context),
         appBar:  AppBar(
           title: Text('Manage products'),
+          elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           bottom: TabBar(tabs: <Widget>[
+            Tab(icon: Icon(Icons.list), text: 'My products',),            
             Tab(icon: Icon(Icons.create),text: 'Create product',),
-            Tab(icon: Icon(Icons.list), text: 'My products',),
           ],),
         ),
         body: TabBarView(// reads TabBar events and displays content
           children: <Widget>[
+          ProductListPage(model),            
           ProductEditPage(),
-          ProductListPage(model)
           ],
         ),
       )
