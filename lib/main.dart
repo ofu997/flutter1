@@ -10,6 +10,8 @@
 // import 'package:flutter/rendering.dart';//to show layout lines for paintSizeEnabled
 
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 import 'package:map_view/map_view.dart';
@@ -19,6 +21,8 @@ import './pages/auth.dart';
 import './pages/products_admin.dart';
 import './pages/products.dart';
 import './pages/product.dart';
+import './pages/map.dart';
+
 import './scoped-models/main.dart';
 import './models/product.dart';
 import './pages/pathelementsempty.dart';
@@ -43,7 +47,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final MainModel _model = MainModel();
+  final _platformChannel = MethodChannel('https://ofu997.github.io/battery');  
   bool _isAuthenticated = false;
+
+  Future<Null> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await _platformChannel.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level is $result %.';
+    } catch (error) {
+      batteryLevel = 'Failed to get battery level.';
+      print(error);
+    }
+    print(batteryLevel);
+  }
 
   @override
   void initState() {
@@ -54,6 +71,7 @@ class _MyAppState extends State<MyApp> {
         _isAuthenticated = isAuthenticated;
       });
     });
+    _getBatteryLevel();
     super.initState();
   }
 
@@ -79,6 +97,7 @@ class _MyAppState extends State<MyApp> {
           '/admin': (BuildContext context) =>
             !_isAuthenticated ? AuthPage()
             : ProductsAdminPage(_model),
+          '/map': (BuildContext context) { return Map(_model);}
         },
         onGenerateRoute: (RouteSettings settings) {
           if (!_isAuthenticated) {

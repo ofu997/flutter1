@@ -12,11 +12,16 @@ import '../models/user.dart';
 import '../models/auth.dart';
 import '../models/location_data.dart';
 
+import '../models/latlong.dart';
+
 mixin ConnectedProductsModel on Model {
   List<Product> _products = [];
+  List<LatLong> _latlongs=[];
   String _selProductId;
   User _authenticatedUser;
   bool _isLoading = false;
+
+  
 }
 
 mixin ProductsModel on ConnectedProductsModel {
@@ -24,6 +29,10 @@ mixin ProductsModel on ConnectedProductsModel {
 
   List<Product> get allProducts {
     return List.from(_products);
+  }
+
+  List<LatLong> get allLatLongs {
+    return List.from(_latlongs);
   }
 
   List<Product> get displayedProducts {
@@ -139,6 +148,9 @@ mixin ProductsModel on ConnectedProductsModel {
           userEmail: _authenticatedUser.email,
           userId: _authenticatedUser.id);
       _products.add(newProduct);
+
+      final LatLong newLatLong = LatLong(lat: locData.latitude,long: locData.longitude);
+      _latlongs.add(newLatLong);
       //print(newProduct.price);
       _isLoading = false;
       notifyListeners();
@@ -240,6 +252,7 @@ mixin ProductsModel on ConnectedProductsModel {
         .then<Null>((http.Response response) {
       final List<Product> fetchedProductList = [];
       final Map<String, dynamic> productListData = json.decode(response.body);
+
       if (productListData == null) {
         _isLoading = false;
         notifyListeners();
@@ -270,6 +283,57 @@ mixin ProductsModel on ConnectedProductsModel {
               return product.userId == _authenticatedUser.id;
             }).toList()
           : fetchedProductList;
+      _isLoading = false;
+      notifyListeners();
+      _selProductId = null;
+    }).catchError((error) {
+      _isLoading = false;
+      notifyListeners();
+      return;
+    });
+  }
+
+    Future<Null> fetchAllLocations() {
+    _isLoading = true;
+
+    notifyListeners();
+    //print("printing _authenticatedUser.token from connected_products fetchProducts" + _authenticatedUser.token);
+    return http
+        .get(
+            'https://flutterbyof.firebaseio.com/products.json?auth=${_authenticatedUser.token}')
+        .then<Null>((http.Response response) {
+      final List<LatLong> allLocationsList = [];
+      final Map<String, dynamic> productListData = json.decode(response.body);
+
+      if (productListData == null) {
+        _isLoading = false;
+        notifyListeners();
+        return;
+      }
+      productListData.forEach((String productId, dynamic productData) {
+        // final Product product = Product(
+        //     id: productId,
+        //     title: productData['title'],
+        //     description: productData['description'],
+        //     image: productData['imageUrl'],
+        //     imagePath: productData['imagePath'],
+        //     price: productData['price'],
+        //     location: LocationData(
+        //         address: productData['loc_address'],
+        //         latitude: productData['loc_lat'],
+        //         longitude: productData['loc_lng']),
+        //     userEmail: productData['userEmail'],
+        //     userId: productData['userId'],
+        //     isFavorite: productData['wishlistUsers'] == null
+        //         ? false
+        //         : (productData['wishlistUsers'] as Map<String, dynamic>)
+        //             .containsKey(_authenticatedUser.id));
+        final LatLong latLong = LatLong(
+          lat: productData['loc_lat'],
+          long: productData['loc_lng']
+        );
+        allLocationsList.add(latLong);
+      });
       _isLoading = false;
       notifyListeners();
       _selProductId = null;

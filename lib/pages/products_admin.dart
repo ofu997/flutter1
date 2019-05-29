@@ -24,6 +24,12 @@ class ProductsAdminPage extends StatelessWidget {
               Navigator.pushReplacementNamed(context,'/products');
             },
           )
+          ,ListTile(
+              title: Text('map'),
+              onTap: (){
+                Navigator.pushReplacementNamed(context, '/map');
+              } 
+          ,)
         ],
       ),
     );

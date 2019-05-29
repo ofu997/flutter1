@@ -76,7 +76,7 @@ class ProductCard extends StatelessWidget{
                       decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.orange[900],
+                color: Colors.orange[400],
                 blurRadius: 10.0,
                 
               ),
