@@ -7,7 +7,7 @@ import '../scoped-models/main.dart';
 //import 'dart:convert';
 //import 'dart:async';
 
-import 'package:map_view/map_view.dart';
+//import 'package:map_view/map_view.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:location/location.dart' as geoloc;
 
@@ -15,7 +15,6 @@ import 'package:map_view/map_view.dart';
 // import '../../models/location_data.dart';
 // import '../../models/product.dart';
 // import '../shared/global_config.dart';
-
 
 
 
@@ -84,40 +83,51 @@ class Map extends StatelessWidget {
     //       // (fals
     //   ScopedModelDescendant<MainModel>(
     //     builder:  (BuildContext context, Widget child, MainModel model){
-          //final List<Marker> markers = <Marker>[]; 
-          //   Marker('position', 'Position', product.location.latitude,
-          //   product.location.longitude)
-          // ];
-          final myMapView = MapView();
+    //final List<Marker> markers = <Marker>[]; 
+    //   Marker('position', 'Position', product.location.latitude,
+    //   product.location.longitude)
+    // ];
 
-          final cameraPosition = CameraPosition(
-              Location(40.0, -90.0), 14.0);
-          final mapView = MapView();
-          // return Column(
-          //   children: <Widget>[
+    print('in _showMap()');
 
-          //   ],
-          // );
-          mapView.show(
-              MapOptions(
-                  initialCameraPosition: cameraPosition,
-                  mapViewType: MapViewType.normal,
-                  title: ''),
-              toolbarActions: [
-                ToolbarAction('Close', 1),
-              ]);
-          mapView.onToolbarAction.listen((int id) {
-            if (id == 1) {
-              mapView.dismiss();
-            }
-          });
-          mapView.onMapReady.listen((_) {
-            for (var exlatlong in model.allLatLongs){
-                //mapView.setMarkers(markers);
-              myMapView.addMarker(new Marker('a','b',exlatlong.lat, exlatlong.long));
-            }            
-          });
+    //final myMapView = MapView();
 
+    final cameraPosition = CameraPosition(
+        Location(40.0, -90.0), 1.0
+      );
+
+    final mapView = MapView();
+    // return Column(
+    //   children: <Widget>[
+
+    //   ],
+    // );
+    mapView.show(
+      
+      MapOptions(
+          initialCameraPosition: cameraPosition,
+          mapViewType: MapViewType.normal,
+          title: ''
+      ),
+      toolbarActions: [
+        ToolbarAction('Close', 1),
+      ],
+    );
+
+          for (var exlatlong in model.allLatLongs){
+        //method for manually hard code markers: mapView.setMarkers(markers);
+        mapView.addMarker(new Marker('a','b',exlatlong.lat, exlatlong.long));
+      }       
+
+    mapView.onToolbarAction.listen((int id) {
+      if (id == 1) {
+        mapView.dismiss();
+      }
+    });
+
+    mapView.onMapReady.listen((_) {
+      print('in mapView.onMapReady.listen()');
+    });
   }
 
   @override
@@ -135,7 +145,7 @@ class Map extends StatelessWidget {
         builder:  (BuildContext context, Widget child, MainModel model){
           
           return
-          Column(
+          Row(
             children: <Widget>[
               GestureDetector(
                 onTap: _showMap,

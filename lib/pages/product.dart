@@ -70,6 +70,12 @@ class ProductPage extends StatelessWidget {
               
                 GestureDetector(
                   onTap: _showMap,
+                  // () {
+                  //   FocusScope.of(context).requestFocus(
+                  //     FocusNode()
+                  //   ); //instantiates an empty focus node, looks at form elements
+                  //   _showMap;              
+                  // },
                   child: 
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,

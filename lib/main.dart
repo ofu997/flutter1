@@ -33,7 +33,7 @@ import './shared/adaptive_theme.dart';
 //renders, mounts widgets. we need to attach widgets (building blocks, UI components)
 void main() {
   //debugPaintSizeEnabled=true;debugBaselinesEnabled=true;debugPaintPointersEnabled=true;
-  MapView.setApiKey(mapAPIKey); //"AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM");
+  MapView.setApiKey(mapAPIKey); 
   runApp(MyApp());
 }
 

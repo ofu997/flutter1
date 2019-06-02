@@ -34,6 +34,8 @@
 	<string>Image will be used as the product image</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Requires live tracking of location</string>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
