@@ -15,13 +15,13 @@ import 'package:flutter/services.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 import 'package:map_view/map_view.dart';
+import 'package:second_app/pages/map_page.dart';
 // import 'package:flutter/rendering.dart';
 
 import './pages/auth.dart';
 import './pages/products_admin.dart';
 import './pages/products.dart';
 import './pages/product.dart';
-import './pages/map.dart';
 
 import './scoped-models/main.dart';
 import './models/product.dart';
@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
           '/admin': (BuildContext context) =>
             !_isAuthenticated ? AuthPage()
             : ProductsAdminPage(_model),
-          '/map': (BuildContext context) { return Map(_model);}
+          '/map': (BuildContext context) { return MapPage(_model);}//Map(_model);}
         },
         onGenerateRoute: (RouteSettings settings) {
           if (!_isAuthenticated) {

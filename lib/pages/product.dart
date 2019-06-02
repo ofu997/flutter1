@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../widgets/ui_elements/title_default.dart';
-import 'package:scoped_model/scoped_model.dart';
+// import 'package:scoped_model/scoped_model.dart';
 import '../models/product.dart';
-import '../scoped-models/main.dart';
+// import '../scoped-models/main.dart';
 import 'package:map_view/map_view.dart';
 import '../widgets/products/product_fab.dart';
 

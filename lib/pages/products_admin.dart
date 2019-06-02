@@ -19,13 +19,15 @@ class ProductsAdminPage extends StatelessWidget {
             elevation: Theme.of(context).platform == TargetPlatform.iOS? 0.0 : 4.0,
           ), //automaticallyImplyLeading: whether to assume AppBar actions
           ListTile(
-            title: Text('All products'),
+            title: Text('All items'),
             onTap: () {// change parameters to key since it requires the page
               Navigator.pushReplacementNamed(context,'/products');
             },
           )
-          ,ListTile(
-              title: Text('map'),
+          ,
+          ListTile(
+              leading: Icon(Icons.location_on),
+              title: Text('Map'),
               onTap: (){
                 Navigator.pushReplacementNamed(context, '/map');
               } 

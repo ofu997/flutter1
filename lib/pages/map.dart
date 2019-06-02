@@ -5,9 +5,9 @@ import '../scoped-models/main.dart';
 //import '../models/auth.dart';
 //import '../widgets/ui_elements/adaptive_progress_indicator.dart';
 //import 'dart:convert';
-//import 'dart:async';
+import 'dart:async';
 
-//import 'package:map_view/map_view.dart';
+import 'package:map_view/map_view.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:location/location.dart' as geoloc;
 
@@ -50,7 +50,6 @@ class Map extends StatelessWidget {
   // //   height: 300,
   // //   maptype: StaticMapViewType.roadmap
   // // );
-  //   // TODO: implement build
   //   return ScopedModelDescendant<MainModel>(
   //     builder:  (BuildContext context, Widget child, MainModel model){
   //       return Column(
