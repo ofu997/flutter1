@@ -36,11 +36,18 @@ class _ProductsPageState extends State<ProductsPage>{
           ), //automaticallyImplyLeading: whether to assume AppBar actions
           ListTile(
             leading: Icon(Icons.shop),
-            title: Text('Manage Products'),
+            title: Text('Manage items'),
             onTap: (){
               Navigator.pushReplacementNamed(context, '/admin');
             },
           ),
+          ListTile(
+              leading: Icon(Icons.location_on),
+              title: Text('Map'),
+              onTap: (){
+                Navigator.pushReplacementNamed(context, '/map');
+              } 
+          ,),         
           Divider(),
           LogoutListTile()
         ],
@@ -51,7 +58,7 @@ class _ProductsPageState extends State<ProductsPage>{
   Widget _buildProductsList() {
     return ScopedModelDescendant(
       builder: (BuildContext context, Widget child, MainModel model) {
-        Widget content = Center(child: Text('No Products Found!'));
+        Widget content = Center(child: Text('No Items Found!'));
         if (model.displayedProducts.length > 0 && !model.isLoading) {
           content = Products();
         } else if (model.isLoading) {
@@ -67,7 +74,7 @@ class _ProductsPageState extends State<ProductsPage>{
     return Scaffold(
       drawer: _buildSideDrawer(context),
       appBar: AppBar(
-        title: Text('Item list'),
+        title: Text('Item list', style: TextStyle(fontFamily: 'Pacifico')),
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
         actions: <Widget>[
           ScopedModelDescendant<MainModel>(

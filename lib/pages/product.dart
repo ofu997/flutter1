@@ -105,7 +105,7 @@ class ProductPage extends StatelessWidget {
                       
           ],
         ),      
-        SizedBox(height: 100.0),
+        SizedBox(height: 25.0),
         _buildFieldLabels("Price:"),
         Row(         
           mainAxisAlignment: MainAxisAlignment.start,
@@ -138,7 +138,7 @@ class ProductPage extends StatelessWidget {
                 expandedHeight: 256.0,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  title: Text(product.title),
+                  title: Text(product.title, style: TextStyle(fontFamily: 'Pacifico')),
                   background: Hero(
                     tag: product.id,
                     child: FadeInImage(
@@ -162,11 +162,11 @@ class ProductPage extends StatelessWidget {
                         TitleDefault(product.title),
                       ], 
                     ),
-                    SizedBox(height: 100.0,),
+                    SizedBox(height: 25.0,),
                     _buildAddressPriceRow(
                         product.location.address, product.price
                     ),
-                    SizedBox(height: 100.0,),
+                    SizedBox(height: 25.0,),
                     _buildFieldLabels("Description:"),
                     Container(
                       padding: EdgeInsets.all(10.0),
@@ -175,7 +175,7 @@ class ProductPage extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(height: 25.0),
+                    SizedBox(height: 100.0),
                   ],
                 ),
               )

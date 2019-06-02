@@ -55,7 +55,7 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
       appBar: AppBar(
 //        automaticallyImplyLeading: true,
-        title: Text('Maps'),
+        title: Text('Maps', style: TextStyle(fontFamily: 'Pacifico')),
       ),
       body: Stack(
         children: 
@@ -126,7 +126,8 @@ class _MapPageState extends State<MapPage> {
 
 
   void goBack(){
-    Navigator.pushNamed(context, '/admin');
+    //Navigator.pushNamed(context, '/admin');
+    Navigator.of(context).pop();
   }  
 
   void mapCreated(controller) {

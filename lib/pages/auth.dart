@@ -41,9 +41,9 @@ class _AuthPage extends State<AuthPage> with TickerProviderStateMixin{
   DecorationImage _buildBackgroundImage(){
   return 
     DecorationImage(
-      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.09), BlendMode.dstATop),
+      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.18), BlendMode.dstATop),
       fit: BoxFit.fill,
-      image: AssetImage('assets/background.jpg'),
+      image: AssetImage('assets/Tchotchkes.jpg'),
     );
   }
 
@@ -163,7 +163,7 @@ class _AuthPage extends State<AuthPage> with TickerProviderStateMixin{
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth *0.95;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Log In'),
+          title: Text('Log In', style: TextStyle(fontFamily: 'Pacifico')),
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -178,6 +178,8 @@ class _AuthPage extends State<AuthPage> with TickerProviderStateMixin{
                   width: targetWidth,
                   child: Column( 
                     children: <Widget>[
+                      Text('Item lister', style: TextStyle(fontFamily: 'Pacifico', fontSize: 25.0),),
+                      SizedBox(height: 30.0),
                       _buildEmailTextfield(),
                       SizedBox(
                         height: 11.0

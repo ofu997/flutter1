@@ -261,7 +261,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
           : 
           Scaffold(
               appBar: AppBar(
-                title: Text('Edit ' + model.selectedProduct.title),              
+                title: Text('Edit ' + model.selectedProduct.title, style: TextStyle(fontFamily: 'Pacifico')),              
                 elevation: Theme.of(context).platform == TargetPlatform.iOS?
                   0.0 : 4.0
                 ),

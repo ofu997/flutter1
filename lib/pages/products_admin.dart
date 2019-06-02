@@ -15,10 +15,11 @@ class ProductsAdminPage extends StatelessWidget {
         children: <Widget>[
           AppBar(// what shows up when hamburger menu is clicked
             automaticallyImplyLeading: false,
-            title: Text(''),
+            title: Text('Choose below', style: TextStyle(fontFamily: 'Pacifico')),
             elevation: Theme.of(context).platform == TargetPlatform.iOS? 0.0 : 4.0,
           ), //automaticallyImplyLeading: whether to assume AppBar actions
           ListTile(
+            leading: Icon(Icons.library_books),
             title: Text('All items'),
             onTap: () {// change parameters to key since it requires the page
               Navigator.pushReplacementNamed(context,'/products');
@@ -44,11 +45,11 @@ class ProductsAdminPage extends StatelessWidget {
       child: Scaffold(
         drawer: _buildSideDrawer(context),
         appBar:  AppBar(
-          title: Text('Manage products'),
+          title: Text('Manage items', style: TextStyle(fontFamily: 'Pacifico')),
           elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           bottom: TabBar(tabs: <Widget>[
-            Tab(icon: Icon(Icons.list), text: 'My products',),            
-            Tab(icon: Icon(Icons.create),text: 'Create product',),
+            Tab(icon: Icon(Icons.list), text: 'My items',),            
+            Tab(icon: Icon(Icons.create),text: 'Create item',),
           ],),
         ),
         body: TabBarView(// reads TabBar events and displays content

@@ -56,6 +56,8 @@ flutter:
     - assets/CottageSans.ttf
     - assets/NotoSans-Regular.ttf
     - assets/NotoSans-Bold.ttf
+    - assets/Pacifico-Regular.ttf
+    - assets/Tchotchkes.jpg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -82,6 +84,10 @@ flutter:
       fonts:
         - asset: assets/NotoSans-Regular.ttf
         - asset: assets/NotoSans-Bold.ttf
+    - family: Pacifico
+      fonts:
+        - asset: assets/Pacifico-Regular.ttf
+          weight: 700
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf

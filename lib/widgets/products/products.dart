@@ -17,7 +17,7 @@ class Products extends StatelessWidget {
 
   Widget _buildProductList(List<Product> products) {
     Widget productCard = Center(
-      child: Text('No product found, please add one'),
+      child: Text('No item found, please add one'),
     );
     if (products.length > 0) {
       productCard = ListView.builder(
