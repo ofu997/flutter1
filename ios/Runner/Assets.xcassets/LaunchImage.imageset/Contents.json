@@ -14,7 +14,12 @@
       "idiom" : "universal",
       "filename" : "LaunchImage@3x.png",
       "scale" : "3x"
-    }
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "LaunchImage@4x.png",
+      "scale" : "4x"
+    }    
   ],
   "info" : {
     "version" : 1,

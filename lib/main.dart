@@ -82,13 +82,7 @@ class _MyAppState extends State<MyApp> {
     return ScopedModel<MainModel>(
       model: _model,
       child: MaterialApp(
-        // theme: ThemeData(
-        //   // swatch is auto-color-schemes. Colors is package, followed by static types
-        //   brightness: Brightness.light,
-        //   primarySwatch: Colors.deepOrange,
-        //   accentColor: Colors.lightBlue,
-        // ),
-        //home: AuthPage(),
+        title: 'Item lister',
         theme: getAdaptiveThemeData(context),
         routes: {
           '/': (BuildContext context) {
@@ -141,6 +135,13 @@ class _MyAppState extends State<MyApp> {
 // <Widget>: generic type array for only holding widgets
 
 // shift alt f for format
+
+// theme: ThemeData(
+//   // swatch is auto-color-schemes. Colors is package, followed by static types
+//   brightness: Brightness.light,
+//   primarySwatch: Colors.deepOrange,
+//   accentColor: Colors.lightBlue,
+// ),
 
 // stateless widget: can't work, change or recall internal data, recalls build function
 
@@ -203,8 +204,4 @@ Line 177: Change to if (mapOptions!!["mapViewType"] != null) {
 Line 178: Change to val mappedMapType: Int? = mapTypeMapping.get(mapOptions!!["mapViewType"]);
 */
 
-// line 87
-
 // ofu997@gmail.com, rewq1234
-
-// last left off: 

@@ -24,15 +24,16 @@ class ProductsAdminPage extends StatelessWidget {
             onTap: () {// change parameters to key since it requires the page
               Navigator.pushReplacementNamed(context,'/products');
             },
-          )
-          ,
+          ),
+          Divider(),
           ListTile(
               leading: Icon(Icons.location_on),
               title: Text('Map'),
               onTap: (){
                 Navigator.pushReplacementNamed(context, '/map');
               } 
-          ,)
+          ,),
+          Divider(),
         ],
       ),
     );
@@ -48,7 +49,7 @@ class ProductsAdminPage extends StatelessWidget {
           title: Text('Manage items', style: TextStyle(fontFamily: 'Pacifico')),
           elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           bottom: TabBar(tabs: <Widget>[
-            Tab(icon: Icon(Icons.list), text: 'My items',),            
+            Tab(icon: Icon(Icons.library_books), text: 'My items',),            
             Tab(icon: Icon(Icons.create),text: 'Create item',),
           ],),
         ),

@@ -15,8 +15,8 @@
         FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="second_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Item lister -by OHF"
+        android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC3nhgfXt7zasHjaV1j33_sW1QdInAIIPM"/>        
         <activity
             android:name=".MainActivity"

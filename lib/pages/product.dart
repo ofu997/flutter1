@@ -166,7 +166,7 @@ class ProductPage extends StatelessWidget {
                     _buildAddressPriceRow(
                         product.location.address, product.price
                     ),
-                    SizedBox(height: 25.0,),
+                    SizedBox(height: 75.0,),
                     _buildFieldLabels("Description:"),
                     Container(
                       padding: EdgeInsets.all(10.0),
@@ -175,7 +175,7 @@ class ProductPage extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(height: 100.0),
+                    SizedBox(height: 150.0),
                   ],
                 ),
               )

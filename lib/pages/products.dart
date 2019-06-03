@@ -31,7 +31,7 @@ class _ProductsPageState extends State<ProductsPage>{
         children: <Widget>[
           AppBar(
             automaticallyImplyLeading: false, 
-            title: Text('Choose below'),
+            title: Text('Choose below', style: TextStyle(fontFamily: 'Pacifico')),
             elevation: Theme.of(context).platform == TargetPlatform.iOS? 0.0 : 4.0
           ), //automaticallyImplyLeading: whether to assume AppBar actions
           ListTile(
@@ -41,6 +41,7 @@ class _ProductsPageState extends State<ProductsPage>{
               Navigator.pushReplacementNamed(context, '/admin');
             },
           ),
+          Divider(),
           ListTile(
               leading: Icon(Icons.location_on),
               title: Text('Map'),
@@ -49,7 +50,8 @@ class _ProductsPageState extends State<ProductsPage>{
               } 
           ,),         
           Divider(),
-          LogoutListTile()
+          LogoutListTile(),
+          Divider(),
         ],
       ),
     );
