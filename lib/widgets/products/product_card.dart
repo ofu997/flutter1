@@ -73,11 +73,12 @@ class ProductCard extends StatelessWidget{
   Widget build(BuildContext context) {
     return 
     Container(
-                      decoration: BoxDecoration(
+      padding: EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+      decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.orange[400],
-                blurRadius: 10.0,
+                color: Colors.amber[200],
+                blurRadius: 20.0,
                 
               ),
             ]
@@ -85,12 +86,7 @@ class ProductCard extends StatelessWidget{
       child: Card(
         child: Column(
           children: <Widget>[
-            // FadeInImage(
-            //   image: NetworkImage(product.image),
-            //   height: 300.0,
-            //   fit: BoxFit.cover,
-            //   placeholder: AssetImage('assets/food.jpg'),
-            // ),
+            SizedBox(height: 10.0),
             Hero(
               tag: product.id,
               child: FadeInImage(
@@ -104,11 +100,11 @@ class ProductCard extends StatelessWidget{
             SizedBox(height: 10.0),
             AddressTag(product.location.address),
             //Text(product.userEmail),
-            //Text(product.dateTime),
+            Text(product.dateTime),
             _buildIcons(context)
           ],
         )
-    ),
+      ),
     );
 
   }

@@ -53,8 +53,10 @@ class _ProductListPageState extends State<ProductListPage>{
           return Dismissible(
             background: Container(color: Colors.pink),
             key: Key(model.allProducts[index].title),
-            onDismissed: (DismissDirection direction) {
-              if (direction == DismissDirection.endToStart) {
+            confirmDismiss: (direction) async {
+              if (direction == DismissDirection.startToEnd) {
+                return false;
+              } else if (direction == DismissDirection.endToStart) {
                 print('end to start...');
 
                 void deleteSelected(){
@@ -83,16 +85,43 @@ class _ProductListPageState extends State<ProductListPage>{
                       ],
                     );
                   }
-                );
-
-              } 
-              else if (direction == DismissDirection.startToEnd) {
-                print('start to end');
-
-              } else {
-                print('other swipe');
+                );                
               }
             },
+            // onDismissed: (DismissDirection direction) {
+            //   if (direction == DismissDirection.endToStart || direction == DismissDirection.startToEnd) {
+            //     print('end to start...');
+
+            //     void deleteSelected(){
+            //       model.selectProduct(model.allProducts[index].id);
+            //       print('before deleting, number of products is ${model.allProducts.length.toString()}');
+            //       model.deleteProduct();
+            //       print('after deleting, number of products is ${model.allProducts.length.toString()}');
+            //     }
+
+            //     return showDialog<Null>(
+            //       context: context,
+            //       builder: (BuildContext context){
+            //         return AlertDialog(
+            //           title: Text('Deleting by swipe'),
+            //           content: Text('Do you want to delete ${model.allProducts[index].title} permanently?'),
+            //           actions: <Widget>[
+            //             FlatButton(color: Colors.greenAccent, textColor: Colors.black, child: Text('No', style: TextStyle(fontWeight: FontWeight.bold)), onPressed: ()
+            //               { Navigator.of(context).pop();}
+            //             ),
+            //             FlatButton(color: Colors.redAccent, textColor: Colors.white, child: Text('Yes. Delete', style: TextStyle(fontWeight: FontWeight.w400)), onPressed: ()
+            //               {
+            //                 deleteSelected();
+            //                 Navigator.of(context).pop();
+            //               },
+            //             ),
+            //           ],
+            //         );
+            //       }
+            //     );
+
+            //   } 
+            // },
             child: Column(
               children: <Widget>[
                 ListTile(

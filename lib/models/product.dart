@@ -12,7 +12,7 @@ class Product{
   final String userEmail;
   final String userId;
   final LocationData location;
-  //final String dateTime;
+  final String dateTime;
 
   Product(
     {@required this.id,
@@ -24,7 +24,7 @@ class Product{
     @required this.userId,
     @required this.location,
     @required this.imagePath,
-    //@required this.dateTime,
+    @required this.dateTime,
     this.isFavorite = false}
   );
 }

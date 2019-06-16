@@ -207,7 +207,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
         _formData['image'],
         double.parse(_priceTextController.text.replaceFirst(RegExp(r','), '.')),
         //_formData['price'],
-        _formData['location']
+        _formData['location'],
+        DateTime.now().toIso8601String(),
         ).then((bool success){
           if (success){
             Navigator

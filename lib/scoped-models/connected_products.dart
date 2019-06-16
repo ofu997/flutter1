@@ -103,12 +103,12 @@ mixin ProductsModel on ConnectedProductsModel {
     }
   }
 
-  Future<bool> addProduct(String title, String description, File image, double _price, LocationData locData) 
+  Future<bool> addProduct(String title, String description, File image, double _price, LocationData locData, String dateTime) 
     async {
     _isLoading = true;
     notifyListeners();	    
     final uploadData = await uploadImage(image);
-    // print('uploadData is $uploadData');
+    // print('uploadData is $uploadData');"selectedproductindex:"
     if (uploadData == null) {
       print('Upload failed!');
       return false;
@@ -123,7 +123,8 @@ mixin ProductsModel on ConnectedProductsModel {
       'imageUrl': uploadData['imageUrl'],
       'loc_lat': locData.latitude,
       'loc_lng': locData.longitude,
-      'loc_address': locData.address
+      'loc_address': locData.address,
+      'dateTime': dateTime,
     };
     print('connected products: productData: $productData');
     try {
@@ -146,7 +147,8 @@ mixin ProductsModel on ConnectedProductsModel {
           price: _price,
           location: locData,
           userEmail: _authenticatedUser.email,
-          userId: _authenticatedUser.id);
+          userId: _authenticatedUser.id,
+          dateTime: dateTime);
       _products.add(newProduct);
 
       final LatLong newLatLong = LatLong(lat: locData.latitude,long: locData.longitude);
@@ -189,7 +191,8 @@ mixin ProductsModel on ConnectedProductsModel {
       'loc_lng': locData.longitude,
       'loc_address': locData.address,
       'userEmail': selectedProduct.userEmail,
-      'userId': selectedProduct.userId
+      'userId': selectedProduct.userId,
+      'dateTime': selectedProduct.dateTime,
     };
 
     try {
@@ -208,7 +211,8 @@ mixin ProductsModel on ConnectedProductsModel {
           price: price,
           location: locData,
           userEmail: selectedProduct.userEmail,
-          userId: selectedProduct.userId);
+          userId: selectedProduct.userId,
+          dateTime: selectedProduct.dateTime);
       _products[selectedProductIndex] = updatedProduct;
       notifyListeners();
       return true;
@@ -272,6 +276,7 @@ mixin ProductsModel on ConnectedProductsModel {
                 longitude: productData['loc_lng']),
             userEmail: productData['userEmail'],
             userId: productData['userId'],
+            dateTime: productData['dateTime'],
             isFavorite: productData['wishlistUsers'] == null
                 ? false
                 : (productData['wishlistUsers'] as Map<String, dynamic>)
@@ -404,6 +409,7 @@ mixin ProductsModel on ConnectedProductsModel {
         location: toggledProduct.location,
         userEmail: toggledProduct.userEmail,
         userId: toggledProduct.userId,
+        dateTime: toggledProduct.dateTime,
         isFavorite: newFavoriteStatus);
     _products[toggledProductIndex] = updatedProduct; // Use the "toggledProductIndex" derived earlier in the method
     notifyListeners();
@@ -429,6 +435,7 @@ mixin ProductsModel on ConnectedProductsModel {
           location: toggledProduct.location,
           userEmail: toggledProduct.userEmail,
           userId: toggledProduct.userId,
+          dateTime: toggledProduct.dateTime,
           isFavorite: !newFavoriteStatus);
       _products[toggledProductIndex] = updatedProduct;
       notifyListeners();
