@@ -8,8 +8,10 @@ Item Lister grants you entry through email authentication. It allows you to make
 
 [Google Play Store link](https://play.google.com/store/apps/details?id=ofu997.github.io.ItemListerByOHF)
 
-![Item Lister Screencast](screencast/screencast.gif)
-
+<p align="center">
+  <img src="screencast/screencast.gif" width="500">
+<!-- ![Item Lister Screencast](screencast/screencast.gif width="200") -->
+</p>
 
 A few resources to get you started if this is your first Flutter project:
 
