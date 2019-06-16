@@ -1,10 +1,15 @@
-# Product Lister
+# Item Lister
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Item Lister grants you entry through email authentication. It allows you to make entries of whatever you like. For each item you can describe it, name its price, include a photo, and map it. Each unique user can create, edit, delete, and "like" items of his/her choice, while being able to see all items posted by other users. 
+
+[Google Play Store link](https://play.google.com/store/apps/details?id=ofu997.github.io.ItemListerByOHF)
+
+![Item Lister Screencast](screencast/screencast.gif)
+
 
 A few resources to get you started if this is your first Flutter project:
 
