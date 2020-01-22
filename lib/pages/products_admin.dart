@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 import './product_edit.dart';
 import './product_list.dart';
 import '../scoped-models/main.dart';

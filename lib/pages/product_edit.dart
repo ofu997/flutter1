@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../widgets/helpers/ensure-visible.dart';
 import '../models/product.dart';

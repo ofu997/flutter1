@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_web/rendering.dart';
+import 'package:flutter_web/widgets.dart';
 import 'package:meta/meta.dart';
 
 class EnsureVisibleWhenFocused extends StatefulWidget {

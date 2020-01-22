@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../scoped-models/main.dart';
 import '../models/auth.dart';

@@ -9,9 +9,9 @@
 // import 'package:map_view/map_view.dart';
 // import 'package:flutter/rendering.dart';//to show layout lines for paintSizeEnabled
 
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'package:flutter_web/services.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 import 'package:map_view/map_view.dart';

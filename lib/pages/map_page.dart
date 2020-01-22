@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:second_app/models/latlong.dart';
 // import 'package:second_app/pages/product_list.dart';

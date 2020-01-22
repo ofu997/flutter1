@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_web/material.dart';
+import 'package:flutter_web/cupertino.dart';
 
 class AdaptiveProgressIndicator extends StatelessWidget {
   @override

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 import './price_tag.dart';
 import '../ui_elements/title_default.dart';
 import './address_tag.dart';

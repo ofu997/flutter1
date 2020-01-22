@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 
 final ThemeData _androidTheme = ThemeData(
   brightness: Brightness.light,

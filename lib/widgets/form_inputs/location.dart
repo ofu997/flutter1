@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 
 import 'package:map_view/map_view.dart';
 import 'package:http/http.dart' as http;
