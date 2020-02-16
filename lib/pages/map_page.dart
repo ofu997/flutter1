@@ -48,9 +48,9 @@ class _MapPageState extends State<MapPage> {
       });
     }
 
-    double getZoom(){
-      return doubleZoom;      
-    }    
+    // double getZoom(){
+    //   return doubleZoom;      
+    // }    
 
     return Scaffold(
       appBar: AppBar(
@@ -151,16 +151,5 @@ class _MapPageState extends State<MapPage> {
         }
     return Set.of(allMarkers);
   }
-
-  // movetoBoston() {
-  //   _controller.animateCamera(CameraUpdate.newCameraPosition(
-  //     CameraPosition(target: LatLng(42.3601, -71.0589), zoom: 14.0, bearing: 45.0, tilt: 45.0),
-  //   ));
-  // }
-
-  // movetoNewYork() {
-  //   _controller.animateCamera(CameraUpdate.newCameraPosition(
-  //     CameraPosition(target: LatLng(40.7128, -74.0060), zoom: 12.0),
-  //   ));
-  // }
+  
 }
