@@ -81,15 +81,7 @@ class _AuthPage extends State<AuthPage> with TickerProviderStateMixin{
   }
 
   Widget _buildPasswordConfirmTextField() {
-    // return TextFormField(
-    //   decoration: InputDecoration(
-    //     labelText: 'Confirm Password', filled: true, fillColor: Colors.white),
-    //   obscureText: true,
-    //   validator: (String value) {
-    //     if (_passwordTextController.text != value) {
-    //       return 'Passwords do not match.';
-    //     }
-    //   },
+
     return FadeTransition(
       opacity: CurvedAnimation(parent: _controller, curve: Curves.easeIn),
       child: SlideTransition(

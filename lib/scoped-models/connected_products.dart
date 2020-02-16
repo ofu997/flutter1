@@ -316,23 +316,6 @@ mixin ProductsModel on ConnectedProductsModel {
         return;
       }
       productListData.forEach((String productId, dynamic productData) {
-        // final Product product = Product(
-        //     id: productId,
-        //     title: productData['title'],
-        //     description: productData['description'],
-        //     image: productData['imageUrl'],
-        //     imagePath: productData['imagePath'],
-        //     price: productData['price'],
-        //     location: LocationData(
-        //         address: productData['loc_address'],
-        //         latitude: productData['loc_lat'],
-        //         longitude: productData['loc_lng']),
-        //     userEmail: productData['userEmail'],
-        //     userId: productData['userId'],
-        //     isFavorite: productData['wishlistUsers'] == null
-        //         ? false
-        //         : (productData['wishlistUsers'] as Map<String, dynamic>)
-        //             .containsKey(_authenticatedUser.id));
         final LatLong latLong = LatLong(
           lat: productData['loc_lat'],
           long: productData['loc_lng']
@@ -348,49 +331,6 @@ mixin ProductsModel on ConnectedProductsModel {
       return;
     });
   }
-
-  // void toggleProductFavoriteStatus() async {
-  //   final bool isCurrentlyFavorite = selectedProduct.isFavorite;
-  //   final bool newFavoriteStatus = !isCurrentlyFavorite;
-  //   final Product updatedProduct = Product(
-  //       id: selectedProduct.id,
-  //       title: selectedProduct.title,
-  //       description: selectedProduct.description,
-  //       price: selectedProduct.price,
-  //       image: selectedProduct.image,
-  //       imagePath: selectedProduct.imagePath,
-  //       location: selectedProduct.location,
-  //       userEmail: selectedProduct.userEmail,
-  //       userId: selectedProduct.userId,
-  //       isFavorite: newFavoriteStatus);
-  //   _products[selectedProductIndex] = updatedProduct;
-  //   notifyListeners();
-  //   http.Response response;
-  //   if (newFavoriteStatus) {
-  //     response = await http.put(
-  //         'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}',
-  //         body: json.encode(true));
-  //   } else {
-  //     response = await http.delete(
-  //         'https://flutterbyof.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}');
-  //   }
-  //   if (response.statusCode != 200 && response.statusCode != 201) {
-  //     final Product updatedProduct = Product(
-  //         id: selectedProduct.id,
-  //         title: selectedProduct.title,
-  //         description: selectedProduct.description,
-  //         price: selectedProduct.price,
-  //         image: selectedProduct.image,
-  //         imagePath: selectedProduct.imagePath,
-  //         location: selectedProduct.location,
-  //         userEmail: selectedProduct.userEmail,
-  //         userId: selectedProduct.userId,
-  //         isFavorite: !newFavoriteStatus);
-  //     _products[selectedProductIndex] = updatedProduct;
-  //     notifyListeners();
-  //   }
-  //   _selProductId=null;
-  // }
 
   void toggleProductFavoriteStatus(Product toggledProduct) async {
     final bool isCurrentlyFavorite = toggledProduct.isFavorite;
@@ -496,8 +436,9 @@ mixin UserModel on ConnectedProductsModel {
     final Map<String, dynamic> responseData = json.decode(response.body);
     bool hasError = true;
     String message = 'Something went wrong (responseData)';
-    // print('the responsedata');
-    // print(responseData);
+    
+    print('the responsedata is $responseData');
+    
     if (responseData.containsKey('idToken')) {
       hasError = false;
       message = 'Authentication succeeded!';
